@@ -36,7 +36,7 @@ No diretório do projeto, execute:
 
 Exemplo: `dotnet add reference ../MeuProjeto.Domain/MeuProjeto.Domain.csproj`
 
-- [NomeSolução]                         
+- FastFoodFIAP                        
     - src: 
         - FastFoodFIAP.Application
                 -> FastFoodFIAP.Domain
