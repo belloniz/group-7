@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FastFoodFIAP.Domain\FastFoodFIAP.Domain.csproj" />
     <ProjectReference Include="..\FastFoodFIAP.Infra.Data\FastFoodFIAP.Infra.Data.csproj" />
+    <ProjectReference Include="..\GenericPack\GenericPack.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

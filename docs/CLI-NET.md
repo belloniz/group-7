@@ -7,13 +7,13 @@ https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
 - FastFoodFIAP                                  ->  sln
     - src: 
         - FastFoodFIAP.Application              ->  classlib
-        - FastFoodFIAP.Domain.Core             ->  classlib
-        - FastFoodFIAP.Domain                  ->  classlib
-        - FastFoodFIAP.Infra.CrossCutting.IoC  ->  classlib
-        - FastFoodFIAP.Infra.Data              ->  classlib
-        - FastFoodFIAP.Services.Api            ->  webapi
+        - FastFoodFIAP.Domain.Core              ->  classlib
+        - FastFoodFIAP.Domain                   ->  classlib
+        - FastFoodFIAP.Infra.CrossCutting.IoC   ->  classlib
+        - FastFoodFIAP.Infra.Data               ->  classlib
+        - FastFoodFIAP.Services.Api             ->  webapi
     - tests:
-        - FastFoodFIAP.[Camada].test           ->  xunit
+        - FastFoodFIAP.[Camada].test            ->  xunit
     - .gitignore                                ->  gitignore  
 
 Exemplo: `dotnet new classlib -lang "C#" -o NomeProjeto`
