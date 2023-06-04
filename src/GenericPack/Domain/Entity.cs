@@ -11,7 +11,7 @@ namespace GenericPack.Domain
 
         public int Id { get; protected set; }
 
-        private List<Event> _domainEvents;
+        private List<Event>? _domainEvents;
         public IReadOnlyCollection<Event>? DomainEvents => _domainEvents?.AsReadOnly();
 
         public void AddDomainEvent(Event domainEvent)

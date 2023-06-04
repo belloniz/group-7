@@ -64,3 +64,16 @@ Exemplo: `dotnet add reference ../MeuProjeto.Domain/MeuProjeto.Domain.csproj`
 Para criar o arquivo .gitignore para o .NET, execute no local do arquivo da solução:
 
     `dotnet new gitignore`
+
+
+### Postgres
+
+Pacote client adicionado em FastFoodFIAP.Services.Api
+
+    `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`
+
+### Docker 
+
+    `docker build -t fastfoodapi:0.1 -f Dockerfile .`
+
+    `docker compose up`

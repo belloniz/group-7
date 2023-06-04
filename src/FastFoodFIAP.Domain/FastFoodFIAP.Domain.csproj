@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\FastFoodFIAP.Domain.Core\FastFoodFIAP.Domain.Core.csproj" />
     <ProjectReference Include="..\GenericPack\GenericPack.csproj" />
   </ItemGroup>
 

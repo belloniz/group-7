@@ -5,7 +5,7 @@ namespace GenericPack.Domain
     /// https://enterprisecraftsmanship.com/posts/value-object-better-implementation/
     public abstract class ValueObject
     {
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null)
                 return false;

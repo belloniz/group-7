@@ -2,6 +2,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFoodFIAP.Domain\FastFoodFIAP.Domain.csproj" />
+    <ProjectReference Include="..\GenericPack\GenericPack.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <PropertyGroup>

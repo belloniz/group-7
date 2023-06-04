@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GenericPack.Data
+﻿namespace GenericPack.Data
 {
 	public interface IUnitOfWork
 	{
