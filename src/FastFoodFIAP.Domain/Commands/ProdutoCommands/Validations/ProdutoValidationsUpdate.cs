@@ -7,6 +7,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands.Validations
             ValidaNome();
             ValidaDescricao();
             ValidaPreco();
+            ValidaCategoria();
         }
     }
 }
