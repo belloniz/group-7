@@ -68,12 +68,24 @@ Para criar o arquivo .gitignore para o .NET, execute no local do arquivo da solu
 
 ### Postgres
 
-Pacote client adicionado em FastFoodFIAP.Services.Api
+Pacote client adicionado em FastFoodFIAP.Infra.CrossCutting.IoC
 
     `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL`
 
 ### Docker 
 
+    Pacote para criação do container com .Net 7
+
+        `dotnet add package Microsoft.Net.Build.Containers`
+
+    Comando para criação da imagem:
+
+        `dotnet publish --os linux --arch x64 -p: PublishProfile=DefaultContainer`
+
+### docker-compose
+
+    `docker-compose up -d`
+
     `docker build -t fastfoodapi:0.1 -f Dockerfile .`
 
-    `docker compose up`
+    `docker-compose --project-name fastfood build`

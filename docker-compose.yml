@@ -1,16 +1,19 @@
 version: "3.1"
-
 services:
   db:
+    container_name: postgres-fiap
     restart: always
     build:
       context: ./Docker
       dockerfile: db.Dockerfile
     volumes:
-      - ./var/pgdata:/var/lib/postgresql/data
+      - C:\tmp\var:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: fastfood
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+
+
+  

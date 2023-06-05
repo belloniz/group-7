@@ -8,9 +8,10 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         public string Descricao { get; private set; } = "";
         public decimal Preco { get; private set; }
         public int CategoriaId {get; private set;}
-        public ICollection<Imagem>? Imagens { get; private set; }
+        
 
-        public virtual CategoriaProduto? Categoria { get; private set; }
+        public virtual CategoriaProduto? CategoriaNavegation { get; private set; }
+        public ICollection<Imagem>? Imagens { get; private set; }
 
         private Produto() { 
         }
@@ -22,6 +23,12 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
             CategoriaId = categoriaId;
 
             Imagens = new HashSet<Imagem>();
+        }
+
+        public void AddImagem(string url)
+        {
+            var imagem = new Imagem(url);
+            Imagens!.Add(imagem);
         }
     }
 }

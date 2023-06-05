@@ -8,6 +8,8 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         public string Url { get; private set; } = "";
 
 
+        public virtual Produto? ProdutoNavigation { get; private set; }
+
         private Imagem() { }
 
         public Imagem(string url){
@@ -17,7 +19,7 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Id;
-            yield return Url;            
+            yield return Url;        
         }
     }
 }
