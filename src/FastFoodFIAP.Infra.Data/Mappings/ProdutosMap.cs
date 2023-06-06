@@ -28,14 +28,17 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.Property(c => c.Preco)
                 .HasColumnName("preco");  
 
+            builder.Property(c => c.CategoriaId)
+                .HasColumnName("categoriaid");  
+
             builder.HasOne(e => e.CategoriaNavegation)
                 .WithMany(p => p.Produtos)
                 .HasForeignKey(d => d.CategoriaId);
 
-            builder.HasMany(p => p.Imagens)
-                .WithOne(e => e.ProdutoNavigation)
-                .HasForeignKey(p => p.Id)
-                .OnDelete(DeleteBehavior.Cascade);   
+            // builder.HasMany(p => p.Imagens)
+            //     .WithOne(e => e.ProdutoNavigation)
+            //     .HasForeignKey(p => p.Id)
+            //     .OnDelete(DeleteBehavior.Cascade);   
 
             builder.Navigation(e => e.CategoriaNavegation).AutoInclude();
         }

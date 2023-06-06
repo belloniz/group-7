@@ -1,10 +1,7 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
-using FastFoodFIAP.Application.AutoMapper;
-using FastFoodFIAP.Application.Interfaces;
-using FastFoodFIAP.Application.Services;
-using FastFoodFIAP.Domain.Interfaces;
-using FastFoodFIAP.Infra.Data.Repository;
 using FastFoodFIAP.Services.Api.Configurations;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,19 +1,26 @@
 
 using System.ComponentModel.DataAnnotations;
 using FastFoodFIAP.Domain.Models;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using FastFoodFIAP.Infra.Data.Mappings;
 using GenericPack.Data;
+using GenericPack.Mediator;
 using GenericPack.Messaging;
 using Microsoft.EntityFrameworkCore;
 
 namespace FastFoodFIAP.Infra.Data.Context
-{
+{    
     public sealed class AppDbContext : DbContext, IUnitOfWork
     {
+        private readonly IMediatorHandler _mediatorHandler;
         public DbSet<CategoriaProduto>? CategoriasProdutos { get; set; }
+        public DbSet<Produto>? Produtos { get; set; }
+        //public DbSet<ProdutosImagens>? ProdutosImagens { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IMediatorHandler mediatorHandler) :base(options)
         {
+             _mediatorHandler = mediatorHandler;
+
             //https://learn.microsoft.com/en-us/ef/core/querying/tracking
              ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
@@ -30,7 +37,9 @@ namespace FastFoodFIAP.Infra.Data.Context
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
+            //Configura mapeamento
             modelBuilder.ApplyConfiguration(new CategoriasProdutosMap());
+            modelBuilder.ApplyConfiguration(new ProdutosMap());
 
             base.OnModelCreating(modelBuilder);
         }

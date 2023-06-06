@@ -24,7 +24,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(c => c.Url)
                 .HasColumnName("url")
-                .HasMaxLength(300);
+                .HasMaxLength(300);        
         }
     }
 }

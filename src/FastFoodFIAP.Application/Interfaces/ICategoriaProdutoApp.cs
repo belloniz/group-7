@@ -8,8 +8,8 @@ namespace FastFoodFIAP.Application.Interfaces
 
         List<CategoriaProdutoViewModel> GetAll();
         CategoriaProdutoViewModel GetById(int id);
-        CategoriaProdutoViewModel Add(CategoriaProdutoInputModel categoriaInputModel);
-        bool Update(int id, CategoriaProdutoInputModel categoriaInputModel);
+        CategoriaProdutoViewModel Add(CategoriaProdutoInputModel model);
+        bool Update(int id, CategoriaProdutoInputModel model);
         bool Remove(int id);        
     }
 }

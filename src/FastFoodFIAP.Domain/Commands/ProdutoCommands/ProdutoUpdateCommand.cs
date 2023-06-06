@@ -6,14 +6,16 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
     {
         protected ProdutoUpdateCommand(){}
 
-        public ProdutoUpdateCommand(int id, string nome, string descricao, decimal preco, int categoriaId){
-            Id=id;
+        public ProdutoUpdateCommand(string nome, string descricao, decimal preco, int categoriaId){
             Nome=nome;
             Descricao=descricao;
             Preco=preco;
             CategoriaId=categoriaId;
         }
 
+        public void SetId(int id){
+            Id=id;
+        }
         public override bool IsValid()
         {
             ValidationResult = new ProdutoValidationsUpdate().Validate(this);

@@ -1,11 +1,9 @@
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
-using GenericPack.Data;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -22,23 +20,23 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public CategoriaProdutoViewModel Add(CategoriaProdutoInputModel categoriaInputModel)
+        public CategoriaProdutoViewModel Add(CategoriaProdutoInputModel model)
         {
-            var categoria = _mapper.Map<CategoriaProduto>(categoriaInputModel);
+            var categoria = _mapper.Map<CategoriaProduto>(model);
             _categoriaRepository.Add(categoria);
             _categoriaRepository.UnitOfWork.Commit();
 
             return _mapper.Map<CategoriaProdutoViewModel>(categoria);
         }
 
-       public bool Update(int id, CategoriaProdutoInputModel categoriaInputModel)
+       public bool Update(int id, CategoriaProdutoInputModel model)
         {
             var categoria = _categoriaRepository.GetById(id);
 
             if (categoria is null)
                 return false;
 
-            categoria = _mapper.Map<CategoriaProduto>(categoriaInputModel);                
+            categoria = _mapper.Map<CategoriaProduto>(model);                
             _categoriaRepository.Update(categoria);
             _categoriaRepository.UnitOfWork.Commit();
 

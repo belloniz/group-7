@@ -1,6 +1,7 @@
 using FastFoodFIAP.Domain.Interfaces;
-using GenericPack.Messaging;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using FluentValidation.Results;
+using GenericPack.Messaging;
 using MediatR;
 
 namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
@@ -17,19 +18,57 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             _repository = repository;
         }
 
-        public Task<ValidationResult> Handle(ProdutoCreateCommand request, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(ProdutoCreateCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (!request.IsValid()) return request.ValidationResult;            
+
+            var produto = new Produto(request.Id,request.Nome,request.Descricao, request.Preco, request.CategoriaId);            
+            
+            //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
+
+            _repository.Add(produto);            
+
+            return await Commit(_repository.UnitOfWork);
         }
 
-        public Task<ValidationResult> Handle(ProdutoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(ProdutoUpdateCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (!request.IsValid()) return request.ValidationResult;
+
+            var produtoExiste = _repository.GetById(request.Id);
+            if (produtoExiste is null)
+            {
+                AddError("O Produto não existe.");
+                return ValidationResult;
+            }                 
+
+            var produto = new Produto(request.Id, request.Nome,request.Descricao, request.Preco, request.CategoriaId);                    
+
+            //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
+
+            _repository.Update(produto);            
+
+            return await Commit(_repository.UnitOfWork);
         }
 
-        public Task<ValidationResult> Handle(ProdutoDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(ProdutoDeleteCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (!request.IsValid()) return request.ValidationResult;
+
+            var produtoExiste = _repository.GetById(request.Id);
+            if (produtoExiste is null)
+            {
+                AddError("O Produto não existe.");
+                return ValidationResult;
+            }    
+
+            var produto = new Produto(request.Id, request.Nome,request.Descricao, request.Preco, request.CategoriaId);                       
+
+            //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
+
+            _repository.Remove(produto);            
+
+            return await Commit(_repository.UnitOfWork);
         }
 
         public void Dispose()

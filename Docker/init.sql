@@ -22,7 +22,7 @@ CREATE TABLE public.produtos (
 CREATE TABLE public.produtos_imagens (
    id SERIAL NOT NULL,
    url VARCHAR(300) NOT NULL,
-   produtoId INT NOT NULL,
+   produtoid INT NOT NULL,
    CONSTRAINT produtos_imagens_pkey PRIMARY KEY (id),
    CONSTRAINT produtos_imagens_fk FOREIGN KEY (produtoid) REFERENCES public.produtos(id) ON DELETE CASCADE
 );

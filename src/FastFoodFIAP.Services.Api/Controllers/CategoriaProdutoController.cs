@@ -3,7 +3,6 @@ using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FastFoodFIAP.Services.Api.Controllers
 {
@@ -54,7 +53,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Localiza uma categoria de produtos.",
         Description = "Localiza uma categoria de produtos pelo seu ID."
         )]
-        [SwaggerResponse(200, "The product was found", typeof(CategoriaProdutoViewModel))]
+        [SwaggerResponse(200, "Success", typeof(CategoriaProdutoViewModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]

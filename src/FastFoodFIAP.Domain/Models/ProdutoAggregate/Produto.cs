@@ -16,7 +16,8 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         private Produto() { 
         }
 
-        public Produto(string nome, string descricao, decimal preco, int categoriaId){
+        public Produto(int id, string nome, string descricao, decimal preco, int categoriaId){
+            Id = id;
             Nome = nome;            
             Descricao = descricao;
             Preco = preco;
