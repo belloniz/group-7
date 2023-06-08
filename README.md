@@ -29,6 +29,8 @@ Também pode ser executado com o Visual Studio Code (Windows, Linux or MacOS).
 
 ## Arquitetura e Padrões
 
+![Arquitetura](https://github.com/belloniz/group-7/blob/main/docs/ArquiteturaHexagonal.png)
+
 - Arquitetura Hexagonal
 - Domain Driven Design
 - Unit of Work
