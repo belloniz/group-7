@@ -7,7 +7,7 @@ services:
       context: ./Docker
       dockerfile: db.Dockerfile
     volumes:
-      - C:\tmp\var:/var/lib/postgresql/data
+      - ./var:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: fastfood
       POSTGRES_USER: postgres

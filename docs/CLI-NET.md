@@ -6,9 +6,9 @@ https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
 
 - FastFoodFIAP                                  ->  sln
     - src: 
-        - FastFoodFIAP.Application              ->  classlib
-        - FastFoodFIAP.Domain.Core              ->  classlib
+        - FastFoodFIAP.Application              ->  classlib        
         - FastFoodFIAP.Domain                   ->  classlib
+        - FastFoodFIAP.Infra.CrossCutting.Bus   ->  classlib
         - FastFoodFIAP.Infra.CrossCutting.IoC   ->  classlib
         - FastFoodFIAP.Infra.Data               ->  classlib
         - FastFoodFIAP.Services.Api             ->  webapi
@@ -40,14 +40,16 @@ Exemplo: `dotnet add reference ../MeuProjeto.Domain/MeuProjeto.Domain.csproj`
     - src: 
         - FastFoodFIAP.Application
                 -> FastFoodFIAP.Domain
-                -> FastFoodFIAP.Infra.Data
 
-        - FastFoodFIAP.Domain.Core
+        - FastFoodFIAP.Infra.CrossCutting.Bus
 
         - FastFoodFIAP.Domain                
-                -> FastFoodFIAP.Domain.Core
 
         - FastFoodFIAP.Infra.CrossCutting.IoC
+                -> FastFoodFIAP.Application
+                -> FastFoodFIAP.Domain
+                -> FastFoodFIAP.Infra.CrossCutting.Bus
+                -> FastFoodFIAP.Infra.Data
 
         - FastFoodFIAP.Infra.Data
                 -> FastFoodFIAP.Domain
