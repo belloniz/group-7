@@ -26,7 +26,7 @@ Para criar o arquivo da solução, execute:
 
     `dotnet new sln --name NomeSolução`
 
-Para vincular os projetos à solucução, execute:
+Para vincular os projetos à solução, execute:
 
     `dotnet sln add src/projeto`
 
