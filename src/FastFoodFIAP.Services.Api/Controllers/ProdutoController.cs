@@ -29,8 +29,8 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IEnumerable<ProdutoViewModel>> GetAll()
-        {            
-            return await _produtoApp.GetAll();                            
+        {
+            return await _produtoApp.GetAll();
         }
 
         [HttpGet("{id}")]
@@ -42,9 +42,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public  async Task<ProdutoViewModel> GetById([FromRoute] int id)
-        {            
-            return await _produtoApp.GetById(id);         
+        public async Task<ProdutoViewModel> GetById([FromRoute] int id)
+        {
+            return await _produtoApp.GetById(id);
         }
 
         [HttpPost]
@@ -52,7 +52,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Cria um novo produto.",
         Description = "Cria um novo produto."
         )]
-        [SwaggerResponse(201, "Success", typeof(ProdutoViewModel))]
+        [SwaggerResponse(201, "Success", typeof(ProdutoInputModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] ProdutoInputModel produto)
@@ -71,20 +71,6 @@ namespace FastFoodFIAP.Services.Api.Controllers
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ProdutoInputModel produto)
         {
             return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _produtoApp.Update(id, produto));
-            // try
-            // {
-            //     if (!ModelState.IsValid)
-            //         return BadRequest(ModelState);
-
-            //     if (_categoriaProdutoApp.Update(id, categoria))
-            //         return NoContent();
-            //     else
-            //         return NotFound();
-            // }
-            // catch (Exception e)
-            // {
-            //     return Problem("Ocorreu um problema com a requisição - " + e.Message); 
-            // }
         }
 
         [HttpDelete("{id}")]
@@ -99,22 +85,6 @@ namespace FastFoodFIAP.Services.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             return CustomResponse(await _produtoApp.Remove(id));
-
-            // try
-            // {
-            //     if (!ModelState.IsValid)
-            //         return BadRequest(ModelState);
-
-            //     if (_categoriaProdutoApp.Remove(id))
-            //         return NoContent();
-            //     else
-            //         return NotFound();
-
-            // }
-            // catch (Exception e)
-            // {
-            //     return Problem("Ocorreu um problema com a requisição - " + e.Message); 
-            // }
         }
     }
 }
