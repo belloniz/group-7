@@ -4,6 +4,8 @@ https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
 
 ## Estrutura da solução
 
+![Projeto](https://github.com/belloniz/group-7/blob/main/docs/Projeto.png)
+
 - FastFoodFIAP                                  ->  sln
     - src: 
         - FastFoodFIAP.Application              ->  classlib        
@@ -24,7 +26,7 @@ Para criar o arquivo da solução, execute:
 
     `dotnet new sln --name NomeSolução`
 
-Para vincular os projetos à solucução, execute:
+Para vincular os projetos à solução, execute:
 
     `dotnet sln add src/projeto`
 
