@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
@@ -12,32 +13,30 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         protected readonly AppDbContext Db;
         protected readonly DbSet<Produto> DbSet;
+        protected readonly DbSet<Imagem> DbSetImagem;
 
         public ProdutoRepository(AppDbContext context)
         {
             Db = context;
-            DbSet = Db.Set<Produto>();            
+            DbSet = Db.Set<Produto>();
+            DbSetImagem = Db.Set<Imagem>();
         }
-         public IUnitOfWork UnitOfWork => Db;
-
-        public void Add(Produto produto)
-        {
-            DbSet.Add(produto);
-        }
-
-        public void Dispose()
-        {
-            Db.Dispose();
-        }
+        public IUnitOfWork UnitOfWork => Db;
 
         public async Task<IEnumerable<Produto>> GetAll()
         {
-            return await DbSet.AsNoTracking().OrderBy(on => on.Nome).ToListAsync(); 
+            return await DbSet.AsNoTracking().OrderBy(x => x.Nome).ToListAsync();
         }
 
         public async Task<Produto?> GetById(int id)
         {
             return await DbSet.FindAsync(id);
+        }
+
+        public void Add(Produto produto)
+        {
+            DbSet.Add(produto);
+            DbSetImagem.AddRange(produto.Imagens!);
         }
 
         public void Remove(Produto produto)
@@ -48,6 +47,13 @@ namespace FastFoodFIAP.Infra.Data.Repository
         public void Update(Produto produto)
         {
             DbSet.Update(produto);
+            DbSetImagem.AddRange(produto.Imagens!);
         }
+
+        public void Dispose()
+        {
+            Db.Dispose();
+        }
+
     }
 }

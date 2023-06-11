@@ -1,3 +1,4 @@
+using System.Data;
 using AutoMapper;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Models;
@@ -13,9 +14,11 @@ namespace FastFoodFIAP.Application.AutoMapper
             
             CreateMap<CategoriaProduto, CategoriaProdutoViewModel>();
 
-            //Produto
-            CreateMap<Produto, ProdutoViewModel>();
-            CreateMap<Produto, ProdutoViewModel>();
+            CreateMap<Imagem, ImagemViewModel>();
+
+            CreateMap<Produto, ProdutoViewModel>()
+                .ForMember(c => c.Categoria,
+                    map => map.MapFrom(m => m.CategoriaNavegation));
         }
         
     }

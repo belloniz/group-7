@@ -24,6 +24,9 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
 
             var produto = new Produto(request.Id,request.Nome,request.Descricao, request.Preco, request.CategoriaId);            
             
+            foreach (var url in request.ImagensUrl)
+                produto.AddImagem(url);
+
             //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
 
             _repository.Add(produto);            
@@ -35,7 +38,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            var produtoExiste = _repository.GetById(request.Id);
+            var produtoExiste = await _repository.GetById(request.Id);
             if (produtoExiste is null)
             {
                 AddError("O Produto não existe.");
@@ -43,6 +46,9 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             }                 
 
             var produto = new Produto(request.Id, request.Nome,request.Descricao, request.Preco, request.CategoriaId);                    
+
+            foreach (var url in request.ImagensUrl)
+                produto.AddImagem(url);
 
             //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
 
@@ -55,7 +61,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            var produtoExiste = _repository.GetById(request.Id);
+            var produtoExiste = await _repository.GetById(request.Id);
             if (produtoExiste is null)
             {
                 AddError("O Produto não existe.");

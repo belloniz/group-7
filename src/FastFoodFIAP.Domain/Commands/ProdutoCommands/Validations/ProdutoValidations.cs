@@ -33,5 +33,11 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands.Validations
             RuleFor(c => c.CategoriaId)
                 .NotEqual(0).WithMessage("A Categoria do produto não foi informada");
         }
+
+        protected void ValidaExisteImagem()
+        {
+            RuleFor(c => c.ImagensUrl.Count)
+                .GreaterThan(0).WithMessage("O produto deve possuir pelo menos uma imagem");
+        }
     }
 }

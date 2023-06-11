@@ -14,7 +14,7 @@ namespace FastFoodFIAP.Application.InputModels
         [Required(ErrorMessage = "A descrição do produto é requerida.")]
         [MinLength(3)]
         [MaxLength(1000)]
-        [DisplayName("Descrição")]        
+        [DisplayName("Descrição")]
         public string Descricao { get; set; } = "";
 
         [Range(0 ,double.MaxValue, ErrorMessage = "O preço do produto deve ser maior que zero.")]
@@ -24,6 +24,6 @@ namespace FastFoodFIAP.Application.InputModels
         [Required(ErrorMessage = "A categoria do produto é requerida.")]
         public int CategoriaId {get; set;}
         
-        public List<string>? Imagens {get; set;}
+        public List<string>? ImagensUrl{get; set;} 
     }
 }

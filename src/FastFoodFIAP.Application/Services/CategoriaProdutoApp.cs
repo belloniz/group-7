@@ -2,70 +2,57 @@ using AutoMapper;
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.ViewModels;
+using FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
+using FluentValidation.Results;
+using GenericPack.Mediator;
 
 namespace FastFoodFIAP.Application.Services
 {
     public class CategoriaProdutoApp : ICategoriaProdutoApp
     {
-
         private readonly ICategoriaProdutoRepository _categoriaRepository;
         private readonly IMapper _mapper;
+        private readonly IMediatorHandler _mediator;
 
-        
-        public CategoriaProdutoApp(ICategoriaProdutoRepository categoriaRepository, IMapper mapper)
+        public CategoriaProdutoApp(ICategoriaProdutoRepository categoriaRepository, IMediatorHandler mediator, IMapper mapper)
         {
             _categoriaRepository = categoriaRepository;
+            _mediator = mediator;
             _mapper = mapper;
         }
 
-        public CategoriaProdutoViewModel Add(CategoriaProdutoInputModel model)
+        public async Task<ValidationResult> Add(CategoriaProdutoInputModel model)
         {
-            var categoria = _mapper.Map<CategoriaProduto>(model);
-            _categoriaRepository.Add(categoria);
-            _categoriaRepository.UnitOfWork.Commit();
-
-            return _mapper.Map<CategoriaProdutoViewModel>(categoria);
+            var command = _mapper.Map<CategoriaProdutoCreateCommand>(model);
+            return await _mediator.SendCommand(command);
         }
 
-       public bool Update(int id, CategoriaProdutoInputModel model)
+        public async Task<ValidationResult> Update(int id, CategoriaProdutoInputModel model)
         {
-            var categoria = _categoriaRepository.GetById(id);
-
-            if (categoria is null)
-                return false;
-
-            categoria = _mapper.Map<CategoriaProduto>(model);                
-            _categoriaRepository.Update(categoria);
-            _categoriaRepository.UnitOfWork.Commit();
-
-            return true;                    
+            var command = _mapper.Map<CategoriaProdutoUpdateCommand>(model);
+            command.SetId(id);
+            return await _mediator.SendCommand(command);
         }
 
-        public bool Remove(int id)
+        public async Task<ValidationResult> Remove(int id)
         {
-            var categoria = _categoriaRepository.GetById(id);
-
-            if (categoria is null)
-                return false;
-
-            _categoriaRepository.Remove(categoria);
-            _categoriaRepository.UnitOfWork.Commit();
-            return true;            
+            var command = new CategoriaProdutoDeleteCommand(id);
+            return await _mediator.SendCommand(command);
         }
 
-        public CategoriaProdutoViewModel GetById(int id)
+        public async Task<CategoriaProdutoViewModel> GetById(int id)
         {
-            return _mapper.Map<CategoriaProdutoViewModel>(_categoriaRepository.GetById(id));
+            return _mapper.Map<CategoriaProdutoViewModel>(await _categoriaRepository.GetById(id));
         }
 
-        public List<CategoriaProdutoViewModel> GetAll()
+        public async Task<IEnumerable<CategoriaProdutoViewModel>> GetAll()
         {
-            return _mapper.Map<List<CategoriaProdutoViewModel>>(_categoriaRepository.GetAll());        
+            return _mapper.Map<IEnumerable<CategoriaProdutoViewModel>>(await _categoriaRepository.GetAll());
         }
 
-         public void Dispose()
+        public void Dispose()
         {
             GC.SuppressFinalize(this);
         }

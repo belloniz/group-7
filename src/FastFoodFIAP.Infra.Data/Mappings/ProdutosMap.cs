@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -13,7 +14,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.HasKey(c => c.Id)
                 .HasName("PRIMARY");
 
-            builder.Property(e => e.Id)
+            builder.Property(c => c.Id)
                 .HasColumnName("id")
                 .ValueGeneratedOnAdd();
 
@@ -30,17 +31,16 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(c => c.CategoriaId)
                 .HasColumnName("categoriaid");  
+            
+            builder.HasIndex(c => c.CategoriaId);
 
-            builder.HasOne(e => e.CategoriaNavegation)
+            builder.HasOne(c => c.CategoriaNavegation)
                 .WithMany(p => p.Produtos)
-                .HasForeignKey(d => d.CategoriaId);
-
-            // builder.HasMany(p => p.Imagens)
-            //     .WithOne(e => e.ProdutoNavigation)
-            //     .HasForeignKey(p => p.Id)
-            //     .OnDelete(DeleteBehavior.Cascade);   
-
+                .HasForeignKey(p => p.CategoriaId);            
+            
             builder.Navigation(e => e.CategoriaNavegation).AutoInclude();
+            builder.Navigation(e => e.Imagens).AutoInclude();
         }
     }
 }
+

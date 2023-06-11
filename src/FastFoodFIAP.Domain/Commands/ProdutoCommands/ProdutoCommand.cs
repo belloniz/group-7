@@ -9,9 +9,10 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
         public string Descricao { get; protected set; } = "";
         public decimal Preco { get; protected set; }
         public int CategoriaId {get; protected set;}
+        public List<string> ImagensUrl{get; protected set;} 
 
         public ProdutoCommand(){
-            
+            ImagensUrl = new List<string>();
         }
     }
 }

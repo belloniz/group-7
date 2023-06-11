@@ -1,7 +1,7 @@
 CREATE DATABASE fastfood;
 
 -- connect to the newly created database
-\c fastfood;
+\c fastfood fastfood;
 
 CREATE TABLE public.categorias_produtos (
    id SERIAL NOT NULL,

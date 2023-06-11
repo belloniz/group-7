@@ -3,7 +3,7 @@ using GenericPack.Domain;
 
 namespace FastFoodFIAP.Domain.Models
 {
-    public class CategoriaProduto: Entity, IAggregateRoot
+    public partial class CategoriaProduto: Entity, IAggregateRoot
     {
         public string Nome { get; private set; } = "";
 
@@ -12,7 +12,8 @@ namespace FastFoodFIAP.Domain.Models
             Produtos = new HashSet<Produto>();
         }
 
-        public CategoriaProduto(string nome){
+        public CategoriaProduto(int id, string nome){
+            Id = id;
             Nome=nome;         
             Produtos = new HashSet<Produto>();   
         }

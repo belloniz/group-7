@@ -15,7 +15,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
         public CategoriaProdutoRepository(AppDbContext context)
         {
             Db = context;
-            DbSet = Db.Set<CategoriaProduto>();            
+            DbSet = Db.Set<CategoriaProduto>();
         }
 
         public IUnitOfWork UnitOfWork => Db;
@@ -30,14 +30,14 @@ namespace FastFoodFIAP.Infra.Data.Repository
             Db.Dispose();
         }
 
-        public IEnumerable<CategoriaProduto> GetAll()
+        public async Task<IEnumerable<CategoriaProduto>> GetAll()
         {
-            return DbSet.AsNoTracking().OrderBy(on => on.Nome);                       
+            return await DbSet.AsNoTracking().OrderBy(on => on.Nome).ToListAsync();
         }
 
-        public CategoriaProduto? GetById(int id)
+        public async Task<CategoriaProduto?> GetById(int id)
         {
-             return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
         public void Remove(CategoriaProduto categoria)

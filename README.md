@@ -9,7 +9,7 @@ SOAP2 - Grupo 7
 ## Como usar
 
 - Você precisará do Visual Studio 2022 e do SDK do .NET 7.0
-- Baixe me https://dotnet.microsoft.com/pt-br/download/dotnet/7.0.
+- Baixe em https://dotnet.microsoft.com/pt-br/download/dotnet/7.0.
 
 Também pode ser executado com o Visual Studio Code (Windows, Linux or MacOS).
 

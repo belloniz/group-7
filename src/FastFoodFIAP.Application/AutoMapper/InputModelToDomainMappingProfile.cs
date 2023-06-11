@@ -1,5 +1,6 @@
 using AutoMapper;
 using FastFoodFIAP.Application.InputModels;
+using FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands;
 using FastFoodFIAP.Domain.Commands.ProdutoCommands;
 using FastFoodFIAP.Domain.Models;
 
@@ -11,11 +12,13 @@ namespace FastFoodFIAP.Application.AutoMapper
         {            
             AllowNullCollections = true;  
             
-            CreateMap<CategoriaProdutoInputModel, CategoriaProduto>();
+            //CategoriaProduto
+            CreateMap<CategoriaProdutoInputModel, CategoriaProdutoCreateCommand>();
+            CreateMap<CategoriaProdutoInputModel, CategoriaProdutoUpdateCommand>();
 
             //Produto
             CreateMap<ProdutoInputModel, ProdutoCreateCommand>();
-            CreateMap<ProdutoInputModel, ProdutoUpdateCommand>();
+            CreateMap<ProdutoInputModel, ProdutoUpdateCommand>();                    
             
         }
     }

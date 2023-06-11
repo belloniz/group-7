@@ -12,16 +12,14 @@ namespace FastFoodFIAP.Application.Services
 {
     public class ProdutoApp : IProdutoApp
     {
-
-        
         private readonly IProdutoRepository _produtoRepository;
         private readonly IMapper _mapper;
         private readonly IMediatorHandler _mediator;
-        
+
         public ProdutoApp(IProdutoRepository produtoRepository, IMediatorHandler mediator, IMapper mapper)
         {
             _produtoRepository = produtoRepository;
-             _mediator = mediator;
+            _mediator = mediator;
             _mapper = mapper;
         }
 
@@ -31,7 +29,7 @@ namespace FastFoodFIAP.Application.Services
             return await _mediator.SendCommand(command);
         }
 
-         public async Task<ValidationResult> Update(int id, ProdutoInputModel model)
+        public async Task<ValidationResult> Update(int id, ProdutoInputModel model)
         {
             var command = _mapper.Map<ProdutoUpdateCommand>(model);
             command.SetId(id);
@@ -41,11 +39,13 @@ namespace FastFoodFIAP.Application.Services
         public async Task<ValidationResult> Remove(int id)
         {
             var command = new ProdutoDeleteCommand(id);
-            return await _mediator.SendCommand(command);            
+            return await _mediator.SendCommand(command);
         }
 
         public async Task<IEnumerable<ProdutoViewModel>> GetAll()
         {
+            var obj = await _produtoRepository.GetAll();
+
             return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.GetAll());
         }
 
