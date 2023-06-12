@@ -1,6 +1,8 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
+using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -28,9 +30,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "No Content")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IEnumerable<CategoriaProdutoViewModel>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            return await _categoriaProdutoApp.GetAll();
+            var lista = await _categoriaProdutoApp.GetAll();
+            return CustomListResponse(lista, lista.Count);
         }
 
         [HttpGet("{id}")]
@@ -42,9 +45,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<CategoriaProdutoViewModel> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await _categoriaProdutoApp.GetById(id);
+            return CustomResponse(await _categoriaProdutoApp.GetById(id));
         }
 
         [HttpPost]
@@ -57,7 +60,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] CategoriaProdutoInputModel categoria)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _categoriaProdutoApp.Add(categoria));
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
+            return CustomCreateResponse(await _categoriaProdutoApp.Add(categoria));
         }
 
         [HttpPut("{id}")]
@@ -70,7 +76,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] CategoriaProdutoInputModel categoria)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _categoriaProdutoApp.Update(id, categoria));
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
+            return CustomNoContentResponse(await _categoriaProdutoApp.Update(id, categoria));            
         }
 
         [HttpDelete("{id}")]
@@ -84,7 +93,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return CustomResponse(await _categoriaProdutoApp.Remove(id));
+            return CustomNoContentResponse(await _categoriaProdutoApp.Remove(id));
         }
     }
 }

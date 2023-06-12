@@ -47,9 +47,9 @@ namespace FastFoodFIAP.Application.Services
             return _mapper.Map<CategoriaProdutoViewModel>(await _categoriaRepository.GetById(id));
         }
 
-        public async Task<IEnumerable<CategoriaProdutoViewModel>> GetAll()
+        public async Task<List<CategoriaProdutoViewModel>> GetAll()
         {
-            return _mapper.Map<IEnumerable<CategoriaProdutoViewModel>>(await _categoriaRepository.GetAll());
+            return _mapper.Map<List<CategoriaProdutoViewModel>>(await _categoriaRepository.GetAll());
         }
 
         public void Dispose()

@@ -13,7 +13,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         {
             if (IsOperationValid())
             {
-                return Ok(new { data = result });
+                return Ok(result);
             }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
@@ -43,20 +43,57 @@ namespace FastFoodFIAP.Services.Api.Controllers
             return CustomResponse();
         }
 
-        protected ActionResult CustomListResponse(object result, int offset, int limit, int count)
+        protected ActionResult CustomCreateResponse(object? result = null)
         {
             if (IsOperationValid())
             {
-                return Ok(new
-                {
-                    data = result,
-                    paging = new
-                    {
-                        offset = offset,
-                        limit = limit,
-                        count = count
-                    }
-                });
+                return StatusCode(StatusCodes.Status201Created, result);
+            }
+
+            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "Messages", _errors.ToArray() }
+            }));
+        }
+
+        protected ActionResult CustomCreateResponse(ValidationResult validationResult)
+        {
+            foreach (var error in validationResult.Errors)
+            {
+                AddError(error.ErrorMessage);
+            }
+
+            return CustomResponse();
+        }
+
+        protected ActionResult CustomNoContentResponse(object? result = null)
+        {
+            if (IsOperationValid())
+            {
+                return NoContent();
+            }
+
+            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "Messages", _errors.ToArray() }
+            }));
+        }
+
+        protected ActionResult CustomNoContentResponse(ValidationResult validationResult)
+        {
+            foreach (var error in validationResult.Errors)
+            {
+                AddError(error.ErrorMessage);
+            }
+
+            return CustomResponse();
+        }
+
+        protected ActionResult CustomListResponse(object result, int count)
+        {
+            if (IsOperationValid())
+            {
+                return count > 0 ? Ok(result): NoContent();
             }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>

@@ -12,7 +12,8 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         public virtual ICollection<Imagem> Imagens { get; private set; }
         public virtual CategoriaProduto? CategoriaNavegation { get; private set; }
         
-        private Produto() { 
+        private Produto() {
+            Imagens = new HashSet<Imagem>();
         }
 
         public Produto(int id, string nome, string descricao, decimal preco, int categoriaId){

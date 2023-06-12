@@ -43,9 +43,9 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             {
                 AddError("O Produto não existe.");
                 return ValidationResult;
-            }                 
+            }
 
-            var produto = new Produto(request.Id, request.Nome,request.Descricao, request.Preco, request.CategoriaId);                    
+            var produto = new Produto(request.Id, request.Nome, request.Descricao, request.Preco, request.CategoriaId);
 
             foreach (var url in request.ImagensUrl)
                 produto.AddImagem(url);

@@ -28,6 +28,12 @@ namespace FastFoodFIAP.Infra.Data.Context
              ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+        {
+            //https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/simple-logging
+            optionsBuilder.LogTo(Console.WriteLine);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<ValidationResult>();

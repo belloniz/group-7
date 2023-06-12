@@ -1,5 +1,6 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
+using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -28,9 +29,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "No Content")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IEnumerable<ProdutoViewModel>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            return await _produtoApp.GetAll();
+            var lista = await _produtoApp.GetAll();
+            return CustomListResponse(lista, lista.Count);
         }
 
         [HttpGet("{id}")]
@@ -42,9 +44,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<ProdutoViewModel> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return await _produtoApp.GetById(id);
+            return CustomResponse(await _produtoApp.GetById(id));
         }
 
         [HttpPost]
@@ -57,7 +59,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] ProdutoInputModel produto)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _produtoApp.Add(produto));
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
+            return CustomCreateResponse(await _produtoApp.Add(produto));
         }
 
         [HttpPut("{id}")]
@@ -70,7 +75,10 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ProdutoInputModel produto)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _produtoApp.Update(id, produto));
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+
+            return CustomNoContentResponse( await _produtoApp.Update(id, produto));
         }
 
         [HttpDelete("{id}")]
@@ -84,7 +92,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return CustomResponse(await _produtoApp.Remove(id));
+            return CustomNoContentResponse(await _produtoApp.Remove(id));
         }
     }
 }

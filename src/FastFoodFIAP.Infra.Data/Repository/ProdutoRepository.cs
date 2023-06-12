@@ -13,13 +13,11 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         protected readonly AppDbContext Db;
         protected readonly DbSet<Produto> DbSet;
-        protected readonly DbSet<Imagem> DbSetImagem;
 
         public ProdutoRepository(AppDbContext context)
         {
             Db = context;
             DbSet = Db.Set<Produto>();
-            DbSetImagem = Db.Set<Imagem>();
         }
         public IUnitOfWork UnitOfWork => Db;
 
@@ -35,8 +33,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Add(Produto produto)
         {
-            DbSet.Add(produto);
-            DbSetImagem.AddRange(produto.Imagens!);
+            DbSet.Add(produto);        
         }
 
         public void Remove(Produto produto)
@@ -46,8 +43,11 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Update(Produto produto)
         {
-            DbSet.Update(produto);
-            DbSetImagem.AddRange(produto.Imagens!);
+            var imagens = Db.ProdutosImagens!.Where(p => p.ProdutoId == produto.Id).AsNoTracking();
+            if (imagens != null) 
+                Db.ProdutosImagens!.RemoveRange(imagens);
+
+            DbSet.Update(produto);          
         }
 
         public void Dispose()

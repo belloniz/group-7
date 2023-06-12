@@ -42,11 +42,9 @@ namespace FastFoodFIAP.Application.Services
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<IEnumerable<ProdutoViewModel>> GetAll()
-        {
-            var obj = await _produtoRepository.GetAll();
-
-            return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.GetAll());
+        public async Task<List<ProdutoViewModel>> GetAll()
+        {           
+            return _mapper.Map<List<ProdutoViewModel>>(await _produtoRepository.GetAll());
         }
 
         public async Task<ProdutoViewModel> GetById(int id)

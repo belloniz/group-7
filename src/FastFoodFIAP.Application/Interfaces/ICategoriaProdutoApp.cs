@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Application.Interfaces
 {
     public interface ICategoriaProdutoApp : IDisposable
     {
-        Task<IEnumerable<CategoriaProdutoViewModel>> GetAll();
+        Task<List<CategoriaProdutoViewModel>> GetAll();
         Task<CategoriaProdutoViewModel> GetById(int id);
         Task<ValidationResult> Add(CategoriaProdutoInputModel model);
         Task<ValidationResult> Update(int id, CategoriaProdutoInputModel model);

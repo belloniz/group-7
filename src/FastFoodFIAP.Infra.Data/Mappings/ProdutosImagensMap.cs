@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
@@ -14,13 +15,13 @@ namespace FastFoodFIAP.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Imagem> builder)
         {            
             builder.ToTable("produtos_imagens");
-   
-            builder.Property<int>("id")  // Id is a shadow property
-                .ValueGeneratedOnAdd()
-                .IsRequired();
-    
-            builder.HasKey("id")   // Id is a shadow property
+
+            builder.HasKey(c => c.Id)
                 .HasName("PRIMARY");
+
+            builder.Property(c => c.Id)
+                .HasColumnName("id")
+                .ValueGeneratedOnAdd();
 
             builder.Property(c => c.Url)
                 .HasColumnName("url")
@@ -32,7 +33,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.HasOne(c => c.ProdutoNavigation)
                 .WithMany(e => e.Imagens)
                 .HasForeignKey( c => c.ProdutoId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);            
         }
     }
 }
