@@ -8,8 +8,8 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         public string Descricao { get; private set; } = "";
         public decimal Preco { get; private set; }
         public int CategoriaId {get; private set;}
-        public ICollection<Imagem> Imagens { get; private set; }
-
+        
+        public virtual ICollection<Imagem> Imagens { get; private set; }
         public virtual CategoriaProduto? CategoriaNavegation { get; private set; }
         
         private Produto() { 
