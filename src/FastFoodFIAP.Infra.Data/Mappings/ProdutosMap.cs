@@ -30,7 +30,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasColumnName("preco");  
 
             builder.Property(c => c.CategoriaId)
-                .HasColumnName("categoriaid");  
+                .HasColumnName("categoria_id");  
             
             builder.HasIndex(c => c.CategoriaId);
 

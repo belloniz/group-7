@@ -28,7 +28,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasMaxLength(300); 
 
             builder.Property(c => c.ProdutoId)
-                .HasColumnName("produtoid");
+                .HasColumnName("produto_id");
 
             builder.HasOne(c => c.ProdutoNavigation)
                 .WithMany(e => e.Imagens)
