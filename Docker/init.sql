@@ -1,7 +1,4 @@
-CREATE DATABASE fastfood;
 
--- connect to the newly created database
-\connect fastfood
 
 CREATE TABLE public.categorias_produtos (
    id SERIAL NOT NULL,

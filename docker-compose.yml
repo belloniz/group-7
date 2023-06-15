@@ -14,6 +14,11 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-
-
+  fastfoodapi:
+    image: fastfoodapi:latest
+    container_name: fastfood-fiap
+    ports:
+      - 80:80
+    restart: always
+  
   
