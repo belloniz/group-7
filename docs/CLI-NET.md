@@ -87,11 +87,15 @@ Pacote client adicionado em FastFoodFIAP.Infra.CrossCutting.IoC
     Comando para criação da imagem:
 
         `dotnet publish --os linux --arch x64 -p: PublishProfile=DefaultContainer`
+### Docker Image
 
+    `docker build -t fastfoodapi:latest -f Dockerfile .`
 ### docker-compose
 
     `docker-compose up -d`
+    
+    `docker-compose --project-name fastfood up -d`
 
-    `docker build -t fastfoodapi:0.1 -f Dockerfile .`
+### Visualizar o swagger da API no navegador
 
-    `docker-compose --project-name fastfood build`
+    `http://localhost:8000/swagger/index.html`
