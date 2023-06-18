@@ -31,12 +31,17 @@ builder.Services.AddDatabaseConfiguration(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
-
+app.UseSwagger();
+app.UseSwaggerUI();
+// if (app.Environment.IsDevelopment())
+//     app.UseSwaggerUI(c =>{
+//         c.SwaggerEndpoint("/swagger/v1/swagger.json", "FastFoodAPI");
+//         c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
+//     });
+// else
+//     app.UseSwaggerUI(c => {
+//         c.RoutePrefix = "/swagger/index.html";
+//     }); 
 
 app.UseHttpsRedirection();
 

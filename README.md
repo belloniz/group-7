@@ -3,8 +3,9 @@
 FIAP Pos Tech - SOFTWARE ARCHITECTURE
 SOAP2 - Grupo 7
 
-## O que é o projeto
+## O projeto
 
+![Projeto](https://github.com/belloniz/group-7/blob/main/docs/DDD.png)
 
 ## Como usar
 
@@ -35,3 +36,7 @@ Também pode ser executado com o Visual Studio Code (Windows, Linux or MacOS).
 - Domain Driven Design
 - Unit of Work
 - Repository
+
+## Estrutura da solução
+
+![Projeto](https://github.com/belloniz/group-7/blob/main/docs/Projeto.png)

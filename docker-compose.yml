@@ -17,7 +17,6 @@ services:
     expose:
       - 5432
   fastfoodapi:
-    image: fastfoodapi:latest
     container_name: fastfood-fiap
     build:
       context: .

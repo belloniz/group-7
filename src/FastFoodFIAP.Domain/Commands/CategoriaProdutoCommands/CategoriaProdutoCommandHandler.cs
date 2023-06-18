@@ -58,9 +58,7 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
                 return ValidationResult;
             }
 
-            var categoria = new CategoriaProduto(request.Id, request.Nome);
-
-            _repository.Remove(categoria);
+            _repository.Remove(categoriaExiste);
 
             return await Commit(_repository.UnitOfWork);
         }

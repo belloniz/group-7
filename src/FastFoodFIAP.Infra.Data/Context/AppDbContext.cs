@@ -1,6 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using FastFoodFIAP.Domain.Models;
+using FastFoodFIAP.Domain.Models.PedidoAggregate;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using FastFoodFIAP.Infra.Data.Mappings;
 using GenericPack.Data;
@@ -14,6 +15,7 @@ namespace FastFoodFIAP.Infra.Data.Context
     {
         private readonly IMediatorHandler _mediatorHandler;
         public DbSet<CategoriaProduto>? CategoriasProdutos { get; set; }
+        public DbSet<Pedido>? Pedidos { get; set; }
         public DbSet<Produto>? Produtos { get; set; }
         public DbSet<Imagem>? ProdutosImagens { get; set; }
 
@@ -45,6 +47,7 @@ namespace FastFoodFIAP.Infra.Data.Context
 
             //Configura mapeamento
             modelBuilder.ApplyConfiguration(new CategoriasProdutosMap());
+            modelBuilder.ApplyConfiguration(new PedidosMap());
             modelBuilder.ApplyConfiguration(new ProdutosMap());
             modelBuilder.ApplyConfiguration(new ProdutosImagensMap());
 

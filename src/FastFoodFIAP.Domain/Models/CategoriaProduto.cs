@@ -21,3 +21,4 @@ namespace FastFoodFIAP.Domain.Models
         public virtual ICollection<Produto> Produtos { get; private set; } 
     }
 }
+

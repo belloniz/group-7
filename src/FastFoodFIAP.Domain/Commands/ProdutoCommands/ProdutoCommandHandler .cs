@@ -66,13 +66,11 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             {
                 AddError("O Produto não existe.");
                 return ValidationResult;
-            }    
-
-            var produto = new Produto(request.Id, request.Nome,request.Descricao, request.Preco, request.CategoriaId);                       
-
+            }                        
+            
             //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
 
-            _repository.Remove(produto);            
+            _repository.Remove(produtoExiste);            
 
             return await Commit(_repository.UnitOfWork);
         }

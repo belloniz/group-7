@@ -6,7 +6,6 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
     {
         public int Id { get; private set; }
         public string Url { get; private set; } = "";
-
         public int ProdutoId { get; private set; }
 
 
@@ -20,6 +19,7 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
+            yield return Id;
             yield return Url;
             yield return ProdutoId;
         }
