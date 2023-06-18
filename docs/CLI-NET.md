@@ -4,8 +4,6 @@ https://dotnet.microsoft.com/pt-br/download/dotnet/7.0
 
 ## Estrutura da solução
 
-![Projeto](https://github.com/belloniz/group-7/blob/main/docs/Projeto.png)
-
 - FastFoodFIAP                                  ->  sln
     - src: 
         - FastFoodFIAP.Application              ->  classlib        
