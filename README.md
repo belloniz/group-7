@@ -17,14 +17,17 @@ SOAP2 - Grupo 7
 
 ## Subindo todo sistema
 
-- 1. Crie a imagem da aplicação Fastfood:
-    docker build -t fastfoodapi:latest -f Dockerfile .
+1. Crie a imagem da aplicação Fastfood:
 
-- 2. Suba os containers (aplicação e banco de dados) usando o docker compose
-    docker-compose up -d
+   `docker build -t fastfoodapi:latest -f Dockerfile .`
 
-- 3. Teste o sistema atravez do swagger:
-    http://localhost:8000/swagger/index.html
+2. Suba os containers (aplicação e banco de dados) usando o docker compose
+
+   `docker-compose up -d`
+
+3. Teste o sistema atravez do swagger:
+
+   `http://localhost:8000/swagger/index.html`
 
 
 ## Tecnologias
