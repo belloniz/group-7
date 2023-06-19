@@ -21,11 +21,11 @@ SOAP2 - Grupo 7
 
    `docker build -t fastfoodapi:latest -f Dockerfile .`
 
-2. Suba os containers (aplicação e banco de dados) usando o docker compose
+2. Suba os containers (aplicação e banco de dados) utilizando o docker compose
 
    `docker-compose up -d`
 
-3. Teste o sistema atravez do swagger:
+3. Teste o sistema através do swagger:
 
    `http://localhost:8000/swagger/index.html`
 
