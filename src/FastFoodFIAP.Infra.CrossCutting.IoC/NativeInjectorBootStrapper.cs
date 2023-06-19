@@ -12,6 +12,7 @@ using FastFoodFIAP.Infra.CrossCutting.Bus;
 using System.Reflection;
 using FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands;
 using FastFoodFIAP.Infra.Data.Context;
+using FastFoodFIAP.Domain.Commands.PedidoCommands;
 
 namespace FastFoodFIAP.Infra.CrossCutting.IoC
 {
@@ -28,10 +29,12 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             // Application            
             services.AddScoped<ICategoriaProdutoApp, CategoriaProdutoApp>();
             services.AddScoped<IProdutoApp, ProdutoApp>();
+            services.AddScoped<IPedidoApp, PedidoApp>();
 
             // Infra - Data           
             services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddTransient<AppDbContext>();
 
             // AutoMapper Settings
@@ -45,6 +48,10 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<ProdutoCreateCommand, ValidationResult>, ProdutoCommandHandler>();
             services.AddScoped<IRequestHandler<ProdutoUpdateCommand, ValidationResult>, ProdutoCommandHandler>();
             services.AddScoped<IRequestHandler<ProdutoDeleteCommand, ValidationResult>, ProdutoCommandHandler>();
+
+             services.AddScoped<IRequestHandler<PedidoCreateCommand, ValidationResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<PedidoUpdateCommand, ValidationResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<PedidoDeleteCommand, ValidationResult>, PedidoCommandHandler>();
 
         }
     }

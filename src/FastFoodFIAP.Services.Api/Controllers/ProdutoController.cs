@@ -1,6 +1,5 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
-using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

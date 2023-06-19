@@ -2,6 +2,7 @@ using System.Data;
 using AutoMapper;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Models;
+using FastFoodFIAP.Domain.Models.PedidoAggregate;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 
 namespace FastFoodFIAP.Application.AutoMapper
@@ -19,6 +20,8 @@ namespace FastFoodFIAP.Application.AutoMapper
             CreateMap<Produto, ProdutoViewModel>()
                 .ForMember(c => c.Categoria,
                     map => map.MapFrom(m => m.CategoriaNavegation));
+            
+            CreateMap<Pedido, PedidoViewModel>();
         }
         
     }

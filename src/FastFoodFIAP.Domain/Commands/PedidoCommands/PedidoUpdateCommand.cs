@@ -13,6 +13,9 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands{
             ClienteId = clienteId;
         }
 
+        public void SetId(int id){
+            Id=id;
+        }
 
         public override bool IsValid()
         {

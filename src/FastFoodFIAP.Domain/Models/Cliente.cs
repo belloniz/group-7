@@ -1,7 +1,8 @@
 ﻿using FastFoodFIAP.Domain.Models.PedidoAggregate;
 using GenericPack.Domain;
 
-namespace FastFoodFIAP.Domain.Models{
+namespace FastFoodFIAP.Domain.Models
+{
     public class Cliente: Entity, IAggregateRoot
     {
         public string? Nome { get; private set; }

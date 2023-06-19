@@ -27,7 +27,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .WithMany(p => p.Pedidos)
                 .HasForeignKey(p => p.ClienteId);            
             
-            builder.Navigation(e => e.ClienteNavegation).AutoInclude();
+            //builder.Navigation(e => e.ClienteNavegation).AutoInclude();
             //builder.Navigation(e => e.Imagens).AutoInclude();
         }
     }
