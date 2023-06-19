@@ -7,12 +7,25 @@ SOAP2 - Grupo 7
 
 ![Projeto](https://github.com/belloniz/group-7/blob/main/docs/DDD.png)
 
-## Como usar
+## Requisitos
 
-- Você precisará do Visual Studio 2022 e do SDK do .NET 7.0
-- Baixe em https://dotnet.microsoft.com/pt-br/download/dotnet/7.0.
+- SDK do .NET 7.0: Baixe em https://dotnet.microsoft.com/pt-br/download/dotnet/7.0.
+- Docker: https://docs.docker.com/engine/install/
 
-Também pode ser executado com o Visual Studio Code (Windows, Linux or MacOS).
+- IDE de sua preferência: pode ser executado com o Visual Studio Code (Windows, Linux or MacOS).
+
+
+## Subindo todo sistema
+
+- 1. Crie a imagem da aplicação Fastfood:
+    docker build -t fastfoodapi:latest -f Dockerfile .
+
+- 2. Suba os containers (aplicação e banco de dados) usando o docker compose
+    docker-compose up -d
+
+- 3. Teste o sistema atravez do swagger:
+    http://localhost:8000/swagger/index.html
+
 
 ## Tecnologias
 
