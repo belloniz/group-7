@@ -63,7 +63,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 AddError(error.ErrorMessage);
             }
 
-            return CustomResponse();
+            return CustomCreateResponse();
         }
 
         protected ActionResult CustomNoContentResponse(object? result = null)
@@ -86,7 +86,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 AddError(error.ErrorMessage);
             }
 
-            return CustomResponse();
+            return CustomNoContentResponse();
         }
 
         protected ActionResult CustomListResponse(object result, int count)

@@ -1,6 +1,5 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
-using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -32,6 +31,21 @@ namespace FastFoodFIAP.Services.Api.Controllers
         public async Task<ActionResult> GetAll()
         {
             var lista = await _produtoApp.GetAll();
+            return CustomListResponse(lista, lista.Count);
+        }
+
+        [HttpGet("categoria/{id}")]
+        [SwaggerOperation(
+        Summary = "Lista todos os produtos de uma categoria.",
+        Description = "Lista ordenada pelo nome de todos os produtos de uma categoria"
+        )]
+        [SwaggerResponse(200, "Success", typeof(List<ProdutoViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> GetAllByCategoria([FromRoute] int id)
+        {
+            var lista = await _produtoApp.GetAllByCategoria(id);
             return CustomListResponse(lista, lista.Count);
         }
 

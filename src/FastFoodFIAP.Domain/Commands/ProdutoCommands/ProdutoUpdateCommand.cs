@@ -16,6 +16,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
         public void SetId(int id){
             Id=id;
         }
+        
         public override bool IsValid()
         {
             ValidationResult = new ProdutoValidationsUpdate().Validate(this);

@@ -1,4 +1,3 @@
-CREATE USER luis;
 
 CREATE TABLE public.categorias_produtos (
    id SERIAL NOT NULL,
@@ -125,3 +124,20 @@ CREATE TABLE public.pagamentos (
    CONSTRAINT pagamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) 
 );
+
+
+insert into public.categorias_produtos (nome) values ('Sanduíche');
+insert into public.categorias_produtos (nome) values ('Acompanhamento');
+insert into public.categorias_produtos (nome) values ('Bebida');
+insert into public.categorias_produtos (nome) values ('Sobremesa');
+
+insert into public.ocupacoes (nome) values ('Administrador');
+insert into public.ocupacoes (nome) values ('Atendente');
+insert into public.ocupacoes (nome) values ('Preparador');
+
+insert into public.situacoes_pedidos (id, nome) values (1, 'Recebido');
+insert into public.situacoes_pedidos (id, nome) values (2, 'Em preparação');
+insert into public.situacoes_pedidos (id, nome) values (3, 'Pronto');
+insert into public.situacoes_pedidos (id, nome) values (4, 'Retirado');
+insert into public.situacoes_pedidos (id, nome) values (5, 'Finalizado');
+insert into public.situacoes_pedidos (id, nome) values (6, 'Cancelado');

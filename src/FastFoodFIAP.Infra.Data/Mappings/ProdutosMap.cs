@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
