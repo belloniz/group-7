@@ -7,6 +7,8 @@ SOAP2 - Grupo 7
 
 ![Projeto](https://github.com/belloniz/group-7/blob/main/docs/DDD.png)
 
+Miro: https://miro.com/app/board/uXjVMI-wOLc=/?share_link_id=8789531868
+
 ## Requisitos
 
 - SDK do .NET 7.0: Baixe em https://dotnet.microsoft.com/pt-br/download/dotnet/7.0.
