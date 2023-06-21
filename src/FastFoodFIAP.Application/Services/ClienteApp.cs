@@ -32,6 +32,11 @@ namespace FastFoodFIAP.Application.Services
             return _mapper.Map<ClienteViewModel>(await _clienteRepository.BuscarClientePorCpf(cpf));
         }
 
+        public async Task<List<ClienteViewModel>> GetAll()
+        {
+            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.GetAll());
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

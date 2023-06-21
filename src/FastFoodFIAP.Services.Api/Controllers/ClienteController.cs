@@ -20,6 +20,21 @@ namespace FastFoodFIAP.Services.Api.Controllers
             _clienteApp = clienteApp;
         }
 
+        [HttpGet]
+        [SwaggerOperation(
+        Summary = "Lista todos os clientes.",
+        Description = "Lista ordenada pelo nome de todos os clientes"
+        )]
+        [SwaggerResponse(200, "Success", typeof(List<ClienteViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> GetAll()
+        {
+            var lista = await _clienteApp.GetAll();
+            return CustomListResponse(lista, lista.Count);
+        }
+
         [HttpPost]
         [SwaggerOperation(
         Summary = "Cadastra um novo cliente.",
