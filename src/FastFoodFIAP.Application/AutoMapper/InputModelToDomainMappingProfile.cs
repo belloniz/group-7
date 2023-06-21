@@ -3,7 +3,9 @@ using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands;
 using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Commands.ProdutoCommands;
+using FastFoodFIAP.Domain.Commands;
 using FastFoodFIAP.Domain.Models;
+using FastFoodFIAP.Domain.Commands.ClienteCommands;
 
 namespace FastFoodFIAP.Application.AutoMapper
 {
@@ -11,7 +13,10 @@ namespace FastFoodFIAP.Application.AutoMapper
     {
         public InputModelToDomainMappingProfile()
         {            
-            AllowNullCollections = true;  
+            AllowNullCollections = true;
+
+            //Cliente
+            CreateMap<ClienteInputModel, ClienteCreateCommand>();
             
             //CategoriaProduto
             CreateMap<CategoriaProdutoInputModel, CategoriaProdutoCreateCommand>();

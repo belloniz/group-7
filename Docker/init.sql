@@ -1,5 +1,4 @@
 
-
 CREATE TABLE public.categorias_produtos (
    id SERIAL NOT NULL,
    nome VARCHAR(50) NOT NULL,
