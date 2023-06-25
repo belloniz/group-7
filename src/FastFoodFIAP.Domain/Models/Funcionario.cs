@@ -3,8 +3,7 @@
 namespace FastFoodFIAP.Domain.Models
 {
     public class Funcionario: Entity, IAggregateRoot
-    {
-        
+    {   
         public string? Nome { get; private set; }  = "";
         public string? Matricula { get; private set; }  = "";
         public int OcupacaoId {get; private set;}
