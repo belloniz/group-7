@@ -12,7 +12,7 @@ namespace FastFoodFIAP.Domain.Models
 
         public virtual Ocupacao? OcupacaoNavegation { get; private set; }
         
-        public Funcionario(int id, string nome, string matricula,int ocupacaoId) 
+        public Funcionario(int id, string nome, string matricula, int ocupacaoId) 
         {
             Id = id;
             Nome = nome;            

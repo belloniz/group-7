@@ -32,4 +32,3 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
         }
     }
 }
-
