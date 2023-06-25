@@ -12,7 +12,7 @@ namespace FastFoodFIAP.Domain.Models
 
         public Ocupacao(int id, string nome){
             Id = id;
-            Nome=nome;         
+            Nome = nome;         
             Funcionario = new HashSet<Funcionario>();   
         }
 
