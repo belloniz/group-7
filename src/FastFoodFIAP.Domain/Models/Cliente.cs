@@ -16,7 +16,7 @@ namespace FastFoodFIAP.Domain.Models
 
         public Cliente(int id, string nome, string email, string cpf){
             Id = id;
-            Nome=nome;         
+            Nome = nome;         
             Email = email;
             Cpf = cpf;
             
