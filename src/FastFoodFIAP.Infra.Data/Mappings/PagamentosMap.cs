@@ -1,4 +1,4 @@
-using FastFoodFIAP.Domain.Models.PedidoAggregate;
+using FastFoodFIAP.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +19,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(p => p.QrCode)
                 .HasColumnName("qrcode")
-                .HasMaxLength(100);
+                .HasMaxLength(300);
 
             builder.Property(c => c.Valor)
                 .HasColumnName("valor");

@@ -23,7 +23,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(f => f.Matricula)
                 .HasColumnName("matricula")
-                .HasMaxLength(1000);            
+                .HasMaxLength(15);            
             
             builder.Property(f => f.OcupacaoId)
                 .HasColumnName("ocupacao_id");  
