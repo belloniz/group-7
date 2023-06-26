@@ -34,7 +34,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .WithMany(f => f.Funcionario)
                 .HasForeignKey(f => f.OcupacaoId);            
             
-            builder.Navigation(e => e.OcupacaoNavegation).AutoInclude();
+            builder.Navigation(f => f.OcupacaoNavegation).AutoInclude();
         }
     }
 }

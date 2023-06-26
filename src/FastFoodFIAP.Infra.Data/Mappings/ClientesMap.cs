@@ -30,4 +30,3 @@ namespace FastFoodFIAP.Infra.Data.Mappings
         }
     }
 }
-
