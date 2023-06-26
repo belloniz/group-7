@@ -5,8 +5,7 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
     public class Pedido : Entity, IAggregateRoot
     {
         public int ClienteId { get; private set;}
-        public int PagamentoId { get; private set;}
-        public List<PedidoItem> Itens { get; private set;}
+        public List<PedidoCombo> PedidoCombos { get; private set;}
         
         //public List<Andamento> Andamentos {get; private set;}
 
@@ -14,7 +13,7 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
         public virtual Pagamento? PagamentoNavegation { get; private set; }
         
         private Pedido() {
-            Itens = new List<PedidoItem>();
+            PedidoCombos = new List<PedidoCombo>();
             //Andamentos = new List<Andamento>();
         }
 
@@ -22,13 +21,13 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
             Id = id;
             ClienteId = clienteId;
 
-            Itens = new List<PedidoItem>();
+            PedidoCombos = new List<PedidoCombo>();
             //Andamentos = new List<Andamento>();
         }
 
-        public void AddItem(int quantidade, Combo? combo)
+        public void AddCombo(int quantidade, PedidoComboProduto? combo)
         {
-            Itens.Add(new PedidoItem(quantidade, combo));
+            PedidoCombos.Add(new PedidoCombo(quantidade, combo));
         }
     }
 }

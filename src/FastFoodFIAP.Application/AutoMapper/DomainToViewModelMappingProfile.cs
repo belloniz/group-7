@@ -1,5 +1,6 @@
 using System.Data;
 using AutoMapper;
+using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.PedidoAggregate;
@@ -24,6 +25,8 @@ namespace FastFoodFIAP.Application.AutoMapper
                     map => map.MapFrom(m => m.CategoriaNavegation));
             
             CreateMap<Pedido, PedidoViewModel>();
+            CreateMap<PedidoCombo, PedidoItemViewModel>();
+            CreateMap<PedidoComboProduto, ComboViewModel>();
         }
         
     }

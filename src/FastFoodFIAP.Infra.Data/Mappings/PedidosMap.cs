@@ -26,10 +26,10 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .WithMany(p => p.Pedidos)
                 .HasForeignKey(p => p.ClienteId);
 
-            builder.HasIndex(c => c.PagamentoId);
+            //builder.HasIndex(c => c.PagamentoId);
 
-            builder.HasOne(c => c.PagamentoNavegation)
-                .WithOne(p => p.Pedido);   
+            //builder.HasOne(c => c.PagamentoNavegation)
+            //    .WithOne(p => p.Pedido);   
             
             //builder.Navigation(e => e.ClienteNavegation).AutoInclude();
             //builder.Navigation(e => e.Imagens).AutoInclude();

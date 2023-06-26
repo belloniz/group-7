@@ -2,21 +2,22 @@ using GenericPack.Domain;
 
 namespace FastFoodFIAP.Domain.Models.PedidoAggregate
 {
-    public partial class PedidoItem : ValueObject
+    public partial class PedidoCombo : ValueObject
     {
         public int Id { get; private set; }
         public int PedidoId { get; private set; }
-        public Combo? Combo { get; private set; }
+        public PedidoComboProduto? PedidoComboProduto { get; private set; }
         public int Quantidade { get; private set; }
 
+        public virtual Pedido? PedidoNavegation { get; private set; }
 
-        private PedidoItem(){
+        private PedidoCombo(){
         }
 
-        public PedidoItem(int quantidade, Combo? combo)
+        public PedidoCombo(int quantidade, PedidoComboProduto? combo)
         {
-            Quantidade = quantidade;            
-            Combo = combo;
+            Quantidade = quantidade;
+            PedidoComboProduto = combo;
         }        
 
         protected override IEnumerable<object> GetEqualityComponents()

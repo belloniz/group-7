@@ -141,3 +141,8 @@ insert into public.situacoes_pedidos (id, nome) values (3, 'Pronto');
 insert into public.situacoes_pedidos (id, nome) values (4, 'Retirado');
 insert into public.situacoes_pedidos (id, nome) values (5, 'Finalizado');
 insert into public.situacoes_pedidos (id, nome) values (6, 'Cancelado');
+
+insert into public.clientes (id, nome, cpf, email) values (1, 'Ana Maria', null, null);
+insert into public.clientes (id, nome, cpf, email) values (2, 'Bruno Miranda', null, null);
+insert into public.clientes (id, nome, cpf, email) values (3, null, '11111111111', 'cliente1@teste.com');
+insert into public.clientes (id, nome, cpf, email) values (4, null, '22222222222', 'cliente2@teste.com');

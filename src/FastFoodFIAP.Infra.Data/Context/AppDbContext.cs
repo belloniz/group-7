@@ -17,6 +17,8 @@ namespace FastFoodFIAP.Infra.Data.Context
         public DbSet<Cliente>? Clientes { get; set; }
         public DbSet<CategoriaProduto>? CategoriasProdutos { get; set; }
         public DbSet<Pedido>? Pedidos { get; set; }
+        public DbSet<PedidoCombo>? PedidosCombos { get; set; }
+        public DbSet<PedidoComboProduto>? PedidosCombosProdutos { get; set; }
         public DbSet<Produto>? Produtos { get; set; }
         public DbSet<Imagem>? ProdutosImagens { get; set; }
         public DbSet<SituacaoPedido>? SituacoesPedidos { get; set; }
@@ -51,6 +53,8 @@ namespace FastFoodFIAP.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ClientesMap());
             modelBuilder.ApplyConfiguration(new CategoriasProdutosMap());
             modelBuilder.ApplyConfiguration(new PedidosMap());
+            modelBuilder.ApplyConfiguration(new PedidosCombosMap());
+            modelBuilder.ApplyConfiguration(new PedidosCombosProdutosMap());
             modelBuilder.ApplyConfiguration(new ProdutosMap());
             modelBuilder.ApplyConfiguration(new ProdutosImagensMap());
             modelBuilder.ApplyConfiguration(new SituacoesPedidosMap());

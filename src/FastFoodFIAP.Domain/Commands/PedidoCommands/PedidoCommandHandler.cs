@@ -24,7 +24,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             var pedido = new Pedido(request.Id,request.ClienteId);            
             
             foreach (var item in request.Itens)
-                pedido.AddItem(item.Quantidade, item.Combo);
+                pedido.AddCombo(item.Quantidade, item.PedidoComboProduto);
 
             //produto.AddDomainEvent(new ProdutoCreateEvent(produto.Id, ....));
 
@@ -47,7 +47,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             var pedido = new Pedido(request.Id, request.ClienteId);
 
             foreach (var item in request.Itens)
-                pedido.AddItem(item.Quantidade, item.Combo);
+                pedido.AddCombo(item.Quantidade, item.PedidoComboProduto);
 
             //pedido.AddDomainEvent(new PedidoCreateEvent(produto.Id, ....));
 
