@@ -13,9 +13,6 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
             Id = id;                    
             QrCode = qrCode;
             Valor = valor;
-
-            
         }
-
     }
 }
