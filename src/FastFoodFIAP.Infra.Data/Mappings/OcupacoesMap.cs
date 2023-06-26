@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFoodFIAP.Infra.Data.Mappings
 {
-    public class ClientesMap: IEntityTypeConfiguration<Cliente>
+    public class OcupacaoMap : IEntityTypeConfiguration<Ocupacao>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
-        {
-            builder.ToTable("clientes");
+        public void Configure(EntityTypeBuilder<Ocupacao> builder)
+        {            
+            builder.ToTable("ocupacao");
    
             builder.HasKey(c => c.Id)
                 .HasName("PRIMARY");
@@ -19,14 +19,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(c => c.Nome)
                 .HasColumnName("nome")
-                .HasMaxLength(100);   
-
-            builder.Property(c => c.Email)
-                .HasColumnName("email")
-                .HasMaxLength(1000);            
-            
-            builder.Property(c => c.Cpf)
-                .HasColumnName("cpf");  
+                .HasMaxLength(50);            
         }
     }
 }
