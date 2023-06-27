@@ -23,9 +23,9 @@ namespace FastFoodFIAP.Infra.Data.Context
         public DbSet<Imagem>? ProdutosImagens { get; set; }
         public DbSet<SituacaoPedido>? SituacoesPedidos { get; set; }
         public DbSet<Pagamento>? Pagamentos { get; set; }
-        public DbSet<Funcionario>? Funcionarios { get; set; }
         public DbSet<Ocupacao>? Ocupacoes { get; set; }
-
+        public DbSet<Funcionario>? Funcionarios { get; set; }
+        
 
         public AppDbContext(DbContextOptions<AppDbContext> options, IMediatorHandler mediatorHandler) :base(options)
         {
@@ -65,8 +65,6 @@ namespace FastFoodFIAP.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new PagamentosMap());
             modelBuilder.ApplyConfiguration(new OcupacoesMap());
             modelBuilder.ApplyConfiguration(new FuncionariosMap());
-
-
 
             base.OnModelCreating(modelBuilder);
         }

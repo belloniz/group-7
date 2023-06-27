@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFoodFIAP.Infra.Data.Mappings
 {
-    public class OcupacaoMap : IEntityTypeConfiguration<Ocupacao>
+    public class OcupacoesMap : IEntityTypeConfiguration<Ocupacao>
     {
         public void Configure(EntityTypeBuilder<Ocupacao> builder)
         {            
-            builder.ToTable("ocupacao");
+            builder.ToTable("ocupacoes");
    
-            builder.HasKey(c => c.Id)
+            builder.HasKey(o => o.Id)
                 .HasName("PRIMARY");
 
-            builder.Property(c => c.Id)
+            builder.Property(o => o.Id)
                 .HasColumnName("id")
                 .ValueGeneratedOnAdd();
 
-            builder.Property(c => c.Nome)
+            builder.Property(o => o.Nome)
                 .HasColumnName("nome")
                 .HasMaxLength(50);            
         }
