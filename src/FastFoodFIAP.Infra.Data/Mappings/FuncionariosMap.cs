@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFoodFIAP.Infra.Data.Mappings
 {
-    public class FuncioarioMap: IEntityTypeConfiguration<Funcionario>
+    public class FuncionariosMap: IEntityTypeConfiguration<Funcionario>
     {
         public void Configure(EntityTypeBuilder<Funcionario> builder)
         {

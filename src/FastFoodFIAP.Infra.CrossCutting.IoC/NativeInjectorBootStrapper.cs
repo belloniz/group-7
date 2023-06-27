@@ -38,6 +38,10 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+            services.AddScoped<IOcupacaoRepository, OcupacaoRepository>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+
             services.AddTransient<AppDbContext>();
 
             // AutoMapper Settings
