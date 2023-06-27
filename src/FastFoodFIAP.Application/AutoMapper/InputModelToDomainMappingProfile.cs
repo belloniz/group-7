@@ -31,8 +31,8 @@ namespace FastFoodFIAP.Application.AutoMapper
             CreateMap<PedidoInputModel, PedidoCreateCommand>();
             CreateMap<PedidoInputModel, PedidoUpdateCommand>();
 
-            CreateMap<PedidoItemInputModel, PedidoCombo>();
-            CreateMap<ComboInputModel, PedidoComboProduto>();
+            CreateMap<PedidoComboInputModel, PedidoCombo>();
+            CreateMap<PedidoComboProdutoInputModel, PedidoComboProduto>();
         }
     }
 }

@@ -6,18 +6,19 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
     {
         public int Id { get; private set; }
         public int PedidoId { get; private set; }
-        public PedidoComboProduto? PedidoComboProduto { get; private set; }
+        public List<PedidoComboProduto> Produtos { get; private set; }
         public int Quantidade { get; private set; }
 
         public virtual Pedido? PedidoNavegation { get; private set; }
 
         private PedidoCombo(){
+            Produtos = new List<PedidoComboProduto>();
         }
 
-        public PedidoCombo(int quantidade, PedidoComboProduto? combo)
+        public PedidoCombo(int quantidade, List<PedidoComboProduto> produtos)
         {
             Quantidade = quantidade;
-            PedidoComboProduto = combo;
+            Produtos = produtos;
         }        
 
         protected override IEnumerable<object> GetEqualityComponents()

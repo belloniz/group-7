@@ -126,10 +126,10 @@ CREATE TABLE public.pagamentos (
 );
 
 
-insert into public.categorias_produtos (nome) values ('Sanduíche');
-insert into public.categorias_produtos (nome) values ('Acompanhamento');
-insert into public.categorias_produtos (nome) values ('Bebida');
-insert into public.categorias_produtos (nome) values ('Sobremesa');
+insert into public.categorias_produtos (id, nome) values (1, 'Sanduíche');
+insert into public.categorias_produtos (id, nome) values (2, 'Acompanhamento');
+insert into public.categorias_produtos (id, nome) values (3, 'Bebida');
+insert into public.categorias_produtos (id, nome) values (4, 'Sobremesa');
 
 insert into public.ocupacoes (nome) values ('Administrador');
 insert into public.ocupacoes (nome) values ('Atendente');
@@ -146,3 +146,16 @@ insert into public.clientes (id, nome, cpf, email) values (1, 'Ana Maria', null,
 insert into public.clientes (id, nome, cpf, email) values (2, 'Bruno Miranda', null, null);
 insert into public.clientes (id, nome, cpf, email) values (3, null, '11111111111', 'cliente1@teste.com');
 insert into public.clientes (id, nome, cpf, email) values (4, null, '22222222222', 'cliente2@teste.com');
+
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (1, 'X-Burger Bacon', 'Tradicional', 18.00, 1);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (2, 'X-Moda Frango', 'Acebolado', 17.00, 1);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (3, 'X-Tudo Filé', 'Completo', 25.00, 1);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (4, 'Coca-Cola Lata', '350ml', 7.00, 3);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (5, 'Guaraná Lata', '350ml', 7.00, 3);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (6, 'Água Mineral', '500ml', 6.00, 3);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (7, 'Batata Pequena', 'Com sal', 12.00, 2);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (8, 'Batata Média', 'Com sal', 13.00, 2);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (9, 'Batata Grande', 'Com sal', 15.00, 2);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (10, 'Sunday Creme', 'Especial', 12.00, 4);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (11, 'Sunday Chocolate', 'Especial', 12.00, 4);
+insert into public.produtos (id, nome, descricao, preco, categoria_id) values (12, 'Sunday Morango', 'Especial', 12.00, 4);

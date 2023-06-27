@@ -23,7 +23,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(c => c.Email)
                 .HasColumnName("email")
-                .HasMaxLength(1000);            
+                .HasMaxLength(80);            
             
             builder.Property(c => c.Cpf)
                 .HasColumnName("cpf");  

@@ -17,14 +17,19 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasColumnName("id")
                 .ValueGeneratedOnAdd();
 
+            builder.Property(c => c.Quantidade)
+                .HasColumnName("quantidade");
+
             builder.Property(c => c.PedidoId)
                 .HasColumnName("pedido_id");
 
             builder.HasIndex(c => c.PedidoId);
 
             builder.HasOne(c => c.PedidoNavegation)
-                .WithMany(p => p.PedidoCombos)
+                .WithMany(p => p.Combos)
                 .HasForeignKey(p => p.PedidoId);
+
+            builder.Navigation(e => e.Produtos).AutoInclude();
         }
     }
 }

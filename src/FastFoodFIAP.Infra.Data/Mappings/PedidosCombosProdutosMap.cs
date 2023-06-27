@@ -10,13 +10,9 @@ namespace FastFoodFIAP.Infra.Data.Mappings
         {
             builder.ToTable("pedidos_combos_produtos");
 
-            builder.HasKey(c => c.Id)
+            builder.HasKey(c => new {c.PedidoComboId, c.ProdutoId})
                 .HasName("PRIMARY");
-
-            builder.Property(c => c.Id)
-                .HasColumnName("id")
-                .ValueGeneratedOnAdd();
-
+            
             builder.Property(c => c.Quantidade)
                 .HasColumnName("quantidade");
 
@@ -28,8 +24,9 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.HasIndex(c => c.PedidoComboId);
 
-            //builder.HasOne(c => c.PedidoComboNavigation)
-            //    .WithOne(p => p.PedidoComboProduto);
+            builder.HasOne(c => c.PedidoComboNavigation)
+                .WithMany(p => p.Produtos)
+                .HasForeignKey(c => c.PedidoComboId);
 
             builder.Property(c => c.ProdutoId)
                 .HasColumnName("produto_id");
@@ -40,6 +37,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .WithMany()
                 .HasForeignKey(c => c.ProdutoId);
 
+            builder.Navigation(e => e.ProdutoNavigation).AutoInclude();
         }
     }
 }

@@ -5,7 +5,6 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
 {
     public class PedidoComboProduto : ValueObject
     {
-        public int Id { get; private set; }
         public int PedidoComboId { get; private set; }        
         public int ProdutoId { get; private set; }
         public int Quantidade { get; private set; }
@@ -23,7 +22,8 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Id;
+            yield return PedidoComboId;
+            yield return ProdutoId;
         }
 
     }

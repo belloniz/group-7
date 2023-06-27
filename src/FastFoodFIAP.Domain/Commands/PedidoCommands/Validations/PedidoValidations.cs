@@ -18,7 +18,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands.Validations
 
         protected void ValidaExisteItens()
         {
-            RuleFor(c => c.Itens.Count)
+            RuleFor(c => c.Combos.Count)
                 .GreaterThan(0).WithMessage("O pedido deve possuir pelo menos uma combo");
         }        
     }
