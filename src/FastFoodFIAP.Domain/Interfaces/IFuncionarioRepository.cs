@@ -1,14 +1,14 @@
-using FastFoodFIAP.Domain.Models.PedidoAggregate;
+using FastFoodFIAP.Domain.Models;
 using GenericPack.Data;
 
 namespace FastFoodFIAP.Domain.Interfaces
 {
-    public interface IPedidoRepository: IRepository<Pedido>
+    public interface IFuncionarioRepository: IRepository<Funcionario>
     {
-        Task<Pedido?> GetById(int id);
-        Task<IEnumerable<Pedido>> GetAll();
-        void Add(Pedido pedido);
-        void Update(Pedido pedido);
-        void Remove(Pedido pedido);
+        Task<Funcionario?> GetById(int id);
+        Task<IEnumerable<Funcionario>> GetAll();
+        void Add(Funcionario funcionario);
+        void Update(Funcionario funcionario);
+        void Remove(Funcionario funcionario);
     }
 }

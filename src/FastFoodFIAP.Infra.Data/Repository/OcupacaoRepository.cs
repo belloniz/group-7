@@ -7,22 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FastFoodFIAP.Infra.Data.Repository
 {
-    public class CategoriaProdutoRepository : ICategoriaProdutoRepository
+    public class OcupacaoRepository : IOcupacaoRepository
     {
         protected readonly AppDbContext Db;
-        protected readonly DbSet<CategoriaProduto> DbSet;
+        protected readonly DbSet<Ocupacao> DbSet;
 
-        public CategoriaProdutoRepository(AppDbContext context)
+        public OcupacaoRepository(AppDbContext context)
         {
             Db = context;
-            DbSet = Db.Set<CategoriaProduto>();
+            DbSet = Db.Set<Ocupacao>();
         }
 
         public IUnitOfWork UnitOfWork => Db;
 
-        public void Add(CategoriaProduto categoria)
+        public void Add(Ocupacao ocupacao)
         {
-            DbSet.Add(categoria);
+            DbSet.Add(ocupacao);
         }
 
         public void Dispose()
@@ -30,24 +30,24 @@ namespace FastFoodFIAP.Infra.Data.Repository
             Db.Dispose();
         }
 
-        public async Task<IEnumerable<CategoriaProduto>> GetAll()
+        public async Task<IEnumerable<Ocupacao>> GetAll()
         {
             return await DbSet.AsNoTracking().OrderBy(on => on.Nome).ToListAsync();
         }
 
-        public async Task<CategoriaProduto?> GetById(int id)
+        public async Task<Ocupacao?> GetById(int id)
         {
             return await DbSet.FindAsync(id);
         }
 
-        public void Remove(CategoriaProduto categoria)
+        public void Remove(Ocupacao ocupacao)
         {
-            DbSet.Remove(categoria);
+            DbSet.Remove(ocupacao);
         }
 
-        public void Update(CategoriaProduto categoria)
+        public void Update(Ocupacao ocupacao)
         {
-            DbSet.Update(categoria);
+            DbSet.Update(ocupacao);
         }
     }
 }

@@ -3,12 +3,12 @@ using GenericPack.Data;
 
 namespace FastFoodFIAP.Domain.Interfaces
 {
-    public interface ICategoriaProdutoRepository : IRepository<CategoriaProduto>
+    public interface IOcupacaoRepository : IRepository<Ocupacao>
     {
-        Task<CategoriaProduto?> GetById(int id);
-        Task<IEnumerable<CategoriaProduto>> GetAll();
-        void Add(CategoriaProduto categoria);
-        void Update(CategoriaProduto categoria);
-        void Remove(CategoriaProduto categoria);
+        Task<Ocupacao?> GetById(int id);
+        Task<IEnumerable<Ocupacao>> GetAll();
+        void Add(Ocupacao ocupacao);
+        void Update(Ocupacao ocupacao);
+        void Remove(Ocupacao ocupacao);
     }
 }

@@ -64,7 +64,8 @@ namespace FastFoodFIAP.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new SituacoesPedidosMap());
             modelBuilder.ApplyConfiguration(new PagamentosMap());
             modelBuilder.ApplyConfiguration(new OcupacoesMap());
-            modelBuilder.ApplyConfiguration(new FuncioariosMap());
+            modelBuilder.ApplyConfiguration(new FuncionariosMap());
+
 
 
             base.OnModelCreating(modelBuilder);

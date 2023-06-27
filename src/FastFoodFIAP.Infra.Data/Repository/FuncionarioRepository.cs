@@ -6,41 +6,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FastFoodFIAP.Infra.Data.Repository
 {
-    public class PagamentoRepository: IPagamentoRepository
+    public class FuncionarioRepository: IFuncionarioRepository
     {
         protected readonly AppDbContext Db;
-        protected readonly DbSet<Pagamento> DbSet;
+        protected readonly DbSet<Funcionario> DbSet;
 
-        public PagamentoRepository(AppDbContext context)
+        public FuncionarioRepository(AppDbContext context)
         {
             Db = context;
-            DbSet = Db.Set<Pagamento>();
+            DbSet = Db.Set<Funcionario>();
         }
         public IUnitOfWork UnitOfWork => Db;
 
-        public async Task<IEnumerable<Pagamento>> GetAll()
+        public async Task<IEnumerable<Funcionario>> GetAll()
         {
             return await DbSet.AsNoTracking().ToListAsync();
         }
         
-        public async Task<Pagamento?> GetById(int id)
+        public async Task<Funcionario?> GetById(int id)
         {
             return await DbSet.FindAsync(id);
         }
 
-        public void Add(Pagamento pagamento)
+        public void Add(Funcionario funcionario)
         {
-            DbSet.Add(pagamento);        
+            DbSet.Add(funcionario);        
         }
 
-        public void Remove(Pagamento pagamento)
+        public void Remove(Funcionario funcionario)
         {
-            DbSet.Remove(pagamento);
+            DbSet.Remove(funcionario);
         }
 
-        public void Update(Pagamento pagamento)
+        public void Update(Funcionario funcionario)
         {
-            DbSet.Update(pagamento);          
+            DbSet.Update(funcionario);          
         }
 
         public void Dispose()
