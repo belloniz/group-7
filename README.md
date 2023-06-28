@@ -13,7 +13,8 @@ No projeto atual temos as seguintes funcionalidades:
 - Identificação do Cliente via CPF
 - Criar, editar e remover de produto
 - Buscar produtos por categoria
-- Fake checkout, apenas enviar os produtos escolhidos para a fila • Listar os pedidos
+- Fake checkout, apenas enviar os produtos escolhidos para a fila
+- Listar os pedidos
 
 ## Documentações
 
