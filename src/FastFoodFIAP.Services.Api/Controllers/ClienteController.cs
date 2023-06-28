@@ -36,9 +36,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
             return CustomCreateResponse(await _clienteApp.CadastrarNovoCliente(cliente));
         }
 
-        [HttpGet("{cpf}")]
+        [HttpGet("/busca/cpf/{cpf}")]
         [SwaggerOperation(
-        Summary = "Localiza um cliente.",
+        Summary = "Localiza um cliente pelo seu CPF",
         Description = "Localiza um cliente pelo seu CPF."
         )]
         [SwaggerResponse(200, "Success", typeof(ClienteViewModel))]
@@ -48,6 +48,34 @@ namespace FastFoodFIAP.Services.Api.Controllers
         public async Task<IActionResult> BuscarClientePorCpf([FromRoute] string cpf)
         {
             return CustomResponse(await _clienteApp.BuscarClientePorCpf(cpf));
+        }
+
+        [HttpGet("/busca/email/{email}")]
+        [SwaggerOperation(
+        Summary = "Localiza um cliente pelo seu endereço de email.",
+        Description = "Localiza um cliente pelo seu endereço de email."
+        )]
+        [SwaggerResponse(200, "Success", typeof(ClienteViewModel))]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(404, "Not Found")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<IActionResult> BuscarClientePorEmail([FromRoute] string email)
+        {
+            return CustomResponse(await _clienteApp.BuscarClientePorEmail(email));
+        }
+
+        [HttpGet("/busca/nome/{nome}")]
+        [SwaggerOperation(
+        Summary = "Localiza um cliente pelo seu endereço de email.",
+        Description = "Localiza um cliente pelo seu endereço de email."
+        )]
+        [SwaggerResponse(200, "Success", typeof(ClienteViewModel))]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(404, "Not Found")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<IActionResult> BuscarClientePorNome([FromRoute] string nome)
+        {
+            return CustomResponse(await _clienteApp.BuscarClientePorNome(nome));
         }
     }
 }

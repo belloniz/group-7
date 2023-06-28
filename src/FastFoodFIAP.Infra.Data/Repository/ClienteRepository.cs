@@ -36,6 +36,17 @@ namespace FastFoodFIAP.Infra.Data.Repository
         {
             return await Db.Clientes.FirstOrDefaultAsync(cliente => cliente.Cpf == cpf);
         }
+
+        public async Task<Cliente?> BuscarClientePorEmail(string email)
+        {
+            return await Db.Clientes.FirstOrDefaultAsync(cliente => cliente.Email == email);
+        }
+
+        public async Task<Cliente?> BuscarClientePorNome(string nome)
+        {
+            return await Db.Clientes.FirstOrDefaultAsync(cliente => cliente.Nome == nome);
+        }
+        
         public void Dispose()
         {
             Db.Dispose();

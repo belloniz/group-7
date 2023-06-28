@@ -9,5 +9,7 @@ namespace FastFoodFIAP.Domain.Interfaces
         void CadastrarNovoCliente(Cliente cliente);
 
         Task<Cliente?> BuscarClientePorCpf(string cpf);
+        Task<Cliente?> BuscarClientePorEmail(string email);
+        Task<Cliente?> BuscarClientePorNome(string nome);
     }
 }
