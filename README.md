@@ -1,6 +1,7 @@
-# Arquitetura Hexagonal com .NET 7
+# [FIAP - Pos Tech] Fast Food
 
 FIAP Pos Tech - SOFTWARE ARCHITECTURE
+
 SOAP2 - Grupo 7
 
 ## O projeto
