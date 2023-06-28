@@ -4,6 +4,16 @@ FIAP Pos Tech - SOFTWARE ARCHITECTURE
 
 SOAP2 - Grupo 7
 
+#### Sumário
+   * [O projeto](#o-projeto)
+   * [Documentações](#documentações)
+   * [Pré-requisitos](#pré-requisitos)
+   * [Como rodar a aplicação <g-emoji class="g-emoji" alias="arrow_forward" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/25b6.png">▶️</g-emoji>](#como-rodar-a-aplicação-️)
+   * [Tecnologias](#tecnologias)
+   * [Arquitetura e Padrões](#arquitetura-e-padrões)
+   * [Estrutura da solução](#estrutura-da-solução)
+   * [Desenvolvedores <img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20" align="absmiddle">](#desenvolvedores-octocat)
+
 ## O projeto
 
 O projeto consiste em um sistema de autoatendimento de fast food, que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente. 
