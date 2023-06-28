@@ -14,6 +14,7 @@ using FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands;
 using FastFoodFIAP.Domain.Commands.ClienteCommands;
 using FastFoodFIAP.Infra.Data.Context;
 using FastFoodFIAP.Domain.Commands.PedidoCommands;
+using FastFoodFIAP.Domain.Commands.AndamentoCommands;
 
 namespace FastFoodFIAP.Infra.CrossCutting.IoC
 {
@@ -28,12 +29,14 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
             // Application            
+            services.AddScoped<IAndamentoApp, AndamentoApp>();
             services.AddScoped<ICategoriaProdutoApp, CategoriaProdutoApp>();
             services.AddScoped<IProdutoApp, ProdutoApp>();
             services.AddScoped<IClienteApp, ClienteApp>();
             services.AddScoped<IPedidoApp, PedidoApp>();
 
             // Infra - Data           
+            services.AddScoped<IAndamentoRepository, AndamentoRepository>();
             services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -43,6 +46,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
             services.AddTransient<AppDbContext>();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // AutoMapper Settings
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(InputModelToDomainMappingProfile));
@@ -57,10 +61,13 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<ProdutoDeleteCommand, ValidationResult>, ProdutoCommandHandler>();
 
             services.AddScoped<IRequestHandler<ClienteCreateCommand, ValidationResult>, ClienteCommandHandler>();
-             services.AddScoped<IRequestHandler<PedidoCreateCommand, ValidationResult>, PedidoCommandHandler>();
+
+            services.AddScoped<IRequestHandler<PedidoCreateCommand, ValidationResult>, PedidoCommandHandler>();
             services.AddScoped<IRequestHandler<PedidoUpdateCommand, ValidationResult>, PedidoCommandHandler>();
             services.AddScoped<IRequestHandler<PedidoDeleteCommand, ValidationResult>, PedidoCommandHandler>();
 
+            services.AddScoped<IRequestHandler<AndamentoCreateCommand, ValidationResult>, AndamentoCommandHandler>();
+            services.AddScoped<IRequestHandler<AndamentoUpdateCommand, ValidationResult>, AndamentoCommandHandler>();
         }
     }
 }

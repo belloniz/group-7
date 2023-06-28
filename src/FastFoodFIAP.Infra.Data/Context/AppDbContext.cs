@@ -14,6 +14,7 @@ namespace FastFoodFIAP.Infra.Data.Context
     public sealed class AppDbContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
+        public DbSet<Andamento>? Andamentos { get; set; }
         public DbSet<Cliente>? Clientes { get; set; }
         public DbSet<CategoriaProduto>? CategoriasProdutos { get; set; }
         public DbSet<Pedido>? Pedidos { get; set; }
@@ -54,6 +55,7 @@ namespace FastFoodFIAP.Infra.Data.Context
                 property.SetColumnType("varchar(100)");
 
             //Configura mapeamento
+            modelBuilder.ApplyConfiguration(new AndamentosMap());
             modelBuilder.ApplyConfiguration(new ClientesMap());
             modelBuilder.ApplyConfiguration(new CategoriasProdutosMap());
             modelBuilder.ApplyConfiguration(new PedidosMap());

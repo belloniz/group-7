@@ -103,11 +103,13 @@ CREATE TABLE public.pedidos_combos_produtos (
 
 CREATE TABLE public.pedidos_andamentos ( 
    id serial4 NOT NULL, 
+   pedido_id INT NOT NULL,
    data_hora_inicio timestamp NOT NULL, 
    data_hora_fim timestamp NOT NULL, 
    situacao_id INT NOT NULL, 
    funcionario_id INT NOT NULL, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
+   CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id), 
    CONSTRAINT andamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pedidos(id), 
    CONSTRAINT andamentos_funcionarios_fk FOREIGN KEY (funcionario_id) REFERENCES public.funcionarios(id) 
 );
@@ -159,3 +161,8 @@ insert into public.produtos (id, nome, descricao, preco, categoria_id) values (9
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (10, 'Sunday Creme', 'Especial', 12.00, 4);
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (11, 'Sunday Chocolate', 'Especial', 12.00, 4);
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (12, 'Sunday Morango', 'Especial', 12.00, 4);
+
+
+insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (1, 'Ana Maria', 'A000001', 2);
+insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (2, 'Bruno Pereira', 'A000002', 2);
+insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (3, 'João Almeida', 'A000003', 2);

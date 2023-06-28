@@ -12,8 +12,8 @@ namespace FastFoodFIAP.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            AllowNullCollections = true;  
-            
+            AllowNullCollections = true;            
+
             CreateMap<CategoriaProduto, CategoriaProdutoViewModel>();
 
             CreateMap<Cliente, ClienteViewModel>();

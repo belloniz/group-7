@@ -14,10 +14,12 @@ namespace FastFoodFIAP.Services.Api.Controllers
     public class PedidoController: ApiController
     {
         private readonly IPedidoApp _pedidoApp;
+        private readonly IAndamentoApp _andamentoApp;
 
-        public PedidoController(IPedidoApp pedidoApp)
+        public PedidoController(IPedidoApp pedidoApp, IAndamentoApp andamentoApp)
         {
             _pedidoApp = pedidoApp;
+            _andamentoApp = andamentoApp;
         }
 
         [HttpGet]
@@ -94,5 +96,22 @@ namespace FastFoodFIAP.Services.Api.Controllers
         {
             return CustomNoContentResponse(await _pedidoApp.Remove(id));
         }
+
+        [HttpPost("{id}/andamento")]
+        [SwaggerOperation(
+        Summary = "Criar um novo andamento para o pedido.",
+        Description = "Criar um novo andamento para o pedido."
+        )]
+        [SwaggerResponse(201, "Success", typeof(List<AndamentoViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> CriarAndamento([FromRoute] int id, [FromBody] AndamentoInputModel andamento)
+        {
+            if (!ModelState.IsValid)
+                return CustomResponse(ModelState);
+            
+            return CustomCreateResponse(await _andamentoApp.Add(andamento));
+        }        
     }
 }
