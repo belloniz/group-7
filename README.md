@@ -16,7 +16,7 @@ No projeto atual temos as seguintes funcionalidades:
 
 ## Documentações
 
-A imagem a seguir documententa o sistema utilizando a linguagem ubíqua, dos seguintes fluxos:
+A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguintes fluxos:
 - Realização do pedido e pagamento
 - Preparação e entrega do pedido
 
