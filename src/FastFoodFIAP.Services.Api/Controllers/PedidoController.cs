@@ -88,7 +88,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Exclui um pedido.",
         Description = "Exclui um pedido."
         )]
-        [SwaggerResponse(204, "Success", typeof(PedidoInputModel))]
+        [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
@@ -97,7 +97,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             return CustomNoContentResponse(await _pedidoApp.Remove(id));
         }
 
-        [HttpPost("{id}/andamento")]
+        [HttpPost("andamento/")]
         [SwaggerOperation(
         Summary = "Criar um novo andamento para o pedido.",
         Description = "Criar um novo andamento para o pedido."
@@ -106,7 +106,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "No Content")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<ActionResult> CriarAndamento([FromRoute] int id, [FromBody] AndamentoInputModel andamento)
+        public async Task<ActionResult> CriarAndamento([FromBody] AndamentoInputModel andamento)
         {
             if (!ModelState.IsValid)
                 return CustomResponse(ModelState);

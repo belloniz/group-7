@@ -6,25 +6,21 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
     {
         public int ClienteId { get; private set;}
         public List<PedidoCombo> Combos { get; private set;}
-        
-        //public List<Andamento> Andamentos {get; private set;}
-
+        //public Andamento Situacao { get;  set;}  
         public virtual Cliente? ClienteNavegation { get; private set;}
         public virtual Pagamento? PagamentoNavegation { get; private set; }
         
         public virtual ICollection<Andamento> Andamentos { get; private set; }
 
         private Pedido() {
-            Combos = new List<PedidoCombo>();
-            //Andamentos = new List<Andamento>();
+            Combos = new List<PedidoCombo>();            
         }
 
         public Pedido(int id, int clienteId){
             Id = id;
             ClienteId = clienteId;
 
-            Combos = new List<PedidoCombo>();
-            //Andamentos = new List<Andamento>();
+            Combos = new List<PedidoCombo>();            
         }
 
         public void AddCombo(int quantidade, List<PedidoComboProduto> combos)

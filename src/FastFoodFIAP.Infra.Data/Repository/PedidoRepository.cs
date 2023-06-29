@@ -25,7 +25,11 @@ namespace FastFoodFIAP.Infra.Data.Repository
         
         public async Task<Pedido?> GetById(int id)
         {
-            return await DbSet.FindAsync(id);
+            //var pedido = await DbSet.FindAsync(id);
+            //pedido.Situacao= Db.Andamentos.Where(c => c.PedidoId == pedido.Id).FirstOrDefault();
+            //return pedido;
+
+            return await DbSet.FindAsync(id); ;
         }
 
         public void Add(Pedido pedido)

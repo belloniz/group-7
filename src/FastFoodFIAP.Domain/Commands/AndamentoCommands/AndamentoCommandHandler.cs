@@ -25,6 +25,8 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             //Validar se o pedido existe
             //Validar se não foi finalizado
             //Validar se é o andamento correto
+            //Validar se o funcionário existe
+            //Validar se a situação existe
 
             var andamento = new Andamento(request.Id, request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio);
 

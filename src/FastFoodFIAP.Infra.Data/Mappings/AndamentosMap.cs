@@ -23,8 +23,9 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.HasIndex(c => c.PedidoId);
 
             builder.HasOne(c => c.PedidoNavegation)
-               .WithMany()
-               .HasForeignKey(p => p.PedidoId);
+               .WithMany(p => p.Andamentos)
+               .HasForeignKey(p => p.PedidoId)
+               .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(c => c.DataHoraInicio)
                 .HasColumnName("data_hora_inicio");

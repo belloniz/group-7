@@ -8,7 +8,7 @@ namespace FastFoodFIAP.Domain.Models
         public int PedidoId { get; private set; }
         public DateTime DataHoraInicio { get; private set; }
         public DateTime? DataHoraFim { get; private set; }
-        public int FuncionarioId { get; private set; }
+        public int? FuncionarioId { get; private set; }
         public int SituacaoId { get; private set; }
 
         public virtual Pedido? PedidoNavegation { get; private set; }
@@ -20,7 +20,7 @@ namespace FastFoodFIAP.Domain.Models
 
         }
 
-        public Andamento(int id, int pedidoId, int funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime? dataHoraFim = null)
+        public Andamento(int id, int pedidoId, int? funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime? dataHoraFim = null)
         {
             Id = id;
             PedidoId = pedidoId;

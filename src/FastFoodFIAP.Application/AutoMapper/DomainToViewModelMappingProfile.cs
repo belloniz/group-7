@@ -23,10 +23,10 @@ namespace FastFoodFIAP.Application.AutoMapper
             CreateMap<Produto, ProdutoViewModel>()
                 .ForMember(c => c.Categoria,
                     map => map.MapFrom(m => m.CategoriaNavegation));
-            
+
             CreateMap<Pedido, PedidoViewModel>()
-                .ForMember( c => c.Cliente,
-                    map => map.MapFrom( m => m.ClienteNavegation));
+                .ForMember(c => c.Cliente,
+                    map => map.MapFrom(m => m.ClienteNavegation));
 
             CreateMap<PedidoCombo, PedidoComboViewModel>();
             

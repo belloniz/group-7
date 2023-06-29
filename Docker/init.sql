@@ -88,7 +88,7 @@ CREATE TABLE public.pedidos_combos (
    pedido_id INT NOT NULL, 
    quantidade INT NOT NULL,   
    CONSTRAINT pedidos_combos_pkey PRIMARY KEY (id), 
-   CONSTRAINT pedidos_combos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id)
+   CONSTRAINT pedidos_combos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
 );
 
 CREATE TABLE public.pedidos_combos_produtos ( 
@@ -97,7 +97,7 @@ CREATE TABLE public.pedidos_combos_produtos (
    valor_unitario  money NOT NULL,
    quantidade INT NOT NULL,
    CONSTRAINT pedidos_combos_produtos_pkey PRIMARY KEY (combo_id, produto_id), 
-   CONSTRAINT pedidos_combos_fk FOREIGN KEY (combo_id) REFERENCES public.pedidos_combos(id),
+   CONSTRAINT pedidos_combos_fk FOREIGN KEY (combo_id) REFERENCES public.pedidos_combos(id) ON DELETE CASCADE,
    CONSTRAINT pedidos_produtos_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
 );
 
@@ -105,11 +105,11 @@ CREATE TABLE public.pedidos_andamentos (
    id serial4 NOT NULL, 
    pedido_id INT NOT NULL,
    data_hora_inicio timestamp NOT NULL, 
-   data_hora_fim timestamp NOT NULL, 
+   data_hora_fim timestamp NULL, 
    situacao_id INT NOT NULL, 
-   funcionario_id INT NOT NULL, 
+   funcionario_id INT NULL, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
-   CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id), 
+   CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE, 
    CONSTRAINT andamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pedidos(id), 
    CONSTRAINT andamentos_funcionarios_fk FOREIGN KEY (funcionario_id) REFERENCES public.funcionarios(id) 
 );
@@ -124,7 +124,7 @@ CREATE TABLE public.pagamentos (
    valor_pagamento money NOT NULL, 
    qr_code varchar(300) NOT NULL, 
    CONSTRAINT pagamentos_pkey PRIMARY KEY (id), 
-   CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) 
+   CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
 );
 
 
@@ -133,9 +133,9 @@ insert into public.categorias_produtos (id, nome) values (2, 'Acompanhamento');
 insert into public.categorias_produtos (id, nome) values (3, 'Bebida');
 insert into public.categorias_produtos (id, nome) values (4, 'Sobremesa');
 
-insert into public.ocupacoes (nome) values ('Administrador');
-insert into public.ocupacoes (nome) values ('Atendente');
-insert into public.ocupacoes (nome) values ('Preparador');
+insert into public.ocupacoes (id, nome) values (1, 'Administrador');
+insert into public.ocupacoes (id, nome) values (2, 'Atendente');
+insert into public.ocupacoes (id, nome) values (3, 'Preparador');
 
 insert into public.situacoes_pedidos (id, nome) values (1, 'Recebido');
 insert into public.situacoes_pedidos (id, nome) values (2, 'Em preparação');
@@ -161,6 +161,19 @@ insert into public.produtos (id, nome, descricao, preco, categoria_id) values (9
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (10, 'Sunday Creme', 'Especial', 12.00, 4);
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (11, 'Sunday Chocolate', 'Especial', 12.00, 4);
 insert into public.produtos (id, nome, descricao, preco, categoria_id) values (12, 'Sunday Morango', 'Especial', 12.00, 4);
+
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem1.jpg', 1);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem2.jpg', 2);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem3.jpg', 3);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem4.jpg', 4);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem5.jpg', 5);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem6.jpg', 6);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem7.jpg', 7);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem8.jpg', 8);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem9.jpg', 9);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem10.jpg', 10);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem11.jpg', 11);
+insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem12.jpg', 12);
 
 
 insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (1, 'Ana Maria', 'A000001', 2);

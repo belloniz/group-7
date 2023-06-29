@@ -26,7 +26,8 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.HasOne(c => c.PedidoComboNavigation)
                 .WithMany(p => p.Produtos)
-                .HasForeignKey(c => c.PedidoComboId);
+                .HasForeignKey(c => c.PedidoComboId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(c => c.ProdutoId)
                 .HasColumnName("produto_id");
