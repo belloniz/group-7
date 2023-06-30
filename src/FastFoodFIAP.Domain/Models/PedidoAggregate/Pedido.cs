@@ -5,8 +5,7 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
     public class Pedido : Entity, IAggregateRoot
     {
         public int ClienteId { get; private set;}
-        public List<PedidoCombo> Combos { get; private set;}
-        //public Andamento Situacao { get;  set;}  
+        public List<PedidoCombo> Combos { get; private set;} 
         public virtual Cliente? ClienteNavegation { get; private set;}
         public virtual Pagamento? PagamentoNavegation { get; private set; }
         
