@@ -10,6 +10,7 @@ namespace FastFoodFIAP.Domain.Models
         public DateTime? DataHoraFim { get; private set; }
         public int? FuncionarioId { get; private set; }
         public int SituacaoId { get; private set; }
+        public bool Atual { get; set; }
 
         public virtual Pedido? PedidoNavegation { get; private set; }
         public virtual Funcionario? FuncionarioNavegation { get; private set; }
@@ -20,7 +21,7 @@ namespace FastFoodFIAP.Domain.Models
 
         }
 
-        public Andamento(int id, int pedidoId, int? funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime? dataHoraFim = null)
+        public Andamento(int id, int pedidoId, int? funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime? dataHoraFim = null, bool atual = false)
         {
             Id = id;
             PedidoId = pedidoId;
@@ -28,6 +29,7 @@ namespace FastFoodFIAP.Domain.Models
             DataHoraFim = dataHoraFim;
             FuncionarioId = funcionarioId;
             SituacaoId = situacaoId;
+            Atual = atual;
         }
     }
 }

@@ -21,6 +21,13 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Add(Andamento andamento)
         {
+            var andamentosPedido = Db.Andamentos?
+                .Where(f => f.PedidoId == andamento.PedidoId && f.SituacaoId < andamento.SituacaoId)
+                .ToList();
+
+            if(andamentosPedido != null ) 
+                andamentosPedido.ForEach(a => a.Atual = false);
+
             DbSet.Add(andamento);
         }
 

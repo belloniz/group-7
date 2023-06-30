@@ -6,6 +6,7 @@
         public DateTime DataHoraInicio { get; set; }
         public DateTime? DataHoraFim { get; set; }
         public FuncionarioViewModel? Funcionario { get; set; }
-        public int SituacaoId { get; set; }
+        public SituacaoPedidoViewModel? Situacao { get; set; }
+        public bool Atual { get; set; }
     }
 }

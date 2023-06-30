@@ -11,6 +11,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             DataHoraFim = null;
             FuncionarioId = funcionarioId;
             SituacaoId = situacaoId;
+            Atual = true;
         }
 
         public override bool IsValid()

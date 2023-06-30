@@ -5,7 +5,8 @@ using FluentValidation.Results;
 namespace FastFoodFIAP.Application.Interfaces
 {
     public interface IPedidoApp: IDisposable
-    {        
+    {
+        Task<List<PedidoViewModel>> GetAllBySituacao(int situacaoId);
         Task<List<PedidoViewModel>> GetAll();
         Task<PedidoViewModel> GetById(int id);
         Task<ValidationResult> Add(PedidoInputModel model);

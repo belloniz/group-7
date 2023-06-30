@@ -47,6 +47,11 @@ namespace FastFoodFIAP.Application.Services
             return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAll());
         }
 
+        public async Task<List<PedidoViewModel>> GetAllBySituacao(int situacaoId)
+        {
+            return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAllBySituacao(situacaoId));
+        }
+
         public async Task<PedidoViewModel> GetById(int id)
         {
             return _mapper.Map<PedidoViewModel>(await _pedidoRepository.GetById(id));
@@ -55,6 +60,6 @@ namespace FastFoodFIAP.Application.Services
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-        }
+        }        
     }
 }

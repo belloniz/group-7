@@ -33,6 +33,9 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.Property(c => c.DataHoraFim)
                 .HasColumnName("data_hora_fim");
 
+            builder.Property(c => c.Atual)
+                .HasColumnName("atual");
+
             builder.Property(c => c.SituacaoId)
                 .HasColumnName("situacao_id");
 

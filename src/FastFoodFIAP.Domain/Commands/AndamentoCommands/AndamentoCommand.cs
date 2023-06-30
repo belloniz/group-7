@@ -10,7 +10,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
         public DateTime? DataHoraFim { get; protected set; }
         public int? FuncionarioId { get; protected set; }
         public int SituacaoId { get; protected set; }
-
+        public bool Atual { get; protected set; }
         public AndamentoCommand()
         {
 

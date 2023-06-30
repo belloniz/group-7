@@ -36,6 +36,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             var lista = await _pedidoApp.GetAll();
             return CustomListResponse(lista, lista.Count);
         }
+        
 
         [HttpGet("{id}")]
         [SwaggerOperation(
@@ -112,6 +113,21 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 return CustomResponse(ModelState);
             
             return CustomCreateResponse(await _andamentoApp.Add(andamento));
-        }        
+        }
+
+        [HttpGet("situacao/{id}")]
+        [SwaggerOperation(
+        Summary = "Lista todos os pedidos por situacao.",
+        Description = "Lista ordenada pela data de todos os pedidos por situacao"
+        )]
+        [SwaggerResponse(200, "Success", typeof(List<PedidoViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> GetAllBySituacao([FromRoute] int id)
+        {
+            var lista = await _pedidoApp.GetAllBySituacao(id);
+            return CustomListResponse(lista, lista.Count);
+        }
     }
 }

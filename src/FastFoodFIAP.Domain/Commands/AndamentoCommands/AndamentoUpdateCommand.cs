@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
     {
         protected AndamentoUpdateCommand() { }
 
-        public AndamentoUpdateCommand(int pedidoId, int funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime dataHoraFim)
+        public AndamentoUpdateCommand(int pedidoId, int funcionarioId, int situacaoId, DateTime dataHoraInicio, DateTime dataHoraFim, bool atual)
         {            
             PedidoId = pedidoId;
             DataHoraInicio = dataHoraInicio;
@@ -14,6 +14,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             FuncionarioId = funcionarioId;
             SituacaoId = situacaoId;
             DataHoraFim = dataHoraFim;
+            Atual = atual;
         }
 
         public void SetId(int id)

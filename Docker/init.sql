@@ -108,6 +108,7 @@ CREATE TABLE public.pedidos_andamentos (
    data_hora_fim timestamp NULL, 
    situacao_id INT NOT NULL, 
    funcionario_id INT NULL, 
+   bool NOT NULL DEFAULT false, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE, 
    CONSTRAINT andamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pedidos(id), 
@@ -137,6 +138,7 @@ insert into public.ocupacoes (id, nome) values (1, 'Administrador');
 insert into public.ocupacoes (id, nome) values (2, 'Atendente');
 insert into public.ocupacoes (id, nome) values (3, 'Preparador');
 
+insert into public.situacoes_pedidos (id, nome) values (0, 'Realizado');
 insert into public.situacoes_pedidos (id, nome) values (1, 'Recebido');
 insert into public.situacoes_pedidos (id, nome) values (2, 'Em preparação');
 insert into public.situacoes_pedidos (id, nome) values (3, 'Pronto');

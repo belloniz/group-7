@@ -23,12 +23,12 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
 
             //######################################
             //Validar se o pedido existe
-            //Validar se não foi finalizado
-            //Validar se é o andamento correto
+            //Validar se a situação (id) existe
+            //Validar se a situação já existe para o pedido            
+            //Validar se o andamento segue a ordem da situação
             //Validar se o funcionário existe
-            //Validar se a situação existe
 
-            var andamento = new Andamento(request.Id, request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio);
+            var andamento = new Andamento(request.Id, request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio, null, request.Atual);
 
             _repository.Add(andamento);
 
@@ -46,7 +46,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
                 return ValidationResult;
             }            
             
-            var andamento = new Andamento(andamentoExiste.Id, andamentoExiste.PedidoId, andamentoExiste.FuncionarioId, andamentoExiste.SituacaoId, andamentoExiste.DataHoraInicio, request.DataHoraFim);
+            var andamento = new Andamento(andamentoExiste.Id, andamentoExiste.PedidoId, andamentoExiste.FuncionarioId, andamentoExiste.SituacaoId, andamentoExiste.DataHoraInicio, request.DataHoraFim, request.Atual);
 
             _repository.Update(andamento);
 

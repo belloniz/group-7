@@ -14,6 +14,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
         IRequestHandler<PedidoDeleteCommand, ValidationResult>
     {
         private readonly IPedidoRepository _repository;
+
         public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository)
         {
             _repository = repository;
@@ -28,7 +29,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
-            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido));
+            //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido));
 
             _repository.Add(pedido);            
 

@@ -1,4 +1,5 @@
 using FastFoodFIAP.Domain.Models.PedidoAggregate;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using GenericPack.Data;
 
 namespace FastFoodFIAP.Domain.Interfaces
@@ -7,6 +8,7 @@ namespace FastFoodFIAP.Domain.Interfaces
     {
         Task<Pedido?> GetById(int id);
         Task<IEnumerable<Pedido>> GetAll();
+        Task<IEnumerable<Pedido>> GetAllBySituacao(int situacaoId);
         void Add(Pedido pedido);
         void Update(Pedido pedido);
         void Remove(Pedido pedido);
