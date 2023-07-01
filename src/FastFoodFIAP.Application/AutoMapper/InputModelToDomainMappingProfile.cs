@@ -6,6 +6,8 @@ using FastFoodFIAP.Domain.Commands.ProdutoCommands;
 using FastFoodFIAP.Domain.Commands;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Commands.ClienteCommands;
+using FastFoodFIAP.Domain.Models.PedidoAggregate;
+using FastFoodFIAP.Domain.Commands.AndamentoCommands;
 
 namespace FastFoodFIAP.Application.AutoMapper
 {
@@ -29,6 +31,12 @@ namespace FastFoodFIAP.Application.AutoMapper
             //Pedido
             CreateMap<PedidoInputModel, PedidoCreateCommand>();
             CreateMap<PedidoInputModel, PedidoUpdateCommand>();
+
+            CreateMap<PedidoComboInputModel, PedidoCombo>();
+            CreateMap<PedidoComboProdutoInputModel, PedidoComboProduto>();
+
+            CreateMap<AndamentoInputModel, AndamentoCreateCommand>();
+            CreateMap<AndamentoInputModel, AndamentoUpdateCommand>();
         }
     }
 }

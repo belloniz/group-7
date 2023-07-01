@@ -100,7 +100,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Exclui um produto.",
         Description = "Exclui um produto."
         )]
-        [SwaggerResponse(204, "Success", typeof(ProdutoInputModel))]
+        [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]

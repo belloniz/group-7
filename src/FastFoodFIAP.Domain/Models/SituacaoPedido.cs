@@ -6,12 +6,11 @@ namespace FastFoodFIAP.Domain.Models
     {
         public string Nome { get; private set; } = "";
 
-        private SituacaoPedido() { 
-        }
+        private SituacaoPedido() { }
 
         public SituacaoPedido(int id, string nome){
             Id = id;
-            Nome=nome;         
+            Nome = nome;         
         }        
     }
 }

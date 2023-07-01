@@ -22,10 +22,18 @@ namespace FastFoodFIAP.Infra.Data.Repository
         {
             return await DbSet.AsNoTracking().ToListAsync();
         }
-        
+
+        public async Task<IEnumerable<Pedido>> GetAllBySituacao(int situacaoId)
+        {
+            return await DbSet.AsNoTracking()
+                .Where(c => c.Andamentos
+                .Any(a => a.SituacaoId == situacaoId && a.Atual))
+                .ToListAsync();          
+        }
+
         public async Task<Pedido?> GetById(int id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet.FindAsync(id); ;
         }
 
         public void Add(Pedido pedido)
@@ -40,9 +48,9 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Update(Pedido pedido)
         {
-            // var imagens = Db.PedidosImagens!.Where(p => p.PedidoId == pedido.Id).AsNoTracking();
-            // if (imagens != null) 
-            //     Db.PedidosImagens!.RemoveRange(imagens);
+            var combos = Db.PedidosCombos!.Where(p => p.PedidoId == pedido.Id).AsNoTracking();
+            if (combos != null) 
+                Db.PedidosCombos!.RemoveRange(combos);
 
             DbSet.Update(pedido);          
         }
@@ -50,7 +58,6 @@ namespace FastFoodFIAP.Infra.Data.Repository
         public void Dispose()
         {
             Db.Dispose();
-        }
-
+        }        
     }
 }

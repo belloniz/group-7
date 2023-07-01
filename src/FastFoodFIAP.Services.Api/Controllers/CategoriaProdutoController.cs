@@ -1,8 +1,6 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
-using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
-using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -87,7 +85,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Exclui uma categoria de produtos.",
         Description = "Exclui uma categoria de produtos."
         )]
-        [SwaggerResponse(204, "Success", typeof(CategoriaProdutoViewModel))]
+        [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]

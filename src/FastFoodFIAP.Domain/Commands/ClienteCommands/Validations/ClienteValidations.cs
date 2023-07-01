@@ -1,3 +1,4 @@
+﻿using FastFoodFIAP.Domain.CustomValidations;
 using FluentValidation;
 
 namespace FastFoodFIAP.Domain.Commands.ClienteCommands.Validations
@@ -17,28 +18,21 @@ namespace FastFoodFIAP.Domain.Commands.ClienteCommands.Validations
                 .Length(2, 35)
                 .WithMessage("O Nome do cliente deve ter entre 2 e 35 caracteres");
         }
-
+        
         protected void ValidaEmail()
         {
-            RuleFor(cliente => cliente.Email)
-                .Must(ContemSimbolosDoEmail)
-                .Length(4, 75)
-                .When(cliente => !string.IsNullOrEmpty(cliente.Email))
-                .WithMessage("Digite um e-mail válido");
-        }
-
-        private bool ContemSimbolosDoEmail(string email)
-        {
-            return email.Contains("@") && email.Contains(".");
+            RuleFor(cliente => cliente.Email)                                               
+                .EmailAddress()
+                .When(cliente => cliente.Email.Length > 0);
         }
 
         protected void ValidaCpf()
         {
             RuleFor(cliente => cliente.Cpf)
-                .NotEmpty()
-                .Length(11)
-                .When(cliente => !string.IsNullOrEmpty(cliente.Cpf.ToString()))
-                .WithMessage("Digite um cpf válido com 11 números");
+                .IsValidCPF()
+                .When(cliente => cliente.Cpf.Length > 0);
         }
+
+
     }
 }

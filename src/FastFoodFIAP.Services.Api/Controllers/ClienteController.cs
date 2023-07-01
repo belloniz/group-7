@@ -1,6 +1,5 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
-using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,6 +17,21 @@ namespace FastFoodFIAP.Services.Api.Controllers
         public ClienteController(IClienteApp clienteApp)
         {
             _clienteApp = clienteApp;
+        }
+
+        [HttpGet]
+        [SwaggerOperation(
+        Summary = "Lista todos os clientes.",
+        Description = "Lista ordenada pelo nome de todos os clientes"
+        )]
+        [SwaggerResponse(200, "Success", typeof(List<ClienteViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> BuscarTodosClientes()
+        {
+            var lista = await _clienteApp.BuscarTodosClientes();
+            return CustomListResponse(lista, lista.Count);
         }
 
         [HttpPost]
@@ -45,9 +59,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> BuscarClientePorCpf([FromRoute] string cpf)
+        public async Task<IActionResult> BuscarClientePeloCpf([FromRoute] string cpf)
         {
-            return CustomResponse(await _clienteApp.BuscarClientePorCpf(cpf));
+            return CustomResponse(await _clienteApp.BuscarClientePeloCpf(cpf));
         }
 
         [HttpGet("/busca/email/{email}")]
@@ -59,23 +73,24 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> BuscarClientePorEmail([FromRoute] string email)
+        public async Task<IActionResult> BuscarClientesPeloEmail([FromRoute] string email)
         {
-            return CustomResponse(await _clienteApp.BuscarClientePorEmail(email));
+            return CustomResponse(await _clienteApp.BuscarClientesPeloEmail(email));
         }
 
         [HttpGet("/busca/nome/{nome}")]
         [SwaggerOperation(
-        Summary = "Localiza um cliente pelo seu endereço de email.",
-        Description = "Localiza um cliente pelo seu endereço de email."
+        Summary = "Localiza clientes pelo nome.",
+        Description = "Localiza clientes pelo nome."
         )]
         [SwaggerResponse(200, "Success", typeof(ClienteViewModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> BuscarClientePorNome([FromRoute] string nome)
+        public async Task<IActionResult> BuscarClientesPeloNome([FromRoute] string nome)
         {
-            return CustomResponse(await _clienteApp.BuscarClientePorNome(nome));
+            var lista = await _clienteApp.BuscarClientesPeloNome(nome);
+            return CustomListResponse(lista, lista.Count);
         }
     }
 }

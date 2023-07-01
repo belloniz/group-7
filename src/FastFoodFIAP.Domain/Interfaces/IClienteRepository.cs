@@ -7,9 +7,9 @@ namespace FastFoodFIAP.Domain.Interfaces
     public interface IClienteRepository : IRepository<Cliente>
     {
         void CadastrarNovoCliente(Cliente cliente);
-
-        Task<Cliente?> BuscarClientePorCpf(string cpf);
-        Task<Cliente?> BuscarClientePorEmail(string email);
-        Task<Cliente?> BuscarClientePorNome(string nome);
+        Task<Cliente?> BuscarClientePeloCpf(string cpf);
+        Task<Cliente?> BuscarClientesPeloEmail(string email);
+        Task<IEnumerable<Cliente>> BuscarClientesPeloNome(string nome);
+        Task<IEnumerable<Cliente>> BuscarTodosClientes();
     }
 }

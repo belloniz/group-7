@@ -1,6 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
 using FastFoodFIAP.Domain.Interfaces;
-using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using FastFoodFIAP.Infra.Data.Context;
 using GenericPack.Data;

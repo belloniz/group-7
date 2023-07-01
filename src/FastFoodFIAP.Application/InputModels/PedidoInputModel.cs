@@ -3,6 +3,6 @@
     public class PedidoInputModel
     {
         public int ClienteId {get; set;}
-        public List<PedidoItemInputModel>? Itens {get; set;}
+        public List<PedidoComboInputModel>? Combos {get; set;}
     }
 }
