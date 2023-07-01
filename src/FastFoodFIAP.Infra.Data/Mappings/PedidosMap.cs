@@ -29,6 +29,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.Navigation(e => e.ClienteNavegation).AutoInclude();
             builder.Navigation(e => e.Combos).AutoInclude();
             builder.Navigation(e => e.Andamentos).AutoInclude();
+            builder.Navigation(e => e.PagamentoNavegation).AutoInclude();
         }
     }
 }

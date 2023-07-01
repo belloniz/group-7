@@ -14,7 +14,7 @@ namespace FastFoodFIAP.Domain.Models
             Pedidos = new HashSet<Pedido>();
         }
 
-        public Cliente(int id, string nome, string email, string cpf){
+        public Cliente(int id, string? nome, string? email, string? cpf){
             Id = id;
             Nome = nome;         
             Email = email;
