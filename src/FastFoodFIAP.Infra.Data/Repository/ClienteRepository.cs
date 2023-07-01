@@ -21,7 +21,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void CadastrarNovoCliente(Cliente Cliente)
         {
-            if (!VerificarSeCpfJaExiste(Cliente.Cpf))
+            if (Cliente.Cpf == null || !VerificarSeCpfJaExiste(Cliente.Cpf))
                 DbSet.Add(Cliente);
         }
 

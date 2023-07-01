@@ -29,6 +29,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
+            //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado));
             //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido));
 
             _repository.Add(pedido);            
@@ -52,8 +53,6 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
-            //pedido.AddDomainEvent(new PedidoCreateEvent(produto.Id, ....));
-
             _repository.Update(pedido);            
 
             return await Commit(_repository.UnitOfWork);
@@ -68,9 +67,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             {
                 AddError("O Pedido não existe.");
                 return ValidationResult;
-            }                      
-
-            //pedido.AddDomainEvent(new PedidoCreateEvent(produto.Id, ....));
+            }                                  
 
             _repository.Remove(pedidoExiste);            
 

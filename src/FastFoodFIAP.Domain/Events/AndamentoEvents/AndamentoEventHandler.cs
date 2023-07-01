@@ -22,7 +22,7 @@ namespace FastFoodFIAP.Domain.Events.AndamentoEvents
         {
             var andamento = new Andamento(0, notification.PedidoId, notification.FuncionarioId, notification.SituacaoId, notification.DataHoraInicio);
 
-            _repository.Add(andamento);
+            _repository.Add(andamento);            
 
             return Task.CompletedTask;
         }
@@ -30,7 +30,6 @@ namespace FastFoodFIAP.Domain.Events.AndamentoEvents
         public Task Handle(AndamentoUpdateEvent notification, CancellationToken cancellationToken)
         {
             
-
             return Task.CompletedTask;
         }
     }

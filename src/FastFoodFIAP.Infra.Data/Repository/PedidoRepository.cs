@@ -38,7 +38,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Add(Pedido pedido)
         {
-            DbSet.Add(pedido);        
+            DbSet.Add(pedido);                    
         }
 
         public void Remove(Pedido pedido)

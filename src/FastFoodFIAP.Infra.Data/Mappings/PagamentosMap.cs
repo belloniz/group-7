@@ -19,12 +19,15 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .ValueGeneratedOnAdd();
 
             builder.Property(p => p.QrCode)
-                .HasColumnName("qrcode")
+                .HasColumnName("qr_code")
                 .HasMaxLength(300);
 
             builder.Property(c => c.Valor)
                 .HasColumnName("valor");
 
+            builder.Property(c => c.PedidoId)
+                .HasColumnName("pedido_id");
+            
             builder.HasIndex(c => c.PedidoId);
 
             builder.HasOne(c => c.PedidoNavegation)
