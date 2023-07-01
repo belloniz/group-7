@@ -8,8 +8,10 @@ namespace FastFoodFIAP.Application.Interfaces
     public interface IClienteApp : IDisposable
     {
 
-        Task<List<ClienteViewModel>> GetAll();
-        Task<ClienteViewModel> BuscarClientePorCpf(string cpf);
         Task<ValidationResult> CadastrarNovoCliente(ClienteInputModel model);
+        Task<ClienteViewModel> BuscarClientePeloCpf(string cpf);
+        Task<ClienteViewModel> BuscarClientesPeloEmail(string email);
+        Task<List<ClienteViewModel>> BuscarClientesPeloNome(string nome);
+        Task<List<ClienteViewModel>> BuscarTodosClientes();
     }
 }

@@ -27,14 +27,25 @@ namespace FastFoodFIAP.Application.Services
             var command = _mapper.Map<ClienteCreateCommand>(model);
             return await _mediator.SendCommand(command);
         }
-        public async Task<ClienteViewModel> BuscarClientePorCpf(string cpf)
+
+        public async Task<ClienteViewModel> BuscarClientePeloCpf(string cpf)
         {
-            return _mapper.Map<ClienteViewModel>(await _clienteRepository.BuscarClientePorCpf(cpf));
+            return _mapper.Map<ClienteViewModel>(await _clienteRepository.BuscarClientePeloCpf(cpf));
         }
 
-        public async Task<List<ClienteViewModel>> GetAll()
+        public async Task<ClienteViewModel> BuscarClientesPeloEmail(string email)
         {
-            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.GetAll());
+            return _mapper.Map<ClienteViewModel>(await _clienteRepository.BuscarClientesPeloEmail(email));
+        }
+
+        public async Task<List<ClienteViewModel>> BuscarClientesPeloNome(string nome)
+        {
+            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.BuscarClientesPeloNome(nome));
+        }
+
+        public async Task<List<ClienteViewModel>> BuscarTodosClientes()
+        {
+            return _mapper.Map<List<ClienteViewModel>>(await _clienteRepository.BuscarTodosClientes());
         }
 
         public void Dispose()
