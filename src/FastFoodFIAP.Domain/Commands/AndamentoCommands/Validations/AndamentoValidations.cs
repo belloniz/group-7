@@ -8,13 +8,15 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands.Validations
         protected void ValidaId()
         {
             RuleFor(c => c.Id)
-                .NotEqual(0).WithMessage("O Id do andamento não foi informado");
+                .NotEqual(Guid.Empty)
+                .WithMessage("O Id do andamento não foi informado");
         }        
 
         protected void ValidaDataHoraFimNaoNula()
         {
             RuleFor(c => c.DataHoraFim)
-                .NotNull().WithMessage("A data e horário de finalização do andamento devem ser informados.");
+                .NotNull()
+                .WithMessage("A data e horário de finalização do andamento devem ser informados.");
         }
 
         protected void ValidaDataHoraFimMaiorIgualInicio()

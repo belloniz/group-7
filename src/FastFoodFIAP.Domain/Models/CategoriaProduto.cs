@@ -12,7 +12,7 @@ namespace FastFoodFIAP.Domain.Models
             Produtos = new HashSet<Produto>();
         }
 
-        public CategoriaProduto(int id, string nome){
+        public CategoriaProduto(Guid id, string nome){
             Id = id;
             Nome = nome;         
             Produtos = new HashSet<Produto>();   

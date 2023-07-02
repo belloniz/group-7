@@ -2,8 +2,9 @@
 
 namespace FastFoodFIAP.Domain.Models
 {
-    public partial class SituacaoPedido: Entity, IAggregateRoot
+    public partial class SituacaoPedido:IAggregateRoot
     {
+        public int Id { get; private set; }
         public string Nome { get; private set; } = "";
 
         private SituacaoPedido() { }

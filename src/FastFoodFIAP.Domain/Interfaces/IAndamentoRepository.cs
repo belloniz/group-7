@@ -5,9 +5,9 @@ namespace FastFoodFIAP.Domain.Interfaces
 {
     public interface IAndamentoRepository : IRepository<Andamento>
     {
-        Task<Andamento?> GetById(int id);
+        Task<Andamento?> GetById(Guid id);
         void Add(Andamento andamento);
         void Update(Andamento andamento);
-
+        Task<IEnumerable<Andamento>> GetAllByPedido(Guid pedidoId);
     }
 }

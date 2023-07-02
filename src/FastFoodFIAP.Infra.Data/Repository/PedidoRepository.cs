@@ -31,7 +31,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
                 .ToListAsync();          
         }
 
-        public async Task<Pedido?> GetById(int id)
+        public async Task<Pedido?> GetById(Guid id)
         {
             return await DbSet.FindAsync(id); ;
         }

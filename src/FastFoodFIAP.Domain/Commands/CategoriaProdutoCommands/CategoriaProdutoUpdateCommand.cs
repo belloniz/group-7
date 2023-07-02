@@ -11,7 +11,7 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
             Nome = nome;
         }
 
-        public void SetId(int id)
+        public void SetId(Guid id)
         {
             Id = id;
         }

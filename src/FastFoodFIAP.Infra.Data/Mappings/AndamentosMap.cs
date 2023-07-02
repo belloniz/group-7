@@ -14,8 +14,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasName("PRIMARY");
 
             builder.Property(c => c.Id)
-                .HasColumnName("id")
-                .ValueGeneratedOnAdd();
+                .HasColumnName("id");
 
             builder.Property(c => c.PedidoId)
                 .HasColumnName("pedido_id");

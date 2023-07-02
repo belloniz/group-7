@@ -21,15 +21,33 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            //######################################
-            //Validar se o pedido existe
-            //Validar se a situação (id) existe
-            //Validar se a situação já existe para o pedido            
+            var andamentos = await _repository.GetAllByPedido(request.PedidoId);
+
+            //Validar se já existe um andamento para o pedido com a mesma situação
+            if (andamentos.Any(p => p.SituacaoId == request.SituacaoId))
+            {
+                AddError("O pedido já possui a mesma situação.");
+                return ValidationResult;
+            }
+
             //Validar se o andamento segue a ordem da situação
-            //Validar se o funcionário existe
+            var andamentoAtual = andamentos.Where(p => p.Atual == true).FirstOrDefault();
+            if (andamentoAtual != null)
+            {
+                if (andamentoAtual.SituacaoId > request.SituacaoId)
+                {
+                    AddError("A situação não corresponde a ordem de atendimento.");
+                    return ValidationResult;
+                }
+                else
+                {
+                    andamentoAtual.Atual = false;
+                    _repository.Update(andamentoAtual);
+                }
+            }
 
-            var andamento = new Andamento(request.Id, request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio, null, request.Atual);
 
+            var andamento = new Andamento(Guid.NewGuid(), request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio, null, request.Atual);
             _repository.Add(andamento);
 
             return await Commit(_repository.UnitOfWork);
@@ -44,8 +62,8 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             {
                 AddError("O Andamento não existe.");
                 return ValidationResult;
-            }            
-            
+            }
+
             var andamento = new Andamento(andamentoExiste.Id, andamentoExiste.PedidoId, andamentoExiste.FuncionarioId, andamentoExiste.SituacaoId, andamentoExiste.DataHoraInicio, request.DataHoraFim, request.Atual);
 
             _repository.Update(andamento);

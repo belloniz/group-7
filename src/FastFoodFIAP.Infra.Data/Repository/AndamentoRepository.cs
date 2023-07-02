@@ -21,13 +21,6 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public void Add(Andamento andamento)
         {
-            var andamentosPedido = Db.Andamentos?
-                .Where(f => f.PedidoId == andamento.PedidoId && f.SituacaoId < andamento.SituacaoId)
-                .ToList();
-
-            if(andamentosPedido != null ) 
-                andamentosPedido.ForEach(a => a.Atual = false);
-
             DbSet.Add(andamento);
         }
 
@@ -36,7 +29,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
             Db.Dispose();
         }
 
-        public async Task<Andamento?> GetById(int id)
+        public async Task<Andamento?> GetById(Guid id)
         {
             return await DbSet.FindAsync(id);
         }
@@ -44,6 +37,10 @@ namespace FastFoodFIAP.Infra.Data.Repository
         public void Update(Andamento andamento)
         {
             DbSet.Update(andamento);
+        }
+
+        public async Task<IEnumerable<Andamento>> GetAllByPedido(Guid pedidoId){
+            return await DbSet.AsNoTracking().Where(x => x.PedidoId == pedidoId).ToListAsync();
         }
     }
 }

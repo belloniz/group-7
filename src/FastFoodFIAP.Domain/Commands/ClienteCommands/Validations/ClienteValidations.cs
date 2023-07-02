@@ -8,7 +8,7 @@ namespace FastFoodFIAP.Domain.Commands.ClienteCommands.Validations
         protected void ValidaId()
         {
             RuleFor(cliente => cliente.Id)
-                .NotEqual(0)
+                .NotEqual(Guid.Empty)
                 .WithMessage("O Id do cliente não foi informado");
         }
 

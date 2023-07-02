@@ -7,13 +7,15 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands.Validations
         protected void ValidaId()
         {
             RuleFor(c => c.Id)
-                .NotEqual(0).WithMessage("O Id do pedido não foi informado");
+                .NotEqual(Guid.Empty)
+                .WithMessage("O Id do pedido não foi informado");
         }
 
         protected void ValidaCliente()
         {
             RuleFor(c => c.ClienteId)
-                .NotEqual(0).WithMessage("O Cliente não foi informado");
+                .NotEqual(Guid.Empty)
+                .WithMessage("O Id do Cliente não foi informado");
         }
 
         protected void ValidaExisteItens()

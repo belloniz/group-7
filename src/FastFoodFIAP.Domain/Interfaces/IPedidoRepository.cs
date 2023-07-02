@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Interfaces
 {
     public interface IPedidoRepository: IRepository<Pedido>
     {
-        Task<Pedido?> GetById(int id);
+        Task<Pedido?> GetById(Guid id);
         Task<IEnumerable<Pedido>> GetAll();
         Task<IEnumerable<Pedido>> GetAllBySituacao(int situacaoId);
         void Add(Pedido pedido);

@@ -15,8 +15,7 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasName("PRIMARY");
 
             builder.Property(p => p.Id)
-                .HasColumnName("id")
-                .ValueGeneratedOnAdd();
+                .HasColumnName("id");
 
             builder.Property(p => p.QrCode)
                 .HasColumnName("qr_code")
@@ -31,7 +30,8 @@ namespace FastFoodFIAP.Infra.Data.Mappings
             builder.HasIndex(c => c.PedidoId);
 
             builder.HasOne(c => c.PedidoNavegation)
-                .WithOne(p => p.PagamentoNavegation);
+                .WithOne(p => p.PagamentoNavegation)
+                .HasForeignKey<Pagamento>();
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class PedidoInputModel
     {
-        public int ClienteId {get; set;}
+        public Guid? ClienteId {get; set;}
         public List<PedidoComboInputModel>? Combos {get; set;}
     }
 }
