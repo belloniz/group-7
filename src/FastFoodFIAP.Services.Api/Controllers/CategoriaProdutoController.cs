@@ -43,7 +43,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             return CustomResponse(await _categoriaProdutoApp.GetById(id));
         }
@@ -72,7 +72,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] CategoriaProdutoInputModel categoria)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] CategoriaProdutoInputModel categoria)
         {
             if (!ModelState.IsValid)
                 return CustomResponse(ModelState);
@@ -89,7 +89,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             return CustomNoContentResponse(await _categoriaProdutoApp.Remove(id));
         }

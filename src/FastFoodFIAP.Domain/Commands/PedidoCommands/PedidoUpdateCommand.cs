@@ -8,12 +8,12 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands{
     {
         protected PedidoUpdateCommand(){}
 
-        public PedidoUpdateCommand(int id, int clienteId){
+        public PedidoUpdateCommand(Guid id, Guid? clienteId){
             Id = id;
             ClienteId = clienteId;
         }
 
-        public void SetId(int id){
+        public void SetId(Guid id){
             Id=id;
         }
 

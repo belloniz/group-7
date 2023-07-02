@@ -7,6 +7,6 @@ namespace FastFoodFIAP.Application.Interfaces
     public interface IAndamentoApp
     {
         Task<ValidationResult> Add(AndamentoInputModel model);
-        Task<ValidationResult> Update(int id, AndamentoInputModel model);
+        Task<ValidationResult> Update(Guid id, AndamentoInputModel model);
     }
 }

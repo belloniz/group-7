@@ -22,7 +22,7 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
         {
             if (!request.IsValid()) return request.ValidationResult;
 
-            var categoria = new CategoriaProduto(request.Id, request.Nome);
+            var categoria = new CategoriaProduto(Guid.NewGuid(), request.Nome);
 
             _repository.Add(categoria);
 

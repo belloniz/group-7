@@ -28,7 +28,7 @@ namespace FastFoodFIAP.Application.Services
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Update(int id, AndamentoInputModel model)
+        public async Task<ValidationResult> Update(Guid id, AndamentoInputModel model)
         {
             var command = _mapper.Map<AndamentoUpdateCommand>(model);
             command.SetId(id);

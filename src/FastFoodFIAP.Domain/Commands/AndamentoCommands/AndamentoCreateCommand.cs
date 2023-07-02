@@ -4,7 +4,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
 {
     public class AndamentoCreateCommand : AndamentoCommand
     {
-        public AndamentoCreateCommand(int pedidoId, int funcionarioId, int situacaoId)
+        public AndamentoCreateCommand(Guid pedidoId, Guid funcionarioId, int situacaoId)
         {            
             PedidoId = pedidoId;
             DataHoraInicio=DateTime.Now;

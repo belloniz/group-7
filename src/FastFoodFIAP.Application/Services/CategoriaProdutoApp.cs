@@ -29,20 +29,20 @@ namespace FastFoodFIAP.Application.Services
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Update(int id, CategoriaProdutoInputModel model)
+        public async Task<ValidationResult> Update(Guid id, CategoriaProdutoInputModel model)
         {
             var command = _mapper.Map<CategoriaProdutoUpdateCommand>(model);
             command.SetId(id);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Remove(int id)
+        public async Task<ValidationResult> Remove(Guid id)
         {
             var command = new CategoriaProdutoDeleteCommand(id);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<CategoriaProdutoViewModel> GetById(int id)
+        public async Task<CategoriaProdutoViewModel> GetById(Guid id)
         {
             return _mapper.Map<CategoriaProdutoViewModel>(await _categoriaRepository.GetById(id));
         }

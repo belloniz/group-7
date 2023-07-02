@@ -1,16 +1,18 @@
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE public.categorias_produtos (
-   id SERIAL NOT NULL,
+   id uuid NOT NULL,
    nome VARCHAR(50) NOT NULL,
    CONSTRAINT categorias_produtos_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE public.produtos (
-	id serial4 NOT NULL,
+	id uuid NOT NULL,
 	nome varchar(100) NOT NULL,
 	descricao varchar(1000) NOT NULL,
 	preco money NOT NULL,
-	categoria_id int4 NOT NULL,
+	categoria_id uuid NOT NULL,
 	CONSTRAINT produtos_pkey PRIMARY KEY (id),
 	CONSTRAINT produtos_fk FOREIGN KEY (categoria_id) REFERENCES public.categorias_produtos(id)
 );
@@ -18,7 +20,7 @@ CREATE TABLE public.produtos (
 CREATE TABLE public.produtos_imagens (
    id SERIAL NOT NULL,
    url VARCHAR(300) NOT NULL,
-   produto_id INT NOT NULL,
+   produto_id uuid NOT NULL,
    CONSTRAINT produtos_imagens_pkey PRIMARY KEY (id),
    CONSTRAINT produtos_imagens_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id) ON DELETE CASCADE
 );
@@ -40,7 +42,7 @@ CREATE TABLE public.combos_imagens (
 
 CREATE TABLE public.combos_produtos ( 
    combo_id INT NOT NULL, 
-   produto_id INT NOT NULL, 
+   produto_id uuid NOT NULL, 
    quantidade INT NOT NULL, 
    CONSTRAINT combos_produtos_pkey PRIMARY KEY (combo_id, produto_id),
    CONSTRAINT combos_fk FOREIGN KEY (combo_id) REFERENCES public.combos(id),
@@ -48,22 +50,22 @@ CREATE TABLE public.combos_produtos (
 );
 
 CREATE TABLE public.ocupacoes ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(80) NOT NULL, 
    CONSTRAINT ocupacoes_pkey PRIMARY KEY (id) 
 );
 
 CREATE TABLE public.funcionarios ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(100) NOT NULL, 
    matricula varchar(15) NOT NULL, 
-   ocupacao_id INT NOT NULL, 
+   ocupacao_id uuid NOT NULL, 
    CONSTRAINT funcionarios_pkey PRIMARY KEY (id), 
    CONSTRAINT funcionarios_ocupacoes_fk FOREIGN KEY (ocupacao_id) REFERENCES public.ocupacoes(id) 
 );
 
 CREATE TABLE public.clientes ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(100) NULL, 
    cpf varchar(11) NULL, 
    email varchar(80) NULL, 
@@ -77,15 +79,15 @@ CREATE TABLE public.situacoes_pedidos (
 );
 
 CREATE TABLE public.pedidos ( 
-   id serial4 NOT NULL, 
-   cliente_id INT NOT NULL, 
+   id uuid NOT NULL, 
+   cliente_id uuid NOT NULL, 
    CONSTRAINT pedidos_pkey PRIMARY KEY (id), 
    CONSTRAINT pedidos_clientes_fk FOREIGN KEY (cliente_id) REFERENCES public.clientes(id) 
 );
 
 CREATE TABLE public.pedidos_combos ( 
    id serial4 NOT NULL, 
-   pedido_id INT NOT NULL, 
+   pedido_id uuid NOT NULL, 
    quantidade INT NOT NULL,   
    CONSTRAINT pedidos_combos_pkey PRIMARY KEY (id), 
    CONSTRAINT pedidos_combos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
@@ -93,7 +95,7 @@ CREATE TABLE public.pedidos_combos (
 
 CREATE TABLE public.pedidos_combos_produtos ( 
    combo_id INT NOT NULL, 
-   produto_id INT NOT NULL,
+   produto_id uuid NOT NULL,
    valor_unitario  money NOT NULL,
    quantidade INT NOT NULL,
    CONSTRAINT pedidos_combos_produtos_pkey PRIMARY KEY (combo_id, produto_id), 
@@ -102,12 +104,12 @@ CREATE TABLE public.pedidos_combos_produtos (
 );
 
 CREATE TABLE public.pedidos_andamentos ( 
-   id serial4 NOT NULL, 
-   pedido_id INT NOT NULL,
+   id uuid NOT NULL, 
+   pedido_id uuid NOT NULL,
    data_hora_inicio timestamp NOT NULL, 
    data_hora_fim timestamp NULL, 
    situacao_id INT NOT NULL, 
-   funcionario_id INT NULL, 
+   funcionario_id uuid NULL, 
    atual bool NOT NULL DEFAULT false, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE, 
@@ -116,69 +118,70 @@ CREATE TABLE public.pedidos_andamentos (
 );
 
 CREATE TABLE public.pagamentos ( 
-   id serial4 NOT NULL, 
-   pedido_id int NOT NULL, 
+   id uuid NOT NULL, 
+   pedido_id uuid NOT NULL, 
    valor money NOT NULL, 
    qr_code varchar(300) NOT NULL, 
    CONSTRAINT pagamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
 );
 
+INSERT INTO public.categorias_produtos (id,nome) VALUES
+	('d7589235-397f-4690-b71f-79cfe3d166e1','Sanduíche'),
+	('d7589235-397f-4690-b71f-79cfe3d166e3','Bebida'),
+	('d7589235-397f-4690-b71f-79cfe3d166e6','Sobremesa'),
+	('d7589235-397f-4690-b71f-79cfe3d166e7','Complemento');
 
-insert into public.categorias_produtos (id, nome) values (1, 'Sanduíche');
-insert into public.categorias_produtos (id, nome) values (2, 'Acompanhamento');
-insert into public.categorias_produtos (id, nome) values (3, 'Bebida');
-insert into public.categorias_produtos (id, nome) values (4, 'Sobremesa');
-ALTER SEQUENCE public.categorias_produtos_id_seq RESTART 5;
+INSERT INTO public.ocupacoes (id,nome) VALUES
+	('09f6a1c6-2fe3-4276-8014-b9595437e331','Administrador'),
+	('09f6a1c6-2fe3-4276-8014-b9595437e332','Atendente'),
+	('09f6a1c6-2fe3-4276-8014-b9595437e333','Preparador');
 
-insert into public.ocupacoes (id, nome) values (1, 'Administrador');
-insert into public.ocupacoes (id, nome) values (2, 'Atendente');
-insert into public.ocupacoes (id, nome) values (3, 'Preparador');
-ALTER SEQUENCE public.ocupacoes_id_seq RESTART 4;
+INSERT INTO public.situacoes_pedidos (id, nome) VALUES 
+   (0, 'Realizado'),
+   (1, 'Recebido'),
+   (2, 'Em preparação'),
+   (3, 'Pronto'),
+   (4, 'Retirado'),
+   (5, 'Finalizado'),
+   (6, 'Cancelado');
 
-insert into public.situacoes_pedidos (id, nome) values (0, 'Realizado');
-insert into public.situacoes_pedidos (id, nome) values (1, 'Recebido');
-insert into public.situacoes_pedidos (id, nome) values (2, 'Em preparação');
-insert into public.situacoes_pedidos (id, nome) values (3, 'Pronto');
-insert into public.situacoes_pedidos (id, nome) values (4, 'Retirado');
-insert into public.situacoes_pedidos (id, nome) values (5, 'Finalizado');
-insert into public.situacoes_pedidos (id, nome) values (6, 'Cancelado');
+INSERT INTO public.clientes (id, nome, cpf, email) VALUES 
+   ('a817156e-4ccc-4229-bfd1-a524f54dd5d1', 'Ana Maria', null, null),
+   ('a817156e-4ccc-4229-bfd1-a524f54dd5d2', 'Bruno Miranda', null, null),
+   ('a817156e-4ccc-4229-bfd1-a524f54dd5d3', null, '27000631040', 'cliente1@teste.com'),
+   ('a817156e-4ccc-4229-bfd1-a524f54dd5d4', null, '97491193048', 'cliente2@teste.com');
 
-insert into public.clientes (id, nome, cpf, email) values (1, 'Ana Maria', null, null);
-insert into public.clientes (id, nome, cpf, email) values (2, 'Bruno Miranda', null, null);
-insert into public.clientes (id, nome, cpf, email) values (3, null, '11111111111', 'cliente1@teste.com');
-insert into public.clientes (id, nome, cpf, email) values (4, null, '22222222222', 'cliente2@teste.com');
-ALTER SEQUENCE public.clientes_id_seq RESTART 5;
+INSERT INTO public.produtos (id, nome, descricao, preco, categoria_id) VALUES 
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d1', 'X-Burger Bacon', 'Tradicional', 18.00, 'd7589235-397f-4690-b71f-79cfe3d166e1'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d2', 'X-Moda Frango', 'Acebolado', 17.00, 'd7589235-397f-4690-b71f-79cfe3d166e1'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d3', 'X-Tudo Filé', 'Completo', 25.00, 'd7589235-397f-4690-b71f-79cfe3d166e1'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d4', 'Coca-Cola Lata', '350ml', 7.00, 'd7589235-397f-4690-b71f-79cfe3d166e3'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d5', 'Guaraná Lata', '350ml', 7.00, 'd7589235-397f-4690-b71f-79cfe3d166e3'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d6', 'Água Mineral', '500ml', 6.00, 'd7589235-397f-4690-b71f-79cfe3d166e3'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d7', 'Batata Pequena', 'Com sal', 12.00, 'd7589235-397f-4690-b71f-79cfe3d166e7'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d8', 'Batata Média', 'Com sal', 13.00, 'd7589235-397f-4690-b71f-79cfe3d166e7'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823d9', 'Batata Grande', 'Com sal', 15.00, 'd7589235-397f-4690-b71f-79cfe3d166e7'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823da', 'Sunday Creme', 'Especial', 12.00, 'd7589235-397f-4690-b71f-79cfe3d166e6'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823db', 'Sunday Chocolate', 'Especial', 12.00, 'd7589235-397f-4690-b71f-79cfe3d166e6'),
+   ('140b22ca-b64f-4c9e-b756-f2a24eb823dc', 'Sunday Morango', 'Especial', 12.00, 'd7589235-397f-4690-b71f-79cfe3d166e6');
 
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (1, 'X-Burger Bacon', 'Tradicional', 18.00, 1);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (2, 'X-Moda Frango', 'Acebolado', 17.00, 1);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (3, 'X-Tudo Filé', 'Completo', 25.00, 1);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (4, 'Coca-Cola Lata', '350ml', 7.00, 3);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (5, 'Guaraná Lata', '350ml', 7.00, 3);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (6, 'Água Mineral', '500ml', 6.00, 3);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (7, 'Batata Pequena', 'Com sal', 12.00, 2);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (8, 'Batata Média', 'Com sal', 13.00, 2);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (9, 'Batata Grande', 'Com sal', 15.00, 2);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (10, 'Sunday Creme', 'Especial', 12.00, 4);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (11, 'Sunday Chocolate', 'Especial', 12.00, 4);
-insert into public.produtos (id, nome, descricao, preco, categoria_id) values (12, 'Sunday Morango', 'Especial', 12.00, 4);
-ALTER SEQUENCE public.produtos_id_seq RESTART 13;
+INSERT INTO public.produtos_imagens (url, produto_id) VALUES 
+   ('http://www.google.com/imagem1.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d1'),
+   ('http://www.google.com/imagem2.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d2'),
+   ('http://www.google.com/imagem3.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d3'),
+   ('http://www.google.com/imagem4.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d4'),
+   ('http://www.google.com/imagem5.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d5'),
+   ('http://www.google.com/imagem6.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d6'),
+   ('http://www.google.com/imagem7.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d7'),
+   ('http://www.google.com/imagem8.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d8'),
+   ('http://www.google.com/imagem9.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823d9'),
+   ('http://www.google.com/imagem10.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823da'),
+   ('http://www.google.com/imagem11.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823db'),
+   ('http://www.google.com/imagem12.jpg', '140b22ca-b64f-4c9e-b756-f2a24eb823dc');
 
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem1.jpg', 1);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem2.jpg', 2);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem3.jpg', 3);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem4.jpg', 4);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem5.jpg', 5);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem6.jpg', 6);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem7.jpg', 7);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem8.jpg', 8);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem9.jpg', 9);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem10.jpg', 10);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem11.jpg', 11);
-insert into public.produtos_imagens (url, produto_id) values ('http://www.google.com/imagem12.jpg', 12);
+INSERT INTO public.funcionarios (id, nome, matricula, ocupacao_id) VALUES 
+   ('6b4f3188-4536-4029-8033-3835c7437f31', 'Ana Maria', 'A000001', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
+   ('6b4f3188-4536-4029-8033-3835c7437f32', 'Bruno Pereira', 'A000002', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
+   ('6b4f3188-4536-4029-8033-3835c7437f33', 'João Almeida', 'A000003', '09f6a1c6-2fe3-4276-8014-b9595437e332');
 
-
-insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (1, 'Ana Maria', 'A000001', 2);
-insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (2, 'Bruno Pereira', 'A000002', 2);
-insert into public.funcionarios (id, nome, matricula, ocupacao_id) values (3, 'João Almeida', 'A000003', 2);
-ALTER SEQUENCE public.funcionarios_id_seq RESTART 4;

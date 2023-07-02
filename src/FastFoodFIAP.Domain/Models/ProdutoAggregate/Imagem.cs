@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Models.ProdutoAggregate
     {
         public int Id { get; private set; }
         public string Url { get; private set; } = "";
-        public int ProdutoId { get; private set; }
+        public Guid ProdutoId { get; private set; }
 
 
         public virtual Produto? ProdutoNavigation { get; private set; }

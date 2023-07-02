@@ -8,8 +8,7 @@ using MediatR;
 namespace FastFoodFIAP.Domain.Events.AndamentoEvents
 {
     public class AndamentoEventHandler :
-        INotificationHandler<AndamentoCreateEvent>,
-        INotificationHandler<AndamentoUpdateEvent>
+        INotificationHandler<AndamentoCreateEvent>
     {
 
         private readonly IAndamentoRepository _repository;
@@ -20,17 +19,12 @@ namespace FastFoodFIAP.Domain.Events.AndamentoEvents
 
         public Task Handle(AndamentoCreateEvent notification, CancellationToken cancellationToken)
         {
-            var andamento = new Andamento(0, notification.PedidoId, notification.FuncionarioId, notification.SituacaoId, notification.DataHoraInicio);
-
+            var andamento = new Andamento(Guid.NewGuid(), notification.PedidoId, notification.FuncionarioId, notification.SituacaoId, 
+            notification.DataHoraInicio, notification.DataHoraFim, notification.Atual);
+            
             _repository.Add(andamento);            
 
             return Task.CompletedTask;
-        }
-
-        public Task Handle(AndamentoUpdateEvent notification, CancellationToken cancellationToken)
-        {
-            
-            return Task.CompletedTask;
-        }
+        }        
     }
 }

@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
     {
         protected ProdutoCreateCommand(){}
 
-        public ProdutoCreateCommand(string nome, string descricao, decimal preco, int categoriaId){
+        public ProdutoCreateCommand(string nome, string descricao, decimal preco, Guid categoriaId){
             Nome=nome;
             Descricao=descricao;
             Preco=preco;

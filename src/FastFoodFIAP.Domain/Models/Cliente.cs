@@ -14,7 +14,7 @@ namespace FastFoodFIAP.Domain.Models
             Pedidos = new HashSet<Pedido>();
         }
 
-        public Cliente(int id, string? nome, string? email, string? cpf){
+        public Cliente(Guid id, string? nome, string? email, string? cpf){
             Id = id;
             Nome = nome;         
             Email = email;
@@ -23,7 +23,7 @@ namespace FastFoodFIAP.Domain.Models
             Pedidos = new HashSet<Pedido>();   
         }
 
-        public Cliente(int id, string cpf){
+        public Cliente(Guid id, string cpf){
             Id = id;
             Cpf = cpf;
             Pedidos = new HashSet<Pedido>();   
