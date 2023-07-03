@@ -1,16 +1,18 @@
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE public.categorias_produtos (
-   id SERIAL NOT NULL,
+   id uuid NOT NULL,
    nome VARCHAR(50) NOT NULL,
    CONSTRAINT categorias_produtos_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE public.produtos (
-	id serial4 NOT NULL,
+	id uuid NOT NULL,
 	nome varchar(100) NOT NULL,
 	descricao varchar(1000) NOT NULL,
 	preco money NOT NULL,
-	categoria_id int4 NOT NULL,
+	categoria_id uuid NOT NULL,
 	CONSTRAINT produtos_pkey PRIMARY KEY (id),
 	CONSTRAINT produtos_fk FOREIGN KEY (categoria_id) REFERENCES public.categorias_produtos(id)
 );
@@ -18,29 +20,16 @@ CREATE TABLE public.produtos (
 CREATE TABLE public.produtos_imagens (
    id SERIAL NOT NULL,
    url VARCHAR(300) NOT NULL,
-   produto_id INT NOT NULL,
+   produto_id uuid NOT NULL,
    CONSTRAINT produtos_imagens_pkey PRIMARY KEY (id),
    CONSTRAINT produtos_imagens_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id) ON DELETE CASCADE
 );
-
-CREATE TABLE public.combos ( 
-   id serial4 NOT NULL, 
-   nome varchar(100) NOT NULL, 
-   descricao varchar(1000) NOT NULL, 
-   CONSTRAINT combos_pkey PRIMARY KEY (id) 
-);
-
-CREATE TABLE public.combos_imagens ( 
-   id serial4 NOT NULL, 
-   url varchar(300) NOT NULL, 
-   combo_id INT NOT NULL, 
-   CONSTRAINT combos_imagens_pkey PRIMARY KEY (id), 
-   CONSTRAINT combos_imagens_fk FOREIGN KEY (combo_id) REFERENCES public.combos(id) ON DELETE CASCADE 
-);
+Expand All
+	@@ -40,30 +42,30 @@ CREATE TABLE public.combos_imagens (
 
 CREATE TABLE public.combos_produtos ( 
    combo_id INT NOT NULL, 
-   produto_id INT NOT NULL, 
+   produto_id uuid NOT NULL, 
    quantidade INT NOT NULL, 
    CONSTRAINT combos_produtos_pkey PRIMARY KEY (combo_id, produto_id),
    CONSTRAINT combos_fk FOREIGN KEY (combo_id) REFERENCES public.combos(id),
@@ -48,32 +37,27 @@ CREATE TABLE public.combos_produtos (
 );
 
 CREATE TABLE public.ocupacoes ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(80) NOT NULL, 
    CONSTRAINT ocupacoes_pkey PRIMARY KEY (id) 
 );
 
 CREATE TABLE public.funcionarios ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(100) NOT NULL, 
    matricula varchar(15) NOT NULL, 
-   ocupacao_id INT NOT NULL, 
+   ocupacao_id uuid NOT NULL, 
    CONSTRAINT funcionarios_pkey PRIMARY KEY (id), 
    CONSTRAINT funcionarios_ocupacoes_fk FOREIGN KEY (ocupacao_id) REFERENCES public.ocupacoes(id) 
 );
 
 CREATE TABLE public.clientes ( 
-   id serial4 NOT NULL, 
+   id uuid NOT NULL, 
    nome varchar(100) NULL, 
    cpf varchar(11) NULL, 
    email varchar(80) NULL, 
-   CONSTRAINT clientes_pkey PRIMARY KEY (id)
-);
-
-CREATE TABLE public.situacoes_pedidos ( 
-   id INT NOT NULL, 
-   nome varchar(50) NOT NULL, 
-   CONSTRAINT situacoes_pedidos_pkey PRIMARY KEY (id) 
+Expand All
+	@@ -77,23 +79,23 @@ CREATE TABLE public.situacoes_pedidos (
 );
 
 CREATE TABLE public.pedidos ( 
@@ -85,7 +69,7 @@ CREATE TABLE public.pedidos (
 
 CREATE TABLE public.pedidos_combos ( 
    id serial4 NOT NULL, 
-   pedido_id INT NOT NULL, 
+   pedido_id uuid NOT NULL, 
    quantidade INT NOT NULL,   
    CONSTRAINT pedidos_combos_pkey PRIMARY KEY (id), 
    CONSTRAINT pedidos_combos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
@@ -93,31 +77,31 @@ CREATE TABLE public.pedidos_combos (
 
 CREATE TABLE public.pedidos_combos_produtos ( 
    combo_id INT NOT NULL, 
-   produto_id INT NOT NULL,
+   produto_id uuid NOT NULL,
    valor_unitario  money NOT NULL,
    quantidade INT NOT NULL,
    CONSTRAINT pedidos_combos_produtos_pkey PRIMARY KEY (combo_id, produto_id), 
-   CONSTRAINT pedidos_combos_fk FOREIGN KEY (combo_id) REFERENCES public.pedidos_combos(id) ON DELETE CASCADE,
-   CONSTRAINT pedidos_produtos_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
+Expand All
+	@@ -102,12 +104,12 @@ CREATE TABLE public.pedidos_combos_produtos (
 );
 
 CREATE TABLE public.pedidos_andamentos ( 
-   id serial4 NOT NULL, 
-   pedido_id INT NOT NULL,
+   id uuid NOT NULL, 
+   pedido_id uuid NOT NULL,
    data_hora_inicio timestamp NOT NULL, 
    data_hora_fim timestamp NULL, 
    situacao_id INT NOT NULL, 
-   funcionario_id INT NULL, 
+   funcionario_id uuid NULL, 
    atual bool NOT NULL DEFAULT false, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE, 
-   CONSTRAINT andamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pedidos(id), 
-   CONSTRAINT andamentos_funcionarios_fk FOREIGN KEY (funcionario_id) REFERENCES public.funcionarios(id) 
+Expand All
+	@@ -116,69 +118,70 @@ CREATE TABLE public.pedidos_andamentos (
 );
 
 CREATE TABLE public.pagamentos ( 
-   id serial4 NOT NULL, 
-   pedido_id int NOT NULL, 
+   id uuid NOT NULL, 
+   pedido_id uuid NOT NULL, 
    valor money NOT NULL, 
    qr_code varchar(300) NOT NULL, 
    CONSTRAINT pagamentos_pkey PRIMARY KEY (id), 
