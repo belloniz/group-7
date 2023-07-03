@@ -37,7 +37,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+                return Problem("Há um problema com a sua requisição - " + e.Message);
             }            
         }
 
@@ -58,7 +58,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+                return Problem("Há um problema com a sua requisição - " + e.Message);
             }
         }
 
@@ -81,7 +81,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+                return Problem("Há um problema com a sua requisição - " + e.Message);
             }
         }
 
@@ -104,7 +104,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+                return Problem("Há um problema com a sua requisição - " + e.Message);
             }
         }
 
@@ -125,7 +125,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+                return Problem("Há um problema com a sua requisição - " + e.Message);
             }
             
         }

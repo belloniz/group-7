@@ -39,7 +39,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
             
         }
@@ -62,7 +62,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
         }
 
@@ -83,7 +83,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
             
         }
@@ -107,7 +107,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
             
         }
@@ -131,7 +131,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
             
         }
@@ -153,7 +153,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             catch (Exception e)
             {
-                return Problem("Há um problema com a sua requisição - " + e.Message);
+                return Problem("HÃ¡ um problema com a sua requisiÃ§Ã£o - " + e.Message);
             }
             
         }
