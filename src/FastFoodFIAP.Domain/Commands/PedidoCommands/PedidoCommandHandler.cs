@@ -17,13 +17,10 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
     {
         private readonly IPedidoRepository _repository;
         private readonly IAndamentoRepository _repositoryAndamento;
-        private readonly IAndamentoRepository _repositoryAndamento;
 
-        public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository, IAndamentoRepository repositoryAndamento)
         public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository, IAndamentoRepository repositoryAndamento)
         {
             _repository = repository;
-            _repositoryAndamento = repositoryAndamento;
             _repositoryAndamento = repositoryAndamento;
         }
 
@@ -31,8 +28,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
         {
             if (!request.IsValid()) return request.ValidationResult;            
 
-            var pedido = new Pedido(Guid.NewGuid(),request.ClienteId);            
-            var pedido = new Pedido(Guid.NewGuid(),request.ClienteId);            
+            var pedido = new Pedido(Guid.NewGuid(),request.ClienteId);                            
             
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
