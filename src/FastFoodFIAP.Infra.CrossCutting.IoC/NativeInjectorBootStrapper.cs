@@ -41,6 +41,8 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IPedidoApp, PedidoApp>();
             services.AddScoped<IFuncionarioApp, FuncionarioApp>();
             services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
+            services.AddScoped<IFuncionarioApp, FuncionarioApp>();
+            services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
 
             // Infra - Data           
             services.AddScoped<IAndamentoRepository, AndamentoRepository>();
@@ -52,7 +54,9 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IOcupacaoRepository, OcupacaoRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
+            services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
 
+            services.AddScoped<AppDbContext>();
             services.AddScoped<AppDbContext>();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
