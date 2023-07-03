@@ -22,7 +22,7 @@ namespace FastFoodFIAP.Application.InputModels
         public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "A categoria do produto é requerida.")]
-        public int CategoriaId {get; set;}
+        public Guid CategoriaId {get; set;}
         
         public List<string>? ImagensUrl{get; set;} 
     }

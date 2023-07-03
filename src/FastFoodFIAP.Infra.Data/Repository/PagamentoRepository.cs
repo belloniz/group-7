@@ -23,7 +23,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
             return await DbSet.AsNoTracking().ToListAsync();
         }
         
-        public async Task<Pagamento?> GetById(int id)
+        public async Task<Pagamento?> GetById(Guid id)
         {
             return await DbSet.FindAsync(id);
         }

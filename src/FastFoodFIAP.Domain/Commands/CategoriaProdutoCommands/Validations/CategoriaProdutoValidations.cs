@@ -7,7 +7,8 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands.Validations
         protected void ValidaId()
         {
             RuleFor(c => c.Id)
-                .NotEqual(0).WithMessage("O Id da categoria não foi informado");
+                .NotEqual(Guid.Empty)
+                .WithMessage("O Id da categoria não foi informado");
         }
 
         protected void ValidaNome()

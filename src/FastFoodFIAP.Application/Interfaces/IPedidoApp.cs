@@ -8,9 +8,9 @@ namespace FastFoodFIAP.Application.Interfaces
     {
         Task<List<PedidoViewModel>> GetAllBySituacao(int situacaoId);
         Task<List<PedidoViewModel>> GetAll();
-        Task<PedidoViewModel> GetById(int id);
+        Task<PedidoViewModel> GetById(Guid id);
         Task<ValidationResult> Add(PedidoInputModel model);
-        Task<ValidationResult> Update(int id, PedidoInputModel model);
-        Task<ValidationResult> Remove(int id);
+        Task<ValidationResult> Update(Guid id, PedidoInputModel model);
+        Task<ValidationResult> Remove(Guid id);
     }
 }

@@ -1,6 +1,8 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
+using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -30,8 +32,16 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<ActionResult> GetAll()
         {
-            var lista = await _produtoApp.GetAll();
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _produtoApp.GetAll();
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
 
         [HttpGet("categoria/{id}")]
@@ -43,10 +53,17 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "No Content")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<ActionResult> GetAllByCategoria([FromRoute] int id)
+        public async Task<ActionResult> GetAllByCategoria([FromRoute] Guid id)
         {
-            var lista = await _produtoApp.GetAllByCategoria(id);
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _produtoApp.GetAllByCategoria(id);
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
         }
 
         [HttpGet("{id}")]
@@ -58,9 +75,17 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            return CustomResponse(await _produtoApp.GetById(id));
+            try
+            {
+                return CustomResponse(await _produtoApp.GetById(id));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
 
         [HttpPost]
@@ -73,10 +98,18 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] ProdutoInputModel produto)
         {
-            if (!ModelState.IsValid)
-                return CustomResponse(ModelState);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return CustomResponse(ModelState);
 
-            return CustomCreateResponse(await _produtoApp.Add(produto));
+                return CustomCreateResponse(await _produtoApp.Add(produto));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
 
         [HttpPut("{id}")]
@@ -87,12 +120,20 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] ProdutoInputModel produto)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] ProdutoInputModel produto)
         {
-            if (!ModelState.IsValid)
-                return CustomResponse(ModelState);
+            try
+            {
+                if (!ModelState.IsValid)
+                    return CustomResponse(ModelState);
 
-            return CustomNoContentResponse( await _produtoApp.Update(id, produto));
+                return CustomNoContentResponse(await _produtoApp.Update(id, produto));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
 
         [HttpDelete("{id}")]
@@ -104,9 +145,17 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            return CustomNoContentResponse(await _produtoApp.Remove(id));
+            try
+            {
+                return CustomNoContentResponse(await _produtoApp.Remove(id));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
     }
 }

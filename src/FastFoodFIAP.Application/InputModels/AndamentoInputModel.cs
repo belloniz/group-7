@@ -8,8 +8,8 @@ namespace FastFoodFIAP.Application.InputModels
 {
     public class AndamentoInputModel
     {
-        public int pedidoId { get; set; }
-        public int FuncionarioId { get; set; }
+        public Guid pedidoId { get; set; }
+        public Guid FuncionarioId { get; set; }
         public int SituacaoId { get; set; }
     }
 }

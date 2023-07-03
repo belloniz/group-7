@@ -48,15 +48,11 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Como rodar a aplicação ▶️
 
-1. Crie a imagem da aplicação Fastfood:
-
-   `docker build -t fastfoodapi:latest -f Dockerfile .`
-
-2. Suba os containers (aplicação e banco de dados) utilizando o docker compose
+1. Suba os containers (aplicação e banco de dados) utilizando o docker compose
 
    `docker-compose up -d`
 
-3. Teste o sistema através do swagger:
+2. Teste o sistema através do swagger:
 
    `http://localhost:8000/swagger/index.html`
 

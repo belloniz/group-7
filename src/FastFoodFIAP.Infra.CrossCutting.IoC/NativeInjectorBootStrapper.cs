@@ -17,6 +17,9 @@ using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Commands.AndamentoCommands;
 using GenericPack.Domain;
 using FastFoodFIAP.Domain.Events.AndamentoEvents;
+using FastFoodFIAP.Domain.Events.PagamentoEvents;
+using FastFoodFIAP.Domain.Interfaces.Services;
+using FastFoodFIAP.Infra.MercadoPago;
 
 namespace FastFoodFIAP.Infra.CrossCutting.IoC
 {
@@ -36,6 +39,10 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IProdutoApp, ProdutoApp>();
             services.AddScoped<IClienteApp, ClienteApp>();
             services.AddScoped<IPedidoApp, PedidoApp>();
+            services.AddScoped<IFuncionarioApp, FuncionarioApp>();
+            services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
+            services.AddScoped<IFuncionarioApp, FuncionarioApp>();
+            services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
 
             // Infra - Data           
             services.AddScoped<IAndamentoRepository, AndamentoRepository>();
@@ -46,8 +53,11 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IPagamentoRepository, PagamentoRepository>();
             services.AddScoped<IOcupacaoRepository, OcupacaoRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
-
-            services.AddTransient<AppDbContext>();
+            services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
+            services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
+            
+            services.AddScoped<AppDbContext>();
+            services.AddScoped<AppDbContext>();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // AutoMapper Settings
@@ -72,9 +82,11 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<AndamentoUpdateCommand, ValidationResult>, AndamentoCommandHandler>();
 
             // Domain - Events
-            services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();
-            services.AddScoped<INotificationHandler<AndamentoUpdateEvent>, AndamentoEventHandler>();
-            
+            services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();            
+            services.AddScoped<INotificationHandler<PagamentoCreateEvent>, PagamentoEventHandler>();
+
+            //Infra - Services
+            services.AddScoped<IGatewayPagamento, MercadoPagoService>();
         }
     }
 }

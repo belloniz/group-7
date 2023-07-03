@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands{
     {
         protected PedidoCreateCommand(){}
 
-        public PedidoCreateCommand(int clienteId){            
+        public PedidoCreateCommand(Guid? clienteId){            
             ClienteId = clienteId;
         }
 

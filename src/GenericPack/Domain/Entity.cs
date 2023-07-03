@@ -6,10 +6,10 @@ namespace GenericPack.Domain
     {
         protected Entity()
         {
-            
+            Id = Guid.NewGuid();
         }
 
-        public int Id { get; protected set; }
+        public Guid Id { get; set; }
 
         private List<Event>? _domainEvents;
         public IReadOnlyCollection<Event>? DomainEvents => _domainEvents?.AsReadOnly();

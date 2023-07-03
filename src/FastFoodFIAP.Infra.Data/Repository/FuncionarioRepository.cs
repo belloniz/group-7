@@ -20,10 +20,10 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public async Task<IEnumerable<Funcionario>> GetAll()
         {
-            return await DbSet.AsNoTracking().ToListAsync();
+            return await DbSet.AsNoTracking().OrderBy(on => on.Nome).ToListAsync();
         }
         
-        public async Task<Funcionario?> GetById(int id)
+        public async Task<Funcionario?> GetById(Guid id)
         {
             return await DbSet.FindAsync(id);
         }

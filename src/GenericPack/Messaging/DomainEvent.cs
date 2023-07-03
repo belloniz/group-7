@@ -3,7 +3,7 @@ namespace GenericPack.Messaging
 {
     public abstract class DomainEvent : Event
     {
-        protected DomainEvent(int aggregateId)
+        protected DomainEvent(Guid aggregateId)
         {
             AggregateId = aggregateId;
         }

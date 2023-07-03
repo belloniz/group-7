@@ -20,7 +20,7 @@ namespace FastFoodFIAP.Domain.Commands.ClienteCommands
         {
             if (!request.IsValid()) return request.ValidationResult;            
             
-            var cliente = new Cliente(request.Id, request.Nome, request.Email, request.Cpf);            
+            var cliente = new Cliente(Guid.NewGuid(), request.Nome, request.Email, request.Cpf);            
             
             _repository.CadastrarNovoCliente(cliente);            
 

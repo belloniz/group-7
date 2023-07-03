@@ -5,7 +5,7 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
     public partial class PedidoCombo : ValueObject
     {
         public int Id { get; private set; }
-        public int PedidoId { get; private set; }
+        public Guid PedidoId { get; private set; }
         public List<PedidoComboProduto> Produtos { get; private set; }
         public int Quantidade { get; private set; }
 

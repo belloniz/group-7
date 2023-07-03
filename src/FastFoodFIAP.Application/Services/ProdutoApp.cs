@@ -29,14 +29,14 @@ namespace FastFoodFIAP.Application.Services
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Update(int id, ProdutoInputModel model)
+        public async Task<ValidationResult> Update(Guid id, ProdutoInputModel model)
         {
             var command = _mapper.Map<ProdutoUpdateCommand>(model);
             command.SetId(id);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Remove(int id)
+        public async Task<ValidationResult> Remove(Guid id)
         {
             var command = new ProdutoDeleteCommand(id);
             return await _mediator.SendCommand(command);
@@ -47,11 +47,11 @@ namespace FastFoodFIAP.Application.Services
             return _mapper.Map<List<ProdutoViewModel>>(await _produtoRepository.GetAll());
         }
 
-        public async Task<List<ProdutoViewModel>> GetAllByCategoria(int categoriaId){
+        public async Task<List<ProdutoViewModel>> GetAllByCategoria(Guid categoriaId){
             return _mapper.Map<List<ProdutoViewModel>>(await _produtoRepository.GetAllByCategoria(categoriaId));
         }
 
-        public async Task<ProdutoViewModel> GetById(int id)
+        public async Task<ProdutoViewModel> GetById(Guid id)
         {
             return _mapper.Map<ProdutoViewModel>(await _produtoRepository.GetById(id));
         }

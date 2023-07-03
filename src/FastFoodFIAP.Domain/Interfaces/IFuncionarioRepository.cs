@@ -5,7 +5,7 @@ namespace FastFoodFIAP.Domain.Interfaces
 {
     public interface IFuncionarioRepository: IRepository<Funcionario>
     {
-        Task<Funcionario?> GetById(int id);
+        Task<Funcionario?> GetById(Guid id);
         Task<IEnumerable<Funcionario>> GetAll();
         void Add(Funcionario funcionario);
         void Update(Funcionario funcionario);

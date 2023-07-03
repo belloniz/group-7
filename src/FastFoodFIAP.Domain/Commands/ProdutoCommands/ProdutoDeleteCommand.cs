@@ -4,7 +4,7 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
 {
     public class ProdutoDeleteCommand:ProdutoCommand
     {
-        public ProdutoDeleteCommand(int id)
+        public ProdutoDeleteCommand(Guid id)
         {
             Id = id;
             AggregateId = id;

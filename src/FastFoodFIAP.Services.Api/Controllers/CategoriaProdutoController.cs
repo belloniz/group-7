@@ -30,8 +30,15 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<ActionResult> GetAll()
         {
-            var lista = await _categoriaProdutoApp.GetAll();
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _categoriaProdutoApp.GetAll();
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+            }            
         }
 
         [HttpGet("{id}")]
@@ -43,9 +50,16 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> GetById([FromRoute] int id)
-        {
-            return CustomResponse(await _categoriaProdutoApp.GetById(id));
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {            
+            try
+            {
+                return CustomResponse(await _categoriaProdutoApp.GetById(id));
+            }
+            catch (Exception e)
+            {
+                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+            }
         }
 
         [HttpPost]
@@ -57,11 +71,18 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] CategoriaProdutoInputModel categoria)
-        {
-            if (!ModelState.IsValid)
-                return CustomResponse(ModelState);
+        {            
+            try
+            {
+                if (!ModelState.IsValid)
+                    return CustomResponse(ModelState);
 
-            return CustomCreateResponse(await _categoriaProdutoApp.Add(categoria));
+                return CustomCreateResponse(await _categoriaProdutoApp.Add(categoria));
+            }
+            catch (Exception e)
+            {
+                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+            }
         }
 
         [HttpPut("{id}")]
@@ -72,12 +93,19 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] CategoriaProdutoInputModel categoria)
-        {
-            if (!ModelState.IsValid)
-                return CustomResponse(ModelState);
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] CategoriaProdutoInputModel categoria)
+        {            
+            try
+            {
+                if (!ModelState.IsValid)
+                    return CustomResponse(ModelState);
 
-            return CustomNoContentResponse(await _categoriaProdutoApp.Update(id, categoria));            
+                return CustomNoContentResponse(await _categoriaProdutoApp.Update(id, categoria));
+            }
+            catch (Exception e)
+            {
+                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -89,9 +117,17 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            return CustomNoContentResponse(await _categoriaProdutoApp.Remove(id));
+            try
+            {
+                return CustomNoContentResponse(await _categoriaProdutoApp.Remove(id));
+            }
+            catch (Exception e)
+            {
+                return Problem("H� um problema com a sua requisi��o - " + e.Message);
+            }
+            
         }
     }
 }

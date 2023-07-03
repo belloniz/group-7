@@ -6,7 +6,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands{
     {
         protected PedidoDeleteCommand(){}
 
-        public PedidoDeleteCommand(int id){
+        public PedidoDeleteCommand(Guid id){
             Id = id;
         }
 

@@ -1,4 +1,6 @@
 ﻿using FastFoodFIAP.Domain.Events.AndamentoEvents;
+using FastFoodFIAP.Domain.Events.PagamentoEvents;
+using FastFoodFIAP.Domain.Events.PagamentoEvents;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.PedidoAggregate;
@@ -14,23 +16,28 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
         IRequestHandler<PedidoDeleteCommand, ValidationResult>
     {
         private readonly IPedidoRepository _repository;
+        private readonly IAndamentoRepository _repositoryAndamento;
 
-        public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository)
+        public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository, IAndamentoRepository repositoryAndamento)
         {
             _repository = repository;
+            _repositoryAndamento = repositoryAndamento;
         }
 
         public async Task<ValidationResult> Handle(PedidoCreateCommand request, CancellationToken cancellationToken)
         {
             if (!request.IsValid()) return request.ValidationResult;            
 
-            var pedido = new Pedido(request.Id,request.ClienteId);            
+            var pedido = new Pedido(Guid.NewGuid(),request.ClienteId);                            
             
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
-            //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado));
-            //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido));
+            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado, false));
+                        
+            //Eventos próvisórios para simulação do checkout e do Recebimento do pagamento
+            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "FIAP FastFood", pedido.TotalPedido()));
+            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
 
             _repository.Add(pedido);            
 

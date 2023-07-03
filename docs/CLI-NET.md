@@ -55,6 +55,9 @@ Exemplo: `dotnet add reference ../MeuProjeto.Domain/MeuProjeto.Domain.csproj`
 
         - FastFoodFIAP.Infra.Data
                 -> FastFoodFIAP.Domain
+        
+        - FastFoodFIAP.Infra.MercadoPago
+                -> FastFoodFIAP.Domain
 
         - FastFoodFIAP.Services.Api
                 -> FastFoodFIAP.Application
