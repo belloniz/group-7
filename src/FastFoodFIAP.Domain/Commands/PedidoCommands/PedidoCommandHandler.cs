@@ -33,9 +33,10 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
             pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado, false));
-            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido, true));            
-        
-            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "QRCODE", pedido.TotalPedido()));
+                        
+            //Eventos próvisórios para simulação do checkout e do Recebimento do pagamento
+            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "FIAP FastFood", pedido.TotalPedido()));
+            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
 
             _repository.Add(pedido);            
 

@@ -51,7 +51,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
         public async Task<IEnumerable<Cliente?>> BuscarClientesPeloNome(string nome)
         {
             
-            return Db.Clientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
+            return Db.Clientes.Where(cliente => cliente.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
         }
         
         public async Task<IEnumerable<Cliente>> BuscarTodosClientes()

@@ -80,7 +80,7 @@ CREATE TABLE public.situacoes_pedidos (
 
 CREATE TABLE public.pedidos ( 
    id uuid NOT NULL, 
-   cliente_id uuid NOT NULL, 
+   cliente_id uuid NULL, 
    CONSTRAINT pedidos_pkey PRIMARY KEY (id), 
    CONSTRAINT pedidos_clientes_fk FOREIGN KEY (cliente_id) REFERENCES public.clientes(id) 
 );

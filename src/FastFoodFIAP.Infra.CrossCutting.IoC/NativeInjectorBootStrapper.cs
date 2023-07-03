@@ -18,6 +18,8 @@ using FastFoodFIAP.Domain.Commands.AndamentoCommands;
 using GenericPack.Domain;
 using FastFoodFIAP.Domain.Events.AndamentoEvents;
 using FastFoodFIAP.Domain.Events.PagamentoEvents;
+using FastFoodFIAP.Domain.Interfaces.Services;
+using FastFoodFIAP.Infra.MercadoPago;
 
 namespace FastFoodFIAP.Infra.CrossCutting.IoC
 {
@@ -77,7 +79,10 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
 
             // Domain - Events
             services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();            
-            services.AddScoped<INotificationHandler<PagamentoCreateEvent>, PagamentoEventHandler>();            
+            services.AddScoped<INotificationHandler<PagamentoCreateEvent>, PagamentoEventHandler>();
+
+            //Infra - Services
+            services.AddScoped<IGatewayPagamento, MercadoPagoService>();
         }
     }
 }

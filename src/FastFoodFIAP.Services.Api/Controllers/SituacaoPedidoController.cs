@@ -30,8 +30,16 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<ActionResult> GetAll()
         {
-            var lista = await _situacaoApp.GetAll();
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _situacaoApp.GetAll();
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
     }
 }

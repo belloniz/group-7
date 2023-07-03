@@ -1,6 +1,8 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
+using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
+using FastFoodFIAP.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -30,8 +32,16 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<ActionResult> BuscarTodosClientes()
         {
-            var lista = await _clienteApp.BuscarTodosClientes();
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _clienteApp.BuscarTodosClientes();
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
 
         [HttpPost]
@@ -44,13 +54,20 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> CadastrarNovoCliente([FromBody] ClienteInputModel cliente)
         {
-            if (!ModelState.IsValid)
-                return CustomResponse(ModelState);
-                
-            return CustomCreateResponse(await _clienteApp.CadastrarNovoCliente(cliente));
+            try
+            {
+                if (!ModelState.IsValid)
+                    return CustomResponse(ModelState);
+
+                return CustomCreateResponse(await _clienteApp.CadastrarNovoCliente(cliente));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }            
         }
 
-        [HttpGet("/busca/cpf/{cpf}")]
+        [HttpGet("cpf/{cpf}")]
         [SwaggerOperation(
         Summary = "Localiza um cliente pelo seu CPF",
         Description = "Localiza um cliente pelo seu CPF."
@@ -60,11 +77,18 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(404, "Not Found")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> BuscarClientePeloCpf([FromRoute] string cpf)
-        {
-            return CustomResponse(await _clienteApp.BuscarClientePeloCpf(cpf));
+        {            
+            try
+            {
+                return CustomResponse(await _clienteApp.BuscarClientePeloCpf(cpf));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
         }
 
-        [HttpGet("/busca/email/{email}")]
+        [HttpGet("email/{email}")]
         [SwaggerOperation(
         Summary = "Localiza um cliente pelo seu endereço de email.",
         Description = "Localiza um cliente pelo seu endereço de email."
@@ -75,10 +99,17 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> BuscarClientesPeloEmail([FromRoute] string email)
         {
-            return CustomResponse(await _clienteApp.BuscarClientesPeloEmail(email));
+            try
+            {
+                return CustomResponse(await _clienteApp.BuscarClientesPeloEmail(email));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }            
         }
 
-        [HttpGet("/busca/nome/{nome}")]
+        [HttpGet("nome/{nome}")]
         [SwaggerOperation(
         Summary = "Localiza clientes pelo nome.",
         Description = "Localiza clientes pelo nome."
@@ -89,8 +120,16 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> BuscarClientesPeloNome([FromRoute] string nome)
         {
-            var lista = await _clienteApp.BuscarClientesPeloNome(nome);
-            return CustomListResponse(lista, lista.Count);
+            try
+            {
+                var lista = await _clienteApp.BuscarClientesPeloNome(nome);
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+            
         }
     }
 }
