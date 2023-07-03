@@ -24,8 +24,21 @@ CREATE TABLE public.produtos_imagens (
    CONSTRAINT produtos_imagens_pkey PRIMARY KEY (id),
    CONSTRAINT produtos_imagens_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id) ON DELETE CASCADE
 );
-Expand All
-	@@ -40,30 +42,30 @@ CREATE TABLE public.combos_imagens (
+
+CREATE TABLE public.combos ( 
+   id serial4 NOT NULL, 
+   nome varchar(100) NOT NULL, 
+   descricao varchar(1000) NOT NULL, 
+   CONSTRAINT combos_pkey PRIMARY KEY (id) 
+);
+
+CREATE TABLE public.combos_imagens ( 
+   id serial4 NOT NULL, 
+   url varchar(300) NOT NULL, 
+   combo_id INT NOT NULL, 
+   CONSTRAINT combos_imagens_pkey PRIMARY KEY (id), 
+   CONSTRAINT combos_imagens_fk FOREIGN KEY (combo_id) REFERENCES public.combos(id) ON DELETE CASCADE 
+);
 
 CREATE TABLE public.combos_produtos ( 
    combo_id INT NOT NULL, 
@@ -56,8 +69,13 @@ CREATE TABLE public.clientes (
    nome varchar(100) NULL, 
    cpf varchar(11) NULL, 
    email varchar(80) NULL, 
-Expand All
-	@@ -77,23 +79,23 @@ CREATE TABLE public.situacoes_pedidos (
+   CONSTRAINT clientes_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.situacoes_pedidos ( 
+   id INT NOT NULL, 
+   nome varchar(50) NOT NULL, 
+   CONSTRAINT situacoes_pedidos_pkey PRIMARY KEY (id) 
 );
 
 CREATE TABLE public.pedidos ( 
@@ -81,8 +99,8 @@ CREATE TABLE public.pedidos_combos_produtos (
    valor_unitario  money NOT NULL,
    quantidade INT NOT NULL,
    CONSTRAINT pedidos_combos_produtos_pkey PRIMARY KEY (combo_id, produto_id), 
-Expand All
-	@@ -102,12 +104,12 @@ CREATE TABLE public.pedidos_combos_produtos (
+   CONSTRAINT pedidos_combos_fk FOREIGN KEY (combo_id) REFERENCES public.pedidos_combos(id) ON DELETE CASCADE,
+   CONSTRAINT pedidos_produtos_fk FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
 );
 
 CREATE TABLE public.pedidos_andamentos ( 
@@ -95,8 +113,8 @@ CREATE TABLE public.pedidos_andamentos (
    atual bool NOT NULL DEFAULT false, 
    CONSTRAINT pedidos_andamentos_pkey PRIMARY KEY (id), 
    CONSTRAINT andamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE, 
-Expand All
-	@@ -116,69 +118,70 @@ CREATE TABLE public.pedidos_andamentos (
+   CONSTRAINT andamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pedidos(id), 
+   CONSTRAINT andamentos_funcionarios_fk FOREIGN KEY (funcionario_id) REFERENCES public.funcionarios(id) 
 );
 
 CREATE TABLE public.pagamentos ( 
