@@ -7,9 +7,8 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
     {
         protected PagamentoUpdateCommand(){}
 
-        public PagamentoUpdateCommand(Guid id, Guid? clienteId){
+        public PagamentoUpdateCommand(Guid id){
             Id = id;
-            ClienteId = clienteId;
         }
     }
 }
