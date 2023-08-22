@@ -1,0 +1,15 @@
+using FastFoodFIAP.Domain.Models.Pagamento;
+using GenericPack.Messaging;
+
+namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
+
+    public class PagamentoUpdateCommand : PagamentoCommands
+    {
+        protected PagamentoUpdateCommand(){}
+
+        public PagamentoUpdateCommand(Guid id, Guid? clienteId){
+            Id = id;
+            ClienteId = clienteId;
+        }
+    }
+}
