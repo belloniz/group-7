@@ -78,6 +78,12 @@ CREATE TABLE public.situacoes_pedidos (
    CONSTRAINT situacoes_pedidos_pkey PRIMARY KEY (id) 
 );
 
+CREATE TABLE public.situacoes_pagamentos ( 
+   id INT NOT NULL, 
+   nome varchar(50) NOT NULL, 
+   CONSTRAINT situacoes_pagamentos_pkey PRIMARY KEY (id) 
+);
+
 CREATE TABLE public.pedidos ( 
    id uuid NOT NULL, 
    cliente_id uuid NULL, 
@@ -146,6 +152,11 @@ INSERT INTO public.situacoes_pedidos (id, nome) VALUES
    (4, 'Retirado'),
    (5, 'Finalizado'),
    (6, 'Cancelado');
+
+INSERT INTO public.situacoes_pagamentos (id, nome) VALUES 
+   (0, 'Pendente'),
+   (1, 'Aprovado'),
+   (2, 'Recusado');
 
 INSERT INTO public.clientes (id, nome, cpf, email) VALUES 
    ('a817156e-4ccc-4229-bfd1-a524f54dd5d1', 'Ana Maria', null, null),

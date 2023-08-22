@@ -6,10 +6,6 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
     {
         public Guid Id { get; protected set; }
         public Guid? ClienteId {get; protected set;}
-        public List<PedidoCombo> Combos { get; protected set;}
-
-        public PedidoCommand(){
-            Combos = new List<PedidoCombo>();
-        }
+       
     }
 }
