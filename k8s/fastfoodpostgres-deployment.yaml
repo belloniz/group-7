@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastfoodpostgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastfoodpostgres-pod
+  template:
+    metadata:
+      name: fastfoodpostgres-pod
+      labels:
+        app: fastfoodpostgres-pod
+    spec:
+      containers:
+        - name: fastfoodpostgres
+          image: luisfernandodass/posfiapsoat-postgres
+          ports:
+            - name: db-port-svc
+              containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdbvl
+          env:
+            - name: DBHOST
+              valueFrom:
+                secretKeyRef:
+                  name: bd-host
+                  key: host
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: bd-name
+                  key: name
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bd-username
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bd-pwd
+                  key: pwd
+      volumes:
+        - name: postgresdbvl
+          persistentVolumeClaim:
+            claimName: postgres-pvc
