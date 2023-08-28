@@ -2,7 +2,7 @@
 using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.ViewModels;
-using FastFoodFIAP.Domain.Commands.PedidoCommands;
+using FastFoodFIAP.Domain.Commands.PagamentoCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FluentValidation.Results;
 using GenericPack.Mediator;
@@ -15,7 +15,7 @@ namespace FastFoodFIAP.Application.Services
         private readonly IMapper _mapper;
         private readonly IMediatorHandler _mediator;
 
-        public PedidoApp(IPagamentoRepository pagamentoRepository, IMediatorHandler mediator, IMapper mapper)
+        public PagamentoApp(IPagamentoRepository pagamentoRepository, IMediatorHandler mediator, IMapper mapper)
         {
             _pagamentoRepository = pagamentoRepository;
             _mediator = mediator;
