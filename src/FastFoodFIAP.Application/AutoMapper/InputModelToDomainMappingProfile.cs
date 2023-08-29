@@ -39,8 +39,7 @@ namespace FastFoodFIAP.Application.AutoMapper
             CreateMap<AndamentoInputModel, AndamentoCreateCommand>();
             CreateMap<AndamentoInputModel, AndamentoUpdateCommand>();
 
-            CreateMap<PagamentoInputModel, AndamentoCreateCommand>();
-            
+            CreateMap<PagamentoInputModel, PagamentoUpdateCommand>();
         }
     }
 }
