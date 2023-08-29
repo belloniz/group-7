@@ -25,7 +25,7 @@ namespace FastFoodFIAP.Application.AutoMapper
             CreateMap<CategoriaProdutoInputModel, CategoriaProdutoCreateCommand>();
             CreateMap<CategoriaProdutoInputModel, CategoriaProdutoUpdateCommand>();
 
-            //Produto
+            //Produto  
             CreateMap<ProdutoInputModel, ProdutoCreateCommand>();
             CreateMap<ProdutoInputModel, ProdutoUpdateCommand>(); 
 
