@@ -26,7 +26,7 @@ namespace FastFoodFIAP.Domain.Events.PagamentoEvents
             //Simulador gateway de pagamento
             var qrCode = _gateway.SolicitarQrCode(notification.Id, notification.Descricao, notification.Valor);
 
-            var pagamento = new Pagamento(Guid.NewGuid(), qrCode, notification.Valor, notification.PedidoId);
+            var pagamento = new Pagamento(Guid.NewGuid(), qrCode, notification.Valor, notification.PedidoId); //Adicionar Situacao Pendente
             
             _repository.Add(pagamento);            
 

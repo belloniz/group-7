@@ -22,7 +22,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             _pagamentoApp = pagamentoApp;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/webhook")]
         [SwaggerOperation(
         Summary = "Recebe a confirmação de pagamento aprovado ou pagamento recusado",
         Description = "Recebe a confirmação de pagamento aprovado ou pagamento recusado"
