@@ -10,5 +10,10 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
         public PagamentoUpdateCommand(Guid id){
             Id = id;
         }
+
+        public void SetId(Guid id)
+        {
+            Id = id;
+        }
     }
 }
