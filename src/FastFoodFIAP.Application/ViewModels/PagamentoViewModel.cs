@@ -4,6 +4,7 @@ namespace FastFoodFIAP.Application.ViewModels
     {
         public Guid Id { get; set; }
         public required String QrCode { get; set; }
-        public decimal Valor { get; set; }      
+        public decimal Valor { get; set; }
+        public int SituacaoId { get; private set; }
     }
 }
