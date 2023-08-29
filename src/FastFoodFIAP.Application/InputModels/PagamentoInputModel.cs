@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FastFoodFIAP.Application.InputModels
 {
-    public class PagmentoInputModel
+    public class PagamentoInputModel
     {        
         [Required(ErrorMessage = "A Situação do pagamento é requerida.")]
         [MinLength(3)]

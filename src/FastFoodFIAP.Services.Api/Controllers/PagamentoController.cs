@@ -2,7 +2,8 @@ using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
-using FastFoodFIAP.Domain.Models.Pagamento;
+using FastFoodFIAP.Domain.Models;
+
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -16,7 +17,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
     {
         private readonly IPagamentoApp _pagamentoApp;
 
-        public ProdutoController(IProdutoApp pagamentoApp)
+        public PagamentoController(IPagamentoApp pagamentoApp)
         {
             _pagamentoApp = pagamentoApp;
         }
