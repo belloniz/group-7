@@ -42,7 +42,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IFuncionarioApp, FuncionarioApp>();
             services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
             services.AddScoped<IFuncionarioApp, FuncionarioApp>();
-            services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
+            services.AddScoped<ISituacaoPagamentoApp, SituacaoPagamentoApp>();
 
             // Infra - Data           
             services.AddScoped<IAndamentoRepository, AndamentoRepository>();
@@ -54,7 +54,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IOcupacaoRepository, OcupacaoRepository>();
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
-            services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
+            services.AddScoped<ISituacaoPagamentoRepository, SituacaoPagamentoRepository>();
             
             services.AddScoped<AppDbContext>();
             services.AddScoped<AppDbContext>();
