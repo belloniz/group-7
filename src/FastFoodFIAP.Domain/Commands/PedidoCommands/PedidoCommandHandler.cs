@@ -1,6 +1,5 @@
 ﻿using FastFoodFIAP.Domain.Events.AndamentoEvents;
 using FastFoodFIAP.Domain.Events.PagamentoEvents;
-using FastFoodFIAP.Domain.Events.PagamentoEvents;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.PedidoAggregate;
@@ -36,7 +35,7 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado, false));
                         
             //Eventos próvisórios para simulação do checkout e do Recebimento do pagamento
-            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "FIAP FastFood", pedido.TotalPedido()));
+            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "FIAP FastFood", pedido.TotalPedido(), (int)Models.Enums.SituacaoPagamento.Pendente));
             pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
 
             _repository.Add(pedido);            
