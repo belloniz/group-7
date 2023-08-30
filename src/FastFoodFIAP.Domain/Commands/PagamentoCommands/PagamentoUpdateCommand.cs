@@ -1,4 +1,3 @@
-using FastFoodFIAP.Domain.Models.Pagamento;
 using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
