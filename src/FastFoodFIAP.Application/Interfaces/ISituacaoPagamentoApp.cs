@@ -4,8 +4,8 @@ using FluentValidation.Results;
 
 namespace FastFoodFIAP.Application.Interfaces
 {
-    public interface ISituacaoPedidoApp : IDisposable
+    public interface ISituacaoPagamentoApp : IDisposable
     {
-        Task<List<SituacaoPedidoViewModel>> GetAll();
+        Task<List<SituacaoPagamentoViewModel>> GetAll();
     }
 }
