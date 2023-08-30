@@ -28,5 +28,10 @@ namespace FastFoodFIAP.Application.Services
             command.SetId(id);
             return await _mediator.SendCommand(command);
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }
