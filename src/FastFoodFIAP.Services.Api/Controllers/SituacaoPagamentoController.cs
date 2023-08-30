@@ -7,14 +7,14 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace FastFoodFIAP.Services.Api.Controllers
 {
     [ApiController]
-    [Route("api/situacao-pedido")]
+    [Route("api/situacao-pagamento")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public class SitucaoPedidoController: ApiController
+    public class SitucaoPagamentoController: ApiController
     {
-        private readonly ISituacaoPedidoApp _situacaoApp;        
+        private readonly ISituacaoPagamentoApp _situacaoApp;        
 
-        public SitucaoPedidoController(ISituacaoPedidoApp situacaoApp)
+        public SitucaoPagamentoController(ISituacaoPagamentoApp situacaoApp)
         {
             _situacaoApp = situacaoApp;            
         }
@@ -24,7 +24,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Lista todas as situações.",
         Description = "Lista todas as situações."
         )]
-        [SwaggerResponse(200, "Success", typeof(List<SituacaoPedidoViewModel>))]
+        [SwaggerResponse(200, "Success", typeof(List<SituacaoPagamentoViewModel>))]
         [SwaggerResponse(204, "No Content")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
