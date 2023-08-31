@@ -22,7 +22,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
             _pagamentoApp = pagamentoApp;
         }
 
-        [HttpPut("{id}/webhook")]
+        [HttpPost("/webhook")]
         [SwaggerOperation(
         Summary = "Recebe a confirmação de pagamento aprovado ou pagamento recusado",
         Description = "Recebe a confirmação de pagamento aprovado ou pagamento recusado"
@@ -30,14 +30,14 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] PagamentoInputModel pagamento)
+        public async Task<IActionResult> Put([FromBody] PagamentoInputModel pagamento)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomNoContentResponse(await _pagamentoApp.Update(id, pagamento));
+                return CustomNoContentResponse(await _pagamentoApp.Update(pagamento));
             }
             catch (Exception e)
             {

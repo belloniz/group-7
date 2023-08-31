@@ -125,13 +125,14 @@ CREATE TABLE public.pedidos_andamentos (
 
 CREATE TABLE public.pagamentos ( 
    id uuid NOT NULL, 
-   pedido_id uuid NOT NULL, 
+   pedido_id uuid NOT NULL,
+   situacao_id INT NOT NULL, 
    valor money NOT NULL, 
    qr_code varchar(300) NOT NULL, 
    CONSTRAINT pagamentos_pkey PRIMARY KEY (id), 
-   CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE
+   CONSTRAINT pagamentos_pedidos_fk FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id) ON DELETE CASCADE,
+   CONSTRAINT pagamentos_situacoes_fk FOREIGN KEY (situacao_id) REFERENCES public.situacoes_pagamentos(id)
 );
-
 
 INSERT INTO public.categorias_produtos (id,nome) VALUES
 	('d7589235-397f-4690-b71f-79cfe3d166e1','Sanduíche'),
@@ -196,4 +197,3 @@ INSERT INTO public.funcionarios (id, nome, matricula, ocupacao_id) VALUES
    ('6b4f3188-4536-4029-8033-3835c7437f31', 'Ana Maria', 'A000001', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
    ('6b4f3188-4536-4029-8033-3835c7437f32', 'Bruno Pereira', 'A000002', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
    ('6b4f3188-4536-4029-8033-3835c7437f33', 'João Almeida', 'A000003', '09f6a1c6-2fe3-4276-8014-b9595437e332');
-

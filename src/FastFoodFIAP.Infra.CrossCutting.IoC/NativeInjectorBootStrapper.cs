@@ -15,6 +15,7 @@ using FastFoodFIAP.Domain.Commands.ClienteCommands;
 using FastFoodFIAP.Infra.Data.Context;
 using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Commands.AndamentoCommands;
+using FastFoodFIAP.Domain.Commands.PagamentoCommands;
 using GenericPack.Domain;
 using FastFoodFIAP.Domain.Events.AndamentoEvents;
 using FastFoodFIAP.Domain.Events.PagamentoEvents;
@@ -80,6 +81,9 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
 
             services.AddScoped<IRequestHandler<AndamentoCreateCommand, ValidationResult>, AndamentoCommandHandler>();
             services.AddScoped<IRequestHandler<AndamentoUpdateCommand, ValidationResult>, AndamentoCommandHandler>();
+
+            services.AddScoped<IRequestHandler<PagamentoUpdateCommand, ValidationResult>, PagamentoCommandHandler>();
+
 
             // Domain - Events
             services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();            

@@ -1,8 +1,9 @@
+using FastFoodFIAP.Domain.Commands.PagamentoCommands.Validations;
 using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
 
-    public class PagamentoUpdateCommand : PagamentoCommands
+    public class PagamentoUpdateCommand : PagamentoCommand
     {
         protected PagamentoUpdateCommand(){}
 
@@ -11,9 +12,10 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands{
             SituacaoId = situacaoId;
         }
 
-        public void SetId(Guid id)
+        public override bool IsValid()
         {
-            Id = id;
+            ValidationResult = new PagamentoValidationsUpdate().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }

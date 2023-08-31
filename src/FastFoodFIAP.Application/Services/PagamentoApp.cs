@@ -22,10 +22,9 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ValidationResult> Update(Guid id, PagamentoInputModel model)
+        public async Task<ValidationResult> Update(PagamentoInputModel model)
         {
             var command = _mapper.Map<PagamentoUpdateCommand>(model);
-            command.SetId(id);
             return await _mediator.SendCommand(command);
         }
 
