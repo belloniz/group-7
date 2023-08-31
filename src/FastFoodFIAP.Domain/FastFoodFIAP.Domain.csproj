@@ -4,12 +4,6 @@
     <ProjectReference Include="..\GenericPack\GenericPack.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Commands\PagamentoCommands\Validations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\PagamentoCommands\Validations\" />
-  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
