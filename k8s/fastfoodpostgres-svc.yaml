@@ -8,4 +8,4 @@ spec:
   ports:
     - protocol: TCP
       port: 5432
-      targetPort: db-port-svc
+      targetPort: bd-port

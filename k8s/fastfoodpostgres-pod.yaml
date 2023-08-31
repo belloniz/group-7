@@ -9,7 +9,7 @@ spec:
     - name: fastfoodpostgres
       image: luisfernandodass/posfiapsoat-postgres
       ports:
-        - name: db-port-svc
+        - name: bd-port
           containerPort: 5432
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
@@ -18,23 +18,23 @@ spec:
         - name: DBHOST
           valueFrom:
             secretKeyRef:
-              name: bd-host
+              name: dbsecret
               key: host
         - name: POSTGRES_DB
           valueFrom:
             secretKeyRef:
-              name: bd-name
-              key: name
+              name: dbsecret
+              key: dbname
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: bd-username
+              name: dbsecret
               key: username
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: bd-pwd
-              key: pwd
+              name: dbsecret
+              key: password
   volumes:
     - name: postgresdbvl
       persistentVolumeClaim:

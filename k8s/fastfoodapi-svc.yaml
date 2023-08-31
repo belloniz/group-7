@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: fastfoodapi-svc
 spec:
+  type: LoadBalancer
   selector:
     app: fastfoodapi-pod
   ports:
     - protocol: TCP
       port: 8002
-      targetPort: api-port-svc
+      targetPort: api-port

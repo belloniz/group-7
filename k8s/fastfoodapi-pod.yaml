@@ -9,5 +9,5 @@ spec:
   - name: fastfoodapi
     image: luisfernandodass/posfiapsoat
     ports:
-      - name: api-port-svc
+      - name: api-port
         containerPort: 80
