@@ -48,6 +48,8 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Como rodar a aplicação ▶️
 
+### Com Docker Compose (Fase 01)
+
 1. Suba os containers (aplicação e banco de dados) utilizando o docker compose
 
    `docker-compose up -d`
@@ -56,7 +58,34 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
    `http://localhost:8000/swagger/index.html`
 
+### Com Kubernets (Fase 02)
 
+1. Installe o K8S e o minikube na sua máquina local.
+    
+    _https://minikube.sigs.k8s.io/docs/start/_
+
+2. Rode o comando abaixo para criar um cluster do Kubernets:
+
+    `minikube start`
+
+3. Dentro da pasta /k8s rode o comando abaixo para criar uma secret (onde armazenamos as credenciais para acesso ao banco de dados)
+
+     `kubectl apply -f db-secret.yaml`
+   
+4. Dentro da pasta /k8s rode o comando abaixo para criar os pods e services necessários da aplicação dotnet e do postgres:
+
+    `kubectl apply -f fastfoodapi-deployment.yaml,fastfoodpostgres-pod.yaml,fastfoodapi-svc.yaml,fastfoodpostgres-svc.yaml` 
+
+5. Rode o comando abaixo para verificar se os pods e services estão com o status "running"
+
+    `kubectl get pods,svc`
+
+6.  Rode o comando abaixo para apontar a porta do service da api para o host local:
+
+    `kubectl port-forward fastfoodapi-svc 8002:4200`
+
+7.  Acesse a porta `http:localhost:4200/swagger/index.html` do seu navegador.  
+   
 ## Tecnologias
 
 - Runtime do .NET 7.0.5
@@ -70,6 +99,8 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
     - Swagger UI
 - PostgreSQL 
 - Docker
+- Kubernets
+  -  Minikube 
 
 ## Arquitetura e Padrões
 
