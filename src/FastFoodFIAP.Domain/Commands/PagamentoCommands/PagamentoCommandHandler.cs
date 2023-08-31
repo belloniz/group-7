@@ -1,4 +1,5 @@
-﻿using FastFoodFIAP.Domain.Events.PagamentoEvents;
+﻿using FastFoodFIAP.Domain.Events.AndamentoEvents;
+using FastFoodFIAP.Domain.Events.PagamentoEvents;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
 using FastFoodFIAP.Domain.Models.PedidoAggregate;
@@ -29,7 +30,13 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands
             }
 
             var pagamento = new Pagamento(request.Id, pagamentoExiste.QrCode, pagamentoExiste.Valor, pagamentoExiste.PedidoId, request.SituacaoId);
-          
+
+
+            if (request.SituacaoId.Equals((int)Models.Enums.SituacaoPagamento.Aprovado))
+            {
+                pagamento.AddDomainEvent(new AndamentoCreateEvent(pagamentoExiste.PedidoId, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
+            }
+
             _repository.Update(pagamento);
 
             return await Commit(_repository.UnitOfWork);
