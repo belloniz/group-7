@@ -40,6 +40,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IProdutoApp, ProdutoApp>();
             services.AddScoped<IClienteApp, ClienteApp>();
             services.AddScoped<IPedidoApp, PedidoApp>();
+            services.AddScoped<IPagamentoApp, PagamentoApp>();
             services.AddScoped<IFuncionarioApp, FuncionarioApp>();
             services.AddScoped<ISituacaoPedidoApp, SituacaoPedidoApp>();
             services.AddScoped<IFuncionarioApp, FuncionarioApp>();
