@@ -30,7 +30,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         [SwaggerResponse(204, "Success")]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
-        public async Task<IActionResult> Put([FromBody] PagamentoInputModel pagamento)
+        public async Task<IActionResult> Post([FromBody] PagamentoInputModel pagamento)
         {
             try
             {
