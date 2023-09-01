@@ -19,8 +19,8 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands{
 
         public override bool IsValid()
         {
-            ValidationResult = new PedidoValidationsUpdate().Validate(this);
-            return ValidationResult.IsValid;
+            CommandResult.ValidationResult = new PedidoValidationsUpdate().Validate(this);
+            return CommandResult.ValidationResult.IsValid;
         }   
     }
 }

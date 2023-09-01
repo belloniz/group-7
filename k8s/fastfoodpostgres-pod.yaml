@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastfoodpostgres-pod
+  labels:
+    app: fastfoodpostgres-pod
+spec:
+  containers:
+    - name: fastfoodpostgres
+      image: luisfernandodass/posfiapsoat-postgres
+      ports:
+        - name: bd-port
+          containerPort: 5432
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgresdbvl
+      env:
+        - name: DBHOST
+          valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: host
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: dbname
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: dbsecret
+              key: password
+  volumes:
+    - name: postgresdbvl
+      persistentVolumeClaim:
+        claimName: postgres-pvc

@@ -6,6 +6,7 @@ using FastFoodFIAP.Domain.Commands.PagamentoCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FluentValidation.Results;
 using GenericPack.Mediator;
+using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -22,7 +23,7 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ValidationResult> Update(PagamentoInputModel model)
+        public async Task<CommandResult> Update(PagamentoInputModel model)
         {
             var command = _mapper.Map<PagamentoUpdateCommand>(model);
             return await _mediator.SendCommand(command);

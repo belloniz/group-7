@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastfoodapi-pod
+  labels:
+    app: fastfoodapi-pod
+spec:
+  containers:
+  - name: fastfoodapi
+    image: luisfernandodass/posfiapsoat
+    ports:
+      - name: api-port
+        containerPort: 80

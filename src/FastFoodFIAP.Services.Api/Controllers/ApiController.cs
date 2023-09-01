@@ -1,4 +1,5 @@
 using FluentValidation.Results;
+using GenericPack.Messaging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -33,9 +34,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
             return CustomResponse();
         }
 
-        protected ActionResult CustomResponse(ValidationResult validationResult)
+        protected ActionResult CustomResponse(CommandResult commandResult)
         {
-            foreach (var error in validationResult.Errors)
+            foreach (var error in commandResult.ValidationResult.Errors)
             {
                 AddError(error.ErrorMessage);
             }
@@ -56,9 +57,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }));
         }
 
-        protected ActionResult CustomCreateResponse(ValidationResult validationResult)
+        protected ActionResult CustomCreateResponse(CommandResult commandResult)
         {
-            foreach (var error in validationResult.Errors)
+            foreach (var error in commandResult.ValidationResult.Errors)
             {
                 AddError(error.ErrorMessage);
             }
@@ -79,9 +80,9 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }));
         }
 
-        protected ActionResult CustomNoContentResponse(ValidationResult validationResult)
+        protected ActionResult CustomNoContentResponse(CommandResult commandResult)
         {
-            foreach (var error in validationResult.Errors)
+            foreach (var error in commandResult.ValidationResult.Errors)
             {
                 AddError(error.ErrorMessage);
             }

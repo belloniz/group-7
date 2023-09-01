@@ -46,7 +46,30 @@ namespace FastFoodFIAP.Services.Api.Controllers
             }
             
         }
-        
+
+        [HttpGet("ativos")]
+        [SwaggerOperation(
+        Summary = "Lista todos os pedidos ativos.",
+        Description = "Lista agrupada por situação e ordenada pela data e hora de todos os pedidos ativos"
+        )]
+        [SwaggerResponse(200, "Success", typeof(List<PedidoViewModel>))]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public async Task<ActionResult> GetAllAtivos()
+        {
+            try
+            {
+                var lista = await _pedidoApp.GetAllAtivos();
+                return CustomListResponse(lista, lista.Count);
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
+
+        }
+
 
         [HttpGet("{id}")]
         [SwaggerOperation(
@@ -75,7 +98,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Cria um novo pedido.",
         Description = "Cria um novo pedido."
         )]
-        [SwaggerResponse(201, "Success", typeof(PedidoInputModel))]
+        [SwaggerResponse(201, "Success", typeof(PedidoViewModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] PedidoInputModel pedidoInputModel)
@@ -85,7 +108,11 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomCreateResponse(await _pedidoApp.Add(pedidoInputModel));
+                var result = await _pedidoApp.Add(pedidoInputModel);
+                if (result.Id != null)
+                    return CustomResponse(await _pedidoApp.GetById((Guid)result.Id));
+                else
+                    return CustomCreateResponse(result);
             }
             catch (Exception e)
             {
@@ -184,6 +211,27 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 return Problem("Há um problema com a sua requisição - " + e.Message);
             }
             
+        }
+
+        [HttpGet("{id}/pagamento-aprovado")]
+        [SwaggerOperation(
+       Summary = "Pagamento do pedido aprovado.",
+       Description = "Verifica se o pagamento do pedido foi aprovado."
+       )]
+        [SwaggerResponse(200, "Success",typeof(bool))]
+        [SwaggerResponse(400, "Bad Request")]
+        [SwaggerResponse(404, "Not Found")]
+        [SwaggerResponse(500, "Unexpected error")]
+        public IActionResult PagamentoAprovado([FromRoute] Guid id)
+        {
+            try
+            {
+                return CustomResponse(_pedidoApp.PagamentoAprovado(id));
+            }
+            catch (Exception e)
+            {
+                return Problem("Há um problema com a sua requisição - " + e.Message);
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FastFoodFIAP.Infra.Data.Repository
 
         public async Task<Produto?> GetById(Guid id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet.AsNoTracking().FirstAsync(x => x.Id == id);
         }
 
         public void Add(Produto produto)

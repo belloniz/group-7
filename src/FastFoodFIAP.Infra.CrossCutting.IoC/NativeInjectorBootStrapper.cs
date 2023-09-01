@@ -5,7 +5,6 @@ using FastFoodFIAP.Domain.Commands.ProdutoCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Infra.Data.Repository;
 using MediatR;
-using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using GenericPack.Mediator;
 using FastFoodFIAP.Infra.CrossCutting.Bus;
@@ -16,18 +15,30 @@ using FastFoodFIAP.Infra.Data.Context;
 using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Commands.AndamentoCommands;
 using FastFoodFIAP.Domain.Commands.PagamentoCommands;
-using GenericPack.Domain;
 using FastFoodFIAP.Domain.Events.AndamentoEvents;
 using FastFoodFIAP.Domain.Events.PagamentoEvents;
 using FastFoodFIAP.Domain.Interfaces.Services;
 using FastFoodFIAP.Infra.MercadoPago;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using GenericPack.Messaging;
+using System.Data;
 
 namespace FastFoodFIAP.Infra.CrossCutting.IoC
 {
     public static class NativeInjectorBootStrapper
     {
-        public static void RegisterServices(IServiceCollection services)
+        public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
         {
+            // Setting DBContexts
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("Connectionstring")));
+
+            services.AddScoped<AppDbContext>();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            services.AddScoped<IDbConnection, Npgsql.NpgsqlConnection>();
+
             // Adding MediatR for Domain Events and Notifications
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
@@ -57,34 +68,29 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             services.AddScoped<ISituacaoPedidoRepository, SituacaoPedidoRepository>();
             services.AddScoped<ISituacaoPagamentoRepository, SituacaoPagamentoRepository>();
-            
-            services.AddScoped<AppDbContext>();
-            services.AddScoped<AppDbContext>();
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // AutoMapper Settings
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(InputModelToDomainMappingProfile));
 
             // Domain - Commands
-            services.AddScoped<IRequestHandler<CategoriaProdutoCreateCommand, ValidationResult>, CategoriaProdutoCommandHandler>();
-            services.AddScoped<IRequestHandler<CategoriaProdutoUpdateCommand, ValidationResult>, CategoriaProdutoCommandHandler>();
-            services.AddScoped<IRequestHandler<CategoriaProdutoDeleteCommand, ValidationResult>, CategoriaProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<CategoriaProdutoCreateCommand, CommandResult>, CategoriaProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<CategoriaProdutoUpdateCommand, CommandResult>, CategoriaProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<CategoriaProdutoDeleteCommand, CommandResult>, CategoriaProdutoCommandHandler>();
 
-            services.AddScoped<IRequestHandler<ProdutoCreateCommand, ValidationResult>, ProdutoCommandHandler>();
-            services.AddScoped<IRequestHandler<ProdutoUpdateCommand, ValidationResult>, ProdutoCommandHandler>();
-            services.AddScoped<IRequestHandler<ProdutoDeleteCommand, ValidationResult>, ProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<ProdutoCreateCommand, CommandResult>, ProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<ProdutoUpdateCommand, CommandResult>, ProdutoCommandHandler>();
+            services.AddScoped<IRequestHandler<ProdutoDeleteCommand, CommandResult>, ProdutoCommandHandler>();
 
-            services.AddScoped<IRequestHandler<ClienteCreateCommand, ValidationResult>, ClienteCommandHandler>();
+            services.AddScoped<IRequestHandler<ClienteCreateCommand, CommandResult>, ClienteCommandHandler>();
 
-            services.AddScoped<IRequestHandler<PedidoCreateCommand, ValidationResult>, PedidoCommandHandler>();
-            services.AddScoped<IRequestHandler<PedidoUpdateCommand, ValidationResult>, PedidoCommandHandler>();
-            services.AddScoped<IRequestHandler<PedidoDeleteCommand, ValidationResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<PedidoCreateCommand, CommandResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<PedidoUpdateCommand, CommandResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<PedidoDeleteCommand, CommandResult>, PedidoCommandHandler>();
 
-            services.AddScoped<IRequestHandler<AndamentoCreateCommand, ValidationResult>, AndamentoCommandHandler>();
-            services.AddScoped<IRequestHandler<AndamentoUpdateCommand, ValidationResult>, AndamentoCommandHandler>();
+            services.AddScoped<IRequestHandler<AndamentoCreateCommand, CommandResult>, AndamentoCommandHandler>();
+            services.AddScoped<IRequestHandler<AndamentoUpdateCommand, CommandResult>, AndamentoCommandHandler>();
 
-            services.AddScoped<IRequestHandler<PagamentoUpdateCommand, ValidationResult>, PagamentoCommandHandler>();
-
+            services.AddScoped<IRequestHandler<PagamentoUpdateCommand, CommandResult>, PagamentoCommandHandler>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();            
@@ -92,6 +98,14 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
 
             //Infra - Services
             services.AddScoped<IGatewayPagamento, MercadoPagoService>();
+            
+            //Gateway de Pagamento
+            services.AddHttpClient<IGatewayPagamento, MercadoPagoService>(
+            client =>
+            {
+                // Set the base address of the named client.
+                client.BaseAddress = new Uri("https://api.mercadopago.com/");
+            });
         }
     }
 }

@@ -7,8 +7,8 @@ using MediatR;
 namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
 {
     public class AndamentoCommandHandler : CommandHandler,
-        IRequestHandler<AndamentoCreateCommand, ValidationResult>,
-        IRequestHandler<AndamentoUpdateCommand, ValidationResult>
+        IRequestHandler<AndamentoCreateCommand, CommandResult>,
+        IRequestHandler<AndamentoUpdateCommand, CommandResult>
     {
 
         private readonly IAndamentoRepository _repository;
@@ -17,9 +17,9 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             _repository = repository;
         }
 
-        public async Task<ValidationResult> Handle(AndamentoCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(AndamentoCreateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var andamentos = await _repository.GetAllByPedido(request.PedidoId);
 
@@ -27,7 +27,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             if (andamentos.Any(p => p.SituacaoId == request.SituacaoId))
             {
                 AddError("O pedido já possui a mesma situação.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             //Validar se o andamento segue a ordem da situação
@@ -37,7 +37,7 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
                 if (andamentoAtual.SituacaoId > request.SituacaoId)
                 {
                     AddError("A situação não corresponde a ordem de atendimento.");
-                    return ValidationResult;
+                    return CommandResult;
                 }
                 else
                 {
@@ -50,18 +50,18 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
             var andamento = new Andamento(Guid.NewGuid(), request.PedidoId, request.FuncionarioId, request.SituacaoId, request.DataHoraInicio, null, request.Atual);
             _repository.Add(andamento);
 
-            return await Commit(_repository.UnitOfWork);
+            return await Commit(_repository.UnitOfWork, andamento.Id);
         }
 
-        public async Task<ValidationResult> Handle(AndamentoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(AndamentoUpdateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var andamentoExiste = await _repository.GetById(request.Id);
             if (andamentoExiste is null)
             {
                 AddError("O Andamento não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             var andamento = new Andamento(andamentoExiste.Id, andamentoExiste.PedidoId, andamentoExiste.FuncionarioId, andamentoExiste.SituacaoId, andamentoExiste.DataHoraInicio, request.DataHoraFim, request.Atual);

@@ -12,8 +12,8 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
 
         public override bool IsValid()
         {
-            ValidationResult = new ProdutoValidationsDelete().Validate(this);
-            return ValidationResult.IsValid;
+            CommandResult.ValidationResult = new ProdutoValidationsDelete().Validate(this);
+            return CommandResult.ValidationResult.IsValid;
         }
     }
 }

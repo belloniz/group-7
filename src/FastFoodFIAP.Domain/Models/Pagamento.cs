@@ -14,7 +14,7 @@ namespace FastFoodFIAP.Domain.Models
 
         private Pagamento() { }
 
-        public Pagamento(Guid id, String qrCode, decimal valor, Guid pedidoId, int situacaoId)
+        public Pagamento(Guid id, string qrCode, decimal valor, Guid pedidoId, int situacaoId)
         {
             Id = id;
             QrCode = qrCode;

@@ -16,8 +16,8 @@ namespace FastFoodFIAP.Domain.Commands.AndamentoCommands
 
         public override bool IsValid()
         {
-            ValidationResult = new AndamentoValidationsCreate().Validate(this);
-            return ValidationResult.IsValid;
+            CommandResult.ValidationResult = new AndamentoValidationsCreate().Validate(this);
+            return CommandResult.ValidationResult.IsValid;
         }
     }
 }
