@@ -7,9 +7,9 @@ using MediatR;
 namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
 {
     public class ProdutoCommandHandler : CommandHandler,
-        IRequestHandler<ProdutoCreateCommand, ValidationResult>,
-        IRequestHandler<ProdutoUpdateCommand, ValidationResult>,
-        IRequestHandler<ProdutoDeleteCommand, ValidationResult>
+        IRequestHandler<ProdutoCreateCommand, CommandResult>,
+        IRequestHandler<ProdutoUpdateCommand, CommandResult>,
+        IRequestHandler<ProdutoDeleteCommand, CommandResult>
     {
 
         private readonly IProdutoRepository _repository;
@@ -18,9 +18,9 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             _repository = repository;
         }
 
-        public async Task<ValidationResult> Handle(ProdutoCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(ProdutoCreateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;            
+            if (!request.IsValid()) return request.CommandResult;            
 
             var produto = new Produto(Guid.NewGuid(),request.Nome,request.Descricao, request.Preco, request.CategoriaId);            
             
@@ -29,18 +29,18 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
 
             _repository.Add(produto);            
 
-            return await Commit(_repository.UnitOfWork);
+            return await Commit(_repository.UnitOfWork,produto.Id);
         }
 
-        public async Task<ValidationResult> Handle(ProdutoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(ProdutoUpdateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var produtoExiste = await _repository.GetById(request.Id);
             if (produtoExiste is null)
             {
                 AddError("O Produto não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             var produto = new Produto(request.Id, request.Nome, request.Descricao, request.Preco, request.CategoriaId);
@@ -53,15 +53,15 @@ namespace FastFoodFIAP.Domain.Commands.ProdutoCommands
             return await Commit(_repository.UnitOfWork);
         }
 
-        public async Task<ValidationResult> Handle(ProdutoDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(ProdutoDeleteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var produtoExiste = await _repository.GetById(request.Id);
             if (produtoExiste is null)
             {
                 AddError("O Produto não existe.");
-                return ValidationResult;
+                return CommandResult;
             }                        
 
             _repository.Remove(produtoExiste);            

@@ -12,6 +12,7 @@
     <ProjectReference Include="..\FastFoodFIAP.Domain\FastFoodFIAP.Domain.csproj" />
     <ProjectReference Include="..\FastFoodFIAP.Infra.Data\FastFoodFIAP.Infra.Data.csproj" />
     <ProjectReference Include="..\GenericPack\GenericPack.csproj" />
+    <PackageReference Include="Dapper" Version="2.0.151" />
 
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />   

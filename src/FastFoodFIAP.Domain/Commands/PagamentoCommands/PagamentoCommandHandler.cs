@@ -9,7 +9,7 @@ using MediatR;
 
 namespace FastFoodFIAP.Domain.Commands.PagamentoCommands
 {
-    public class PagamentoCommandHandler: CommandHandler, IRequestHandler<PagamentoUpdateCommand, ValidationResult>
+    public class PagamentoCommandHandler: CommandHandler, IRequestHandler<PagamentoUpdateCommand, CommandResult>
     {
         private readonly IPagamentoRepository _repository;
 
@@ -18,29 +18,23 @@ namespace FastFoodFIAP.Domain.Commands.PagamentoCommands
             _repository = repository;
         }
 
-        public async Task<ValidationResult> Handle(PagamentoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(PagamentoUpdateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var pagamentoExiste = await _repository.GetById(request.Id);
             if (pagamentoExiste is null)
             {
                 AddError("O pagamento não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             var pagamento = new Pagamento(request.Id, pagamentoExiste.QrCode, pagamentoExiste.Valor, pagamentoExiste.PedidoId, request.SituacaoId);
 
-
             if (request.SituacaoId.Equals((int)Models.Enums.SituacaoPagamento.Aprovado))
-            {
                 pagamento.AddDomainEvent(new AndamentoCreateEvent(pagamentoExiste.PedidoId, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
-            }
-
-            if (request.SituacaoId.Equals((int)Models.Enums.SituacaoPagamento.Recusado))
-            {
+            else 
                 pagamento.AddDomainEvent(new AndamentoCreateEvent(pagamentoExiste.PedidoId, null, (int)Models.Enums.SituacaoPedido.Cancelado, true));
-            }
 
             _repository.Update(pagamento);
 

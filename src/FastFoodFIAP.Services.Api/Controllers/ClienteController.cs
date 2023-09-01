@@ -3,6 +3,7 @@ using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Models;
+using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -49,7 +50,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Cadastra um novo cliente.",
         Description = "Cadastra um novo cliente."
         )]
-        [SwaggerResponse(201, "Success", typeof(ClienteInputModel))]
+        [SwaggerResponse(201, "Success", typeof(ClienteViewModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> CadastrarNovoCliente([FromBody] ClienteInputModel cliente)
@@ -59,7 +60,11 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomCreateResponse(await _clienteApp.CadastrarNovoCliente(cliente));
+                var result = await _clienteApp.CadastrarNovoCliente(cliente);
+                if (result.Id != null)
+                    return CustomResponse(await _clienteApp.BuscarClientesPeloId((Guid)result.Id));
+                else
+                    return CustomCreateResponse(result);
             }
             catch (Exception e)
             {

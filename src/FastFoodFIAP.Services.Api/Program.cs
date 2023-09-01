@@ -23,10 +23,7 @@ builder.Services.AddSwaggerGen(s => {
 });
 
 // .NET Native DI Abstraction
-builder.Services.AddDependencyInjectionConfiguration();
-
-// Setting DBContexts
-builder.Services.AddDatabaseConfiguration(builder.Configuration);
+builder.Services.AddDependencyInjectionConfiguration(builder.Configuration);
 
 var app = builder.Build();
 

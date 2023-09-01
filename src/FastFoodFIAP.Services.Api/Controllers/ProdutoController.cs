@@ -4,6 +4,7 @@ using FastFoodFIAP.Application.Services;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Models.ProdutoAggregate;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace FastFoodFIAP.Services.Api.Controllers
@@ -93,7 +94,7 @@ namespace FastFoodFIAP.Services.Api.Controllers
         Summary = "Cria um novo produto.",
         Description = "Cria um novo produto."
         )]
-        [SwaggerResponse(201, "Success", typeof(ProdutoInputModel))]
+        [SwaggerResponse(201, "Success", typeof(ProdutoViewModel))]
         [SwaggerResponse(400, "Bad Request")]
         [SwaggerResponse(500, "Unexpected error")]
         public async Task<IActionResult> Post([FromBody] ProdutoInputModel produto)
@@ -103,7 +104,11 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomCreateResponse(await _produtoApp.Add(produto));
+                var result = await _produtoApp.Add(produto);
+                if (result.Id != null)
+                    return CustomResponse(await _produtoApp.GetById((Guid)result.Id));
+                else
+                    return CustomCreateResponse(result);
             }
             catch (Exception e)
             {

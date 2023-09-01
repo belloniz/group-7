@@ -6,6 +6,7 @@ using FastFoodFIAP.Domain.Commands.ClienteCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FluentValidation.Results;
 using GenericPack.Mediator;
+using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -22,7 +23,7 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ValidationResult> CadastrarNovoCliente(ClienteInputModel model)
+        public async Task<CommandResult> CadastrarNovoCliente(ClienteInputModel model)
         {
             var command = _mapper.Map<ClienteCreateCommand>(model);
             return await _mediator.SendCommand(command);
@@ -51,6 +52,11 @@ namespace FastFoodFIAP.Application.Services
         public void Dispose()
         {
             GC.SuppressFinalize(this);
+        }
+
+        public async Task<ClienteViewModel> BuscarClientesPeloId(Guid id)
+        {
+            return _mapper.Map<ClienteViewModel>(await _clienteRepository.BuscarClientePeloId(id));
         }
     }
 }

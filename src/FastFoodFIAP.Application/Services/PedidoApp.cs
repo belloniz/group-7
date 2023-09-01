@@ -6,6 +6,7 @@ using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Interfaces;
 using FluentValidation.Results;
 using GenericPack.Mediator;
+using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -23,20 +24,20 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ValidationResult> Add(PedidoInputModel model)
+        public async Task<CommandResult> Add(PedidoInputModel model)
         {
             var command = _mapper.Map<PedidoCreateCommand>(model);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Update(Guid id, PedidoInputModel model)
+        public async Task<CommandResult> Update(Guid id, PedidoInputModel model)
         {
             var command = _mapper.Map<PedidoUpdateCommand>(model);
             command.SetId(id);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Remove(Guid id)
+        public async Task<CommandResult> Remove(Guid id)
         {
             var command = new PedidoDeleteCommand(id);
             return await _mediator.SendCommand(command);
@@ -45,6 +46,11 @@ namespace FastFoodFIAP.Application.Services
         public async Task<List<PedidoViewModel>> GetAll()
         {
             return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAll());
+        }
+
+        public async Task<List<PedidoViewModel>> GetAllAtivos()
+        {
+            return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAllAtivos());
         }
 
         public async Task<List<PedidoViewModel>> GetAllBySituacao(int situacaoId)
@@ -60,6 +66,11 @@ namespace FastFoodFIAP.Application.Services
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-        }        
+        }
+
+        public bool PagamentoAprovado(Guid id)
+        {
+            return _pedidoRepository.PagamentoAprovado(id);
+        }
     }
 }

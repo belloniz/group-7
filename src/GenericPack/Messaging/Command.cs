@@ -4,20 +4,20 @@ using MediatR;
 
 namespace GenericPack.Messaging
 {
-    public abstract class Command : Message, IRequest<ValidationResult>, IBaseRequest
+    public abstract class Command : Message, IRequest<CommandResult>, IBaseRequest
     {
         public DateTime Timestamp { get; private set; }
-        public ValidationResult ValidationResult { get; set; }
+        public CommandResult CommandResult { get; set; }
 
         protected Command()
         {
             Timestamp = DateTime.Now;
-            ValidationResult = new ValidationResult();
+            CommandResult = new CommandResult();
         }
 
         public virtual bool IsValid()
         {
-            return ValidationResult.IsValid;
+            return CommandResult.ValidationResult.IsValid;
         }
     }
 

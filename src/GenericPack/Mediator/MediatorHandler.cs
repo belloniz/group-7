@@ -16,7 +16,7 @@ namespace GenericPack.Mediator
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Task<ValidationResult> SendCommand<T>(T command) where T : Command
+        public virtual Task<CommandResult> SendCommand<T>(T command) where T : Command
         {
             return _mediator.Send(command);
         }

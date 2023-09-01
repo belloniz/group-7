@@ -77,7 +77,13 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomCreateResponse(await _categoriaProdutoApp.Add(categoria));
+                var result = await _categoriaProdutoApp.Add(categoria);
+                if (result.Id != null)
+                    return CustomResponse(await _categoriaProdutoApp.GetById((Guid)result.Id));
+                else
+                    return CustomCreateResponse(result);
+
+                //return CustomCreateResponse(await _categoriaProdutoApp.Add(categoria));
             }
             catch (Exception e)
             {

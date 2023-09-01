@@ -7,6 +7,7 @@ using FastFoodFIAP.Domain.Interfaces;
 using FastFoodFIAP.Domain.Models;
 using FluentValidation.Results;
 using GenericPack.Mediator;
+using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -23,20 +24,20 @@ namespace FastFoodFIAP.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ValidationResult> Add(CategoriaProdutoInputModel model)
+        public async Task<CommandResult> Add(CategoriaProdutoInputModel model)
         {
             var command = _mapper.Map<CategoriaProdutoCreateCommand>(model);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Update(Guid id, CategoriaProdutoInputModel model)
+        public async Task<CommandResult> Update(Guid id, CategoriaProdutoInputModel model)
         {
             var command = _mapper.Map<CategoriaProdutoUpdateCommand>(model);
             command.SetId(id);
             return await _mediator.SendCommand(command);
         }
 
-        public async Task<ValidationResult> Remove(Guid id)
+        public async Task<CommandResult> Remove(Guid id)
         {
             var command = new CategoriaProdutoDeleteCommand(id);
             return await _mediator.SendCommand(command);

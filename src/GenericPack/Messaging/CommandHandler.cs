@@ -6,28 +6,28 @@ namespace GenericPack.Messaging
 {
     public abstract class CommandHandler
     {
-        protected ValidationResult ValidationResult;
+        protected CommandResult CommandResult;
 
         protected CommandHandler()
         {
-            ValidationResult = new ValidationResult();
+            CommandResult = new CommandResult();
         }
 
         protected void AddError(string mensagem)
         {
-            ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
+            CommandResult.ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
         }
 
-        protected async Task<ValidationResult> Commit(IUnitOfWork uow, string message)
+        protected async Task<CommandResult> Commit(IUnitOfWork uow, string message, Object? id)
         {
             if (!await uow.Commit()) AddError(message);
-
-            return ValidationResult;
+            CommandResult.Id = id;
+            return CommandResult;
         }
 
-        protected async Task<ValidationResult> Commit(IUnitOfWork uow)
+        protected async Task<CommandResult> Commit(IUnitOfWork uow, Object? id = null)
         {
-            return await Commit(uow, "There was an error saving data").ConfigureAwait(false);
+            return await Commit(uow, "There was an error saving data",id).ConfigureAwait(false);
         }
     }
 }

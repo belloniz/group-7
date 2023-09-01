@@ -20,7 +20,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.Bus
             await _mediator.Publish(@event);
         }
 
-        public async Task<ValidationResult> SendCommand<T>(T command) where T : Command
+        public async Task<CommandResult> SendCommand<T>(T command) where T : Command
         {
             return await _mediator.Send(command);
         }

@@ -1,7 +1,9 @@
-﻿namespace FastFoodFIAP.Domain.Interfaces.Services
+﻿using FastFoodFIAP.Domain.Models.PedidoAggregate;
+
+namespace FastFoodFIAP.Domain.Interfaces.Services
 {
     public interface IGatewayPagamento
     {
-        string SolicitarQrCode(Guid identificador, string descricao, decimal valor);
+        Task<string> SolicitarQrCodeAsync(Pedido pedido);
     }
 }

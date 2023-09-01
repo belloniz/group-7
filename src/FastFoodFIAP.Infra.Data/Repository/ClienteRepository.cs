@@ -63,5 +63,10 @@ namespace FastFoodFIAP.Infra.Data.Repository
         {
             Db.Dispose();
         }
+
+        public async Task<Cliente?> BuscarClientePeloId(Guid id)
+        {
+            return await DbSet.FindAsync(id);
+        }
     }
 }

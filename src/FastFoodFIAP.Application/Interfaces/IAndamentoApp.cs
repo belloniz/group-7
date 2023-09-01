@@ -1,12 +1,12 @@
 ﻿using FastFoodFIAP.Application.InputModels;
 using FastFoodFIAP.Application.ViewModels;
-using FluentValidation.Results;
+using GenericPack.Messaging;
 
 namespace FastFoodFIAP.Application.Interfaces
 {
     public interface IAndamentoApp
     {
-        Task<ValidationResult> Add(AndamentoInputModel model);
-        Task<ValidationResult> Update(Guid id, AndamentoInputModel model);
+        Task<CommandResult> Add(AndamentoInputModel model);
+        Task<CommandResult> Update(Guid id, AndamentoInputModel model);
     }
 }

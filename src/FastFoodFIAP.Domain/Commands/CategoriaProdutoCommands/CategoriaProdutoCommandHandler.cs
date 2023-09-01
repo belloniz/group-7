@@ -7,9 +7,9 @@ using MediatR;
 namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
 {
     public class CategoriaProdutoCommandHandler : CommandHandler,
-        IRequestHandler<CategoriaProdutoCreateCommand, ValidationResult>,
-        IRequestHandler<CategoriaProdutoUpdateCommand, ValidationResult>,
-        IRequestHandler<CategoriaProdutoDeleteCommand, ValidationResult>
+        IRequestHandler<CategoriaProdutoCreateCommand, CommandResult>,
+        IRequestHandler<CategoriaProdutoUpdateCommand, CommandResult>,
+        IRequestHandler<CategoriaProdutoDeleteCommand, CommandResult>
     {
 
         private readonly ICategoriaProdutoRepository _repository;
@@ -18,26 +18,26 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
             _repository = repository;
         }
 
-        public async Task<ValidationResult> Handle(CategoriaProdutoCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CategoriaProdutoCreateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var categoria = new CategoriaProduto(Guid.NewGuid(), request.Nome);
 
             _repository.Add(categoria);
 
-            return await Commit(_repository.UnitOfWork);
+            return await Commit(_repository.UnitOfWork, categoria.Id);
         }
 
-        public async Task<ValidationResult> Handle(CategoriaProdutoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CategoriaProdutoUpdateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var categoriaExiste = await _repository.GetById(request.Id);
             if (categoriaExiste is null)
             {
                 AddError("A Categoria não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             var categoria = new CategoriaProduto(request.Id, request.Nome);
@@ -47,15 +47,15 @@ namespace FastFoodFIAP.Domain.Commands.CategoriaProdutoCommands
             return await Commit(_repository.UnitOfWork);
         }
 
-        public async Task<ValidationResult> Handle(CategoriaProdutoDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CategoriaProdutoDeleteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var categoriaExiste = await _repository.GetById(request.Id);
             if (categoriaExiste is null)
             {
                 AddError("A Categoria não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             _repository.Remove(categoriaExiste);

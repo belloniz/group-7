@@ -10,48 +10,44 @@ using MediatR;
 namespace FastFoodFIAP.Domain.Commands.PedidoCommands
 {
     public class PedidoCommandHandler: CommandHandler,
-        IRequestHandler<PedidoCreateCommand, ValidationResult>,
-        IRequestHandler<PedidoUpdateCommand, ValidationResult>,
-        IRequestHandler<PedidoDeleteCommand, ValidationResult>
+        IRequestHandler<PedidoCreateCommand, CommandResult>,
+        IRequestHandler<PedidoUpdateCommand, CommandResult>,
+        IRequestHandler<PedidoDeleteCommand, CommandResult>
     {
         private readonly IPedidoRepository _repository;
-        private readonly IAndamentoRepository _repositoryAndamento;
 
-        public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository, IAndamentoRepository repositoryAndamento)
+        public PedidoCommandHandler(IMediator mediator, IPedidoRepository repository)
         {
             _repository = repository;
-            _repositoryAndamento = repositoryAndamento;
         }
 
-        public async Task<ValidationResult> Handle(PedidoCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(PedidoCreateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;            
+            if (!request.IsValid()) return request.CommandResult;            
 
             var pedido = new Pedido(Guid.NewGuid(),request.ClienteId);                            
             
             foreach (var item in request.Combos)
                 pedido.AddCombo(item.Quantidade, item.Produtos);
 
-            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado, false));
+            pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Realizado, true));
                         
-            //Eventos próvisórios para simulação do checkout e do Recebimento do pagamento
-            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido.Id, "FIAP FastFood", pedido.TotalPedido(), (int)Models.Enums.SituacaoPagamento.Pendente));
-            //pedido.AddDomainEvent(new AndamentoCreateEvent(pedido.Id, null, (int)Models.Enums.SituacaoPedido.Recebido, true));
+            pedido.AddDomainEvent(new PagamentoCreateEvent(pedido));
 
             _repository.Add(pedido);            
 
-            return await Commit(_repository.UnitOfWork);
+            return await Commit(_repository.UnitOfWork, pedido.Id);
         }
 
-        public async Task<ValidationResult> Handle(PedidoUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(PedidoUpdateCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var pedidoExiste = await _repository.GetById(request.Id);
             if (pedidoExiste is null)
             {
                 AddError("O Pedido não existe.");
-                return ValidationResult;
+                return CommandResult;
             }
 
             var pedido = new Pedido(request.Id, request.ClienteId);
@@ -64,15 +60,15 @@ namespace FastFoodFIAP.Domain.Commands.PedidoCommands
             return await Commit(_repository.UnitOfWork);
         }
 
-        public async Task<ValidationResult> Handle(PedidoDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(PedidoDeleteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid()) return request.ValidationResult;
+            if (!request.IsValid()) return request.CommandResult;
 
             var pedidoExiste = await _repository.GetById(request.Id);
             if (pedidoExiste is null)
             {
                 AddError("O Pedido não existe.");
-                return ValidationResult;
+                return CommandResult;
             }                                  
 
             _repository.Remove(pedidoExiste);            
