@@ -104,7 +104,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Arquitetura e Padrões
 
-![Arquitetura](https://github.com/belloniz/group-7/blob/main/docs/ArquiteturaHexagonal.png)
+![Arquitetura](https://github.com/belloniz/group-7/blob/main/docs/CleanArchitecture.png)
 
 - Arquitetura Limpa (Clean Architecture)
 - Domain Driven Design (DDD)
