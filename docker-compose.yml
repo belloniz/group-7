@@ -1,6 +1,6 @@
 version: "3.4"
 services:  
-  database:
+  fastfoodpostgres-svc:
     container_name: postgres-fiap
     restart: always
     build:
@@ -22,10 +22,10 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on: 
-      - database
+      - fastfoodpostgres-svc
     ports:
       - 8000:80
       - 8001:443
     restart: always
     environment: 
-      - DBHOST=database
+      - DBHOST=fastfoodpostgres-svc

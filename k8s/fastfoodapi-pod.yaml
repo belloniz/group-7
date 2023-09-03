@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: fastfoodapi
-    image: luisfernandodass/posfiapsoat
+    image: brwillon/fastfoodapi
     ports:
       - name: api-port
         containerPort: 80
