@@ -1,0 +1,17 @@
+.\group-7
+├── Docker
+├── docs
+├── k8s
+├── src
+|  ├── FastFoodFIAP.Application
+|  ├── FastFoodFIAP.Domain
+|  ├── FastFoodFIAP.Infra.CrossCutting.Bus
+|  ├── FastFoodFIAP.Infra.CrossCutting.IoC
+|  ├── FastFoodFIAP.Infra.Data
+|  ├── FastFoodFIAP.Infra.MercadoPago
+|  ├── FastFoodFIAP.Services.Api
+|  └── GenericPack
+
+
+directory: 32
+

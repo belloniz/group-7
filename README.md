@@ -32,7 +32,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 - Realização do pedido e pagamento
 - Preparação e entrega do pedido
 
-![Projeto](https://github.com/belloniz/group-7/blob/main/docs/DDD.png)
+![Projeto](./docs/DDD.png)
 
 
 - Miro do DDD: https://miro.com/app/board/uXjVMI-wOLc=/?share_link_id=8789531868
@@ -56,13 +56,13 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 2. Teste o sistema através do swagger:
 
-   `http://localhost:8000/swagger/index.html`
+   [http://localhost:8000/swagger/index.html](http://localhost:8000/swagger/index.html)
 
 ### Com Kubernets (Fase 02)
 
-1. Installe o K8S e o minikube na sua máquina local.
+1. Instale o K8S e o minikube na sua máquina local.
     
-    _https://minikube.sigs.k8s.io/docs/start/_
+    [Minikue Get Started!](https://minikube.sigs.k8s.io/docs/start/)
 
 2. Rode o comando abaixo para criar um cluster do Kubernets:
 
@@ -70,22 +70,25 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 3. Dentro da pasta /k8s rode o comando abaixo para criar uma secret (onde armazenamos as credenciais para acesso ao banco de dados)
 
-     `kubectl apply -f db-secret.yaml`
+    `kubectl apply -f db-secret.yaml`
    
 4. Dentro da pasta /k8s rode o comando abaixo para criar os pods e services necessários da aplicação dotnet e do postgres:
 
-    `kubectl apply -f fastfoodapi-deployment.yaml,pv.yaml,fastfoodpostgres-pod.yaml,fastfoodapi-svc.yaml,fastfoodpostgres-svc.yaml` 
+    `kubectl apply -f fastfoodapi-deployment.yaml,pv.yaml,fastfoodpostgres-pod.yaml,fastfoodapi-svc.yaml,fastfoodpostgres-svc.yaml`
 
 5. Rode o comando abaixo para verificar se os pods e services estão com o status "running"
 
     `kubectl get pods,svc`
 
-6.  Rode o comando abaixo para apontar a porta do service da api para o host local:
+6. Rode o comando abaixo para apontar a porta do service da api para o host local:
 
     `kubectl port-forward svc/fastfoodapi-svc 4200:8002`
 
-7.  Acesse a porta `http:localhost:4200/swagger/index.html` do seu navegador.  
-   
+7. Acesse a aplicação pelo seu navegador:
+
+    [http:localhost:4200/swagger/index.html](http:localhost:4200/swagger/index.html)
+
+
 ## Tecnologias
 
 - Runtime do .NET 7.0.5
@@ -104,7 +107,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Arquitetura e Padrões
 
-![Arquitetura](https://github.com/belloniz/group-7/blob/main/docs/CleanArchitecture.png)
+![Arquitetura](./docs/CleanArchitecture.png)
 
 - Arquitetura Limpa (Clean Architecture)
 - Domain Driven Design (DDD)
@@ -115,7 +118,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Estrutura da solução
 
-![Projeto](https://github.com/belloniz/group-7/blob/main/docs/Projeto.png) 
+![Projeto](./docs/Projeto.png) 
 
 ## Desenvolvedores :octocat:
 
