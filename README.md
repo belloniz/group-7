@@ -23,8 +23,11 @@ No projeto atual temos as seguintes funcionalidades:
 - Identificação do Cliente via CPF
 - Criar, editar e remover de produto
 - Buscar produtos por categoria
-- Fake checkout, apenas enviar os produtos escolhidos para a fila
-- Listar os pedidos
+- Checkout do pedido com retorno dos dados de acompanhamento e pagamento
+- Webhook para recebimento da confirmação do pagamento
+- Consultar situação do pagamento
+- Atualizar situação dos pedidos
+- Listar os pedidos ativos
 
 ## Documentações
 
