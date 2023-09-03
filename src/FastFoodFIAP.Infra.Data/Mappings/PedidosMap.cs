@@ -1,6 +1,7 @@
 ﻿using FastFoodFIAP.Domain.Models.PedidoAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace FastFoodFIAP.Infra.Data.Mappings
 {
@@ -15,6 +16,10 @@ namespace FastFoodFIAP.Infra.Data.Mappings
 
             builder.Property(c => c.Id)
                 .HasColumnName("id");
+
+            builder.Property(c => c.CodigoAcompanhamento)
+                .HasColumnName("codigo_acompanhamento")            
+                .ValueGeneratedOnAdd();
 
             builder.Property(c => c.ClienteId)
                 .HasColumnName("cliente_id");  

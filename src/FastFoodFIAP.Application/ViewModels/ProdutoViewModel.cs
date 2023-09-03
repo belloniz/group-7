@@ -13,5 +13,16 @@ namespace FastFoodFIAP.Application.ViewModels
         public decimal Preco { get; set; }
         public CategoriaProdutoViewModel? Categoria {get; set;}
         public List<ImagemViewModel>? Imagens {get; set;}
+
+        public ProdutoViewModel() { }
+
+        public ProdutoViewModel(Guid id, string nome, string descricao, decimal preco, CategoriaProdutoViewModel? categoria) { 
+            Id = id;
+            Nome = nome;
+            Descricao = descricao;
+            Preco = preco;
+            Categoria = categoria;
+        }
+
     }
 }

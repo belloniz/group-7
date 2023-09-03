@@ -93,7 +93,7 @@ namespace FastFoodFIAP.Infra.CrossCutting.IoC
             services.AddScoped<IRequestHandler<PagamentoUpdateCommand, CommandResult>, PagamentoCommandHandler>();
 
             // Domain - Events
-            services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();            
+            services.AddScoped<INotificationHandler<AndamentoCreateEvent>, AndamentoEventHandler>();
             services.AddScoped<INotificationHandler<PagamentoCreateEvent>, PagamentoEventHandler>();
 
             //Infra - Services

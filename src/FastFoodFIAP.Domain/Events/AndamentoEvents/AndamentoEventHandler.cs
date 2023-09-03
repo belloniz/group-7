@@ -18,22 +18,16 @@ namespace FastFoodFIAP.Domain.Events.AndamentoEvents
             _repository = repository;
         }
 
-        public Task Handle(AndamentoCreateEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(AndamentoCreateEvent notification, CancellationToken cancellationToken)
         {
-            //var andamentos =  _repository.GetAllByPedido(notification.PedidoId).Result;
-            //var andamentoAtual = andamentos.Where(p => p.Atual == true).FirstOrDefault();
-            //if (andamentoAtual != null)
-            //{
-            //    andamentoAtual.Atual = false;
-            //    _repository.Update(andamentoAtual);   
-            //}
+            //_repository.DesativaAndamentosAnteriosDoPedido(notification.PedidoId);
 
             var andamento = new Andamento(Guid.NewGuid(), notification.PedidoId, notification.FuncionarioId, notification.SituacaoId, 
             notification.DataHoraInicio, notification.DataHoraFim, notification.Atual);
-            
-            _repository.Add(andamento);            
+           
+            _repository.Add(andamento);
 
-            return Task.CompletedTask;
-        }        
+            return;
+        }       
     }
 }

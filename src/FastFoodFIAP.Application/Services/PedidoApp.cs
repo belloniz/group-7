@@ -4,9 +4,14 @@ using FastFoodFIAP.Application.Interfaces;
 using FastFoodFIAP.Application.ViewModels;
 using FastFoodFIAP.Domain.Commands.PedidoCommands;
 using FastFoodFIAP.Domain.Interfaces;
+using FastFoodFIAP.Domain.Models.PedidoAggregate;
+using FastFoodFIAP.Domain.Models;
 using FluentValidation.Results;
 using GenericPack.Mediator;
 using GenericPack.Messaging;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Drawing;
+using System;
 
 namespace FastFoodFIAP.Application.Services
 {
@@ -50,7 +55,7 @@ namespace FastFoodFIAP.Application.Services
 
         public async Task<List<PedidoViewModel>> GetAllAtivos()
         {
-            return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAllAtivos());
+            return _mapper.Map<List<PedidoViewModel>>(await _pedidoRepository.GetAllAtivos());            
         }
 
         public async Task<List<PedidoViewModel>> GetAllBySituacao(int situacaoId)

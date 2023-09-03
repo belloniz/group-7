@@ -12,8 +12,10 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Numerics;
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FastFoodFIAP.Infra.Data.Repository
 {
@@ -42,55 +44,24 @@ namespace FastFoodFIAP.Infra.Data.Repository
         {
             try
             {
-                //return await DbSet.AsNoTracking()
-                //.Include(x => x.Andamentos!
-                //.OrderByDescending(x => x.SituacaoId).ThenBy(x => x.DataHoraInicio))
-                //.Where(x => x.Andamentos!
-                //.Any(x => x.Atual && x.SituacaoId <= (int)Domain.Models.Enums.SituacaoPedido.Pronto))
-                //.ToListAsync();
 
+                var pedidos = await DbSet.AsNoTracking()                
+                .Where(c => c.Andamentos!
+                .Any(a => a.SituacaoId <= (int)Domain.Models.Enums.SituacaoPedido.Pronto && a.Atual))
+                .ToListAsync();
 
-                var query = from p in Db.Pedidos
-                            join pc in Db.PedidosCombos! on p.Id equals pc.PedidoId
-                            join pcp in Db.PedidosCombosProdutos! on pc.Id equals pcp.PedidoComboId
-                            join pd in Db.Produtos! on pcp.ProdutoId equals pd.Id
-                            join c in Db.CategoriasProdutos! on pd.CategoriaId equals c.Id
-                            join a in Db.Andamentos! on p.Id equals a.PedidoId
-                            join s in Db.SituacoesPedidos! on a.SituacaoId equals s.Id
-                            from f in Db.Funcionarios.Where(f => a.FuncionarioId == f.Id).DefaultIfEmpty()
-                            from cl in Db.Clientes.Where(cl => p.ClienteId == cl.Id).DefaultIfEmpty()
-                            where s.Id <= (int)Domain.Models.Enums.SituacaoPedido.Pronto && a.Atual
-                            orderby s.Id descending
-                            select p;
+                foreach (var pedido in pedidos)
+                    foreach (var andamento in pedido.Andamentos!)
+                        if (!andamento.Atual)
+                            pedido.Andamentos.Remove(andamento);
 
-                //var query = from p in Db.Pedidos
-                //            join pc in Db.PedidosCombos on p.Id equals pc.PedidoId
-                //            join pcp in Db.PedidosCombosProdutos on pc.Id equals pcp.PedidoComboId
-                //            join pd in Db.Produtos on pcp.ProdutoId equals pd.Id
-                //            join c in Db.CategoriasProdutos on pd.CategoriaId equals c.Id
-                //            join a in Db.Andamentos on p.Id equals a.PedidoId
-                //            join s in Db.SituacoesPedidos on a.SituacaoId equals s.Id
-                //            join f in Db.Funcionarios on a.FuncionarioId equals f.Id into fGroup
-                //            from f in fGroup.DefaultIfEmpty()
-                //            join cl in Db.Clientes on p.ClienteId equals cl.Id into clGroup
-                //            from cl in clGroup.DefaultIfEmpty()
-                //            where s.Id <= 3 && a.Atual
-                //            orderby s.Id descending
-                //            select new
-                //            {
-                //                Pedido = p,
-                //                Cliente = cl,
-                //                PedidoCombo = pc,
-                //                PedidoComboProduto = pcp,
-                //                Produto = pd,
-                //                CategoriaProduto = c,
-                //                AndamentoPedido = a,
-                //                SituacaoPedido = s,
-                //                Funcionario = f
-                //            };
+                var ordem = pedidos.OrderBy(p => p.Andamentos!
+                .OrderByDescending(c => c.SituacaoId).ThenBy(c => c.DataHoraInicio)
+                .Select(c => c.SituacaoId).FirstOrDefault());
 
-                var result = query.ToList();
-                return (IEnumerable<Pedido>)result;
+                
+
+                return ordem;
 
             }
             catch (Exception ex)

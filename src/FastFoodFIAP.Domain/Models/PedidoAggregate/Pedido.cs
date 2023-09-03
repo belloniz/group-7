@@ -4,9 +4,10 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
 {
     public class Pedido : Entity, IAggregateRoot
     {
+        public long? CodigoAcompanhamento { get; private set; }
         public Guid? ClienteId { get; private set;}
         public List<PedidoCombo> Combos { get; private set;} 
-        public virtual Cliente? ClienteNavegation { get; private set;}
+        public virtual Cliente? ClienteNavegation { get; set;}
         public virtual Pagamento? PagamentoNavegation { get; private set; }
         
         public virtual ICollection<Andamento>? Andamentos { get; private set; }
@@ -25,7 +26,7 @@ namespace FastFoodFIAP.Domain.Models.PedidoAggregate
         public void AddCombo(int quantidade, List<PedidoComboProduto> combos)
         {
             Combos.Add(new PedidoCombo(quantidade, combos));
-        }
+        }        
 
         public decimal TotalPedido(){
             decimal Total = 0;            
