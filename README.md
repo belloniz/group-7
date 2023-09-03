@@ -106,8 +106,10 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ![Arquitetura](https://github.com/belloniz/group-7/blob/main/docs/ArquiteturaHexagonal.png)
 
-- Arquitetura Hexagonal
-- Domain Driven Design
+- Arquitetura Limpa (Clean Architecture)
+- Domain Driven Design (DDD)
+- Domain Events
+- CQRS
 - Unit of Work
 - Repository
 
