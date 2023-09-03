@@ -33,20 +33,20 @@ namespace FastFoodFIAP.Infra.MercadoPago
             requisicao.title = "Pedido FastFood FIAP";
             requisicao.notification_url = "https://www.fastfoodfiap.com.br/api/webhook";
             requisicao.description = "Autoatendimento";
-            requisicao.total_amount = 2;// pedido.TotalPedido();
+            requisicao.total_amount = 2;
             
             foreach(var combo in pedido.Combos)
                 foreach(var produto in combo.Produtos)
                 {
                     Item item = new Item();
                     item.sku_number = produto.ProdutoId.ToString();
-                    item.category = "";// produto.ProdutoNavigation!.CategoriaNavegation!.Nome;
-                    item.title = "";// produto.ProdutoNavigation.Nome;
-                    item.description = "";// produto.ProdutoNavigation.Descricao;
+                    item.category = "";
+                    item.title = "";
+                    item.description = "";
                     item.unit_price = produto.ValorUnitario;
                     item.quantity = produto.Quantidade * combo.Quantidade;
                     item.unit_measure = "unit";
-                    item.total_amount = produto.Quantidade;// produto.Quantidade * produto.ValorUnitario;
+                    item.total_amount = produto.Quantidade;
 
                     requisicao.items.Add(item);
                 }

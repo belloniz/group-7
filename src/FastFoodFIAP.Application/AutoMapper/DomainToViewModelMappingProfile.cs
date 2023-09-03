@@ -24,7 +24,9 @@ namespace FastFoodFIAP.Application.AutoMapper
                 .ForMember(c => c.Categoria,
                     map => map.MapFrom(m => m.CategoriaNavegation));
 
-            CreateMap<Pagamento, PagamentoViewModel>();
+            CreateMap<Pagamento, PagamentoViewModel>()
+                .ForMember(c => c.Situacao,
+                    map => map.MapFrom(m => m.SitucaoPagamentoNavegation));
 
             CreateMap<Pedido, PedidoViewModel>()
                 .ForMember(c => c.Cliente,
@@ -53,6 +55,8 @@ namespace FastFoodFIAP.Application.AutoMapper
                     map => map.MapFrom(m => m.FuncionarioNavegation))
                 .ForMember(c => c.Situacao,
                     map => map.MapFrom(m => m.SitucaoPedidoNavegation));
+
+
         }
     }
 }

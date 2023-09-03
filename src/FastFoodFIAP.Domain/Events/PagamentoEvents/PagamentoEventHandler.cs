@@ -26,8 +26,6 @@ namespace FastFoodFIAP.Domain.Events.PagamentoEvents
 
         public async Task Handle(PagamentoCreateEvent notification, CancellationToken cancellationToken)
         {
-          
-
             var qrCode = await _gateway.SolicitarQrCodeAsync(notification.Pedido);
 
             var pagamento = new Pagamento(Guid.NewGuid(), qrCode, notification.Pedido.TotalPedido(), notification.Pedido.Id, (int)Models.Enums.SituacaoPagamento.Pendente);

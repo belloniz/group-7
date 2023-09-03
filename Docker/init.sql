@@ -87,6 +87,7 @@ CREATE TABLE public.situacoes_pagamentos (
 CREATE TABLE public.pedidos ( 
    id uuid NOT NULL, 
    cliente_id uuid NULL, 
+   codigo_acompanhamento bigserial NOT NULL,
    CONSTRAINT pedidos_pkey PRIMARY KEY (id), 
    CONSTRAINT pedidos_clientes_fk FOREIGN KEY (cliente_id) REFERENCES public.clientes(id) 
 );
@@ -197,3 +198,26 @@ INSERT INTO public.funcionarios (id, nome, matricula, ocupacao_id) VALUES
    ('6b4f3188-4536-4029-8033-3835c7437f31', 'Ana Maria', 'A000001', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
    ('6b4f3188-4536-4029-8033-3835c7437f32', 'Bruno Pereira', 'A000002', '09f6a1c6-2fe3-4276-8014-b9595437e332'),
    ('6b4f3188-4536-4029-8033-3835c7437f33', 'João Almeida', 'A000003', '09f6a1c6-2fe3-4276-8014-b9595437e332');
+
+
+CREATE OR REPLACE FUNCTION update_andamentos_trigger_fnc()
+   RETURNS trigger AS
+$$
+BEGIN
+
+UPDATE pedidos_andamentos pa
+SET atual = false 
+WHERE (pa.pedido_id = NEW.pedido_id AND pa.id <> NEW.id);
+RETURN NEW;
+END
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER update_andamentos
+   AFTER INSERT
+   ON "pedidos_andamentos"
+   FOR EACH ROW
+EXECUTE PROCEDURE update_andamentos_trigger_fnc();
+
+
+

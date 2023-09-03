@@ -25,16 +25,24 @@ namespace FastFoodFIAP.Infra.Data.Mappings
                 .HasColumnName("valor");
 
             builder.Property(c => c.PedidoId)
-                .HasColumnName("pedido_id");
-
-            builder.Property(c => c.SituacaoId)
-                .HasColumnName("situacao_id");
+                .HasColumnName("pedido_id");            
 
             builder.HasIndex(c => c.PedidoId);
 
             builder.HasOne(c => c.PedidoNavegation)
                 .WithOne(p => p.PagamentoNavegation)
                 .HasForeignKey<Pagamento>();
+
+            builder.Property(c => c.SituacaoId)
+                .HasColumnName("situacao_id");
+
+            builder.HasIndex(c => c.SituacaoId);
+
+            builder.HasOne(c => c.SitucaoPagamentoNavegation)
+               .WithMany()
+               .HasForeignKey(p => p.SituacaoId);
+            
+            builder.Navigation(e => e.SitucaoPagamentoNavegation).AutoInclude();
         }
     }
 }

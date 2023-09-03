@@ -181,7 +181,11 @@ namespace FastFoodFIAP.Services.Api.Controllers
                 if (!ModelState.IsValid)
                     return CustomResponse(ModelState);
 
-                return CustomCreateResponse(await _andamentoApp.Add(andamento));
+                var result = await _andamentoApp.Add(andamento);
+                if (result.Id != null)
+                    return CustomResponse(await _pedidoApp.GetById((Guid)result.Id));
+                else
+                    return CustomCreateResponse(result);
             }
             catch (Exception e)
             {

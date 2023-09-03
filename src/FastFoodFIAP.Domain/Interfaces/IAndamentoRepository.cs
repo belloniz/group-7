@@ -8,6 +8,7 @@ namespace FastFoodFIAP.Domain.Interfaces
         Task<Andamento?> GetById(Guid id);
         void Add(Andamento andamento);
         void Update(Andamento andamento);
+        void DesativaAndamentosAnteriosDoPedido(Guid pedidoId);
         Task<IEnumerable<Andamento>> GetAllByPedido(Guid pedidoId);
     }
 }
