@@ -115,6 +115,21 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 ## Estrutura da solução
 
+.\group-7
+├── Docker
+├── docs
+├── k8s
+├── src
+|  ├── FastFoodFIAP.Application
+|  ├── FastFoodFIAP.Domain
+|  ├── FastFoodFIAP.Infra.CrossCutting.Bus
+|  ├── FastFoodFIAP.Infra.CrossCutting.IoC
+|  ├── FastFoodFIAP.Infra.Data
+|  ├── FastFoodFIAP.Infra.MercadoPago
+|  ├── FastFoodFIAP.Services.Api
+|  └── GenericPack
+
+
 ![Projeto](https://github.com/belloniz/group-7/blob/main/docs/Projeto.png) 
 
 ## Desenvolvedores :octocat:
