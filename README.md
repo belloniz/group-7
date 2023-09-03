@@ -74,7 +74,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
    
 4. Dentro da pasta /k8s rode o comando abaixo para criar os pods e services necessários da aplicação dotnet e do postgres:
 
-    `kubectl apply -f fastfoodapi-deployment.yaml,fastfoodpostgres-pod.yaml,fastfoodapi-svc.yaml,fastfoodpostgres-svc.yaml` 
+    `kubectl apply -f fastfoodapi-deployment.yaml,pv.yaml,fastfoodpostgres-pod.yaml,fastfoodapi-svc.yaml,fastfoodpostgres-svc.yaml` 
 
 5. Rode o comando abaixo para verificar se os pods e services estão com o status "running"
 
@@ -82,7 +82,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 6.  Rode o comando abaixo para apontar a porta do service da api para o host local:
 
-    `kubectl port-forward fastfoodapi-svc 8002:4200`
+    `kubectl port-forward svc/fastfoodapi-svc 4200:8002`
 
 7.  Acesse a porta `http:localhost:4200/swagger/index.html` do seu navegador.  
    
