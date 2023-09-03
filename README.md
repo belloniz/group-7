@@ -86,7 +86,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 7. Acesse a aplicação pelo seu navegador:
 
-    [http:localhost:4200/swagger/index.html](http:localhost:4200/swagger/index.html)
+    [http://localhost:4200/swagger/index.html](http://localhost:4200/swagger/index.html)
 
 
 ## Tecnologias
