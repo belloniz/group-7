@@ -56,13 +56,13 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 2. Teste o sistema através do swagger:
 
-   ![http://localhost:8000/swagger/index.html](http://localhost:8000/swagger/index.html)
+   http://localhost:8000/swagger/index.html
 
 ### Com Kubernets (Fase 02)
 
 1. Instale o K8S e o minikube na sua máquina local.
     
-    ![Minikue Get Started!](https://minikube.sigs.k8s.io/docs/start/)
+    [Minikue Get Started!](https://minikube.sigs.k8s.io/docs/start/)
 
 2. Rode o comando abaixo para criar um cluster do Kubernets:
 
@@ -86,7 +86,7 @@ A imagem a seguir documenta o sistema utilizando a linguagem ubíqua, dos seguin
 
 7. Acesse a aplicação pelo seu navegador:
 
-    ![http://localhost:4200/swagger/index.html](http://localhost:4200/swagger/index.html)
+   http://localhost:4200/swagger/index.html
 
 
 ## Tecnologias
